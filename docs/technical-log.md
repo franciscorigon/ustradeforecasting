@@ -229,7 +229,7 @@ Expand EDA with World Bank visualizations and additional data sources.
 ### 2026-03-27 — Data Understanding — Industrial production and commodities collected + EDA expanded + HS2 sectoral classification
 
 **What was done:**
-Collected industrial production indices for Canada, Mexico and Brazil, and prices for three key commodities (WTI crude oil, soybean, iron ore). Expanded the EDA notebook with six new sections and implemented a sectoral HS2 classification aligned with TCC1 Section 2.3.2.
+Collected industrial production indices for Canada, Mexico and Brazil, and prices for three key commodities (WTI crude oil, soybean, iron ore). Expanded the EDA notebook with six new sections and implemented a sectoral HS2 classification (Commodities, Manufactured Goods, and High-Tech) aligned with TCC1 Section 2.3.2, with emphasis on high-technology sectors (HS 30, 84, 85, 88, 90, 91) as identified as critical for trade asymmetry analysis.
 
 **Technical details — new FRED series:**
 
@@ -273,6 +273,10 @@ Note: Mexico's standard OECD series (`MEXPROINDMISMEI`) does not exist in FRED. 
 
 **Decision made:**
 Phase 2 (Data Understanding) considered complete. All data sources defined in TCC1 Section 3.2.1 have been collected and explored.
+
+Sectoral modeling strategy defined: ARIMA, Random Forest and LightGBM will be trained independently for each of the three HS2 categories (Commodities, Manufactured Goods, High-Tech), per country pair. This allows direct comparison of exchange rate sensitivity across sector types — e.g., whether a BRL depreciation affects US high-tech exports differently than commodity exports. This approach is aligned with TCC1 objective of identifying the sectors most vulnerable to exchange rate fluctuations.
+
+Note: High-Tech trade volume with Brazil is substantially lower than with Canada and Mexico — monthly data sparsity for this segment will be assessed during Data Preparation before modeling.
 
 **Next step:**
 Begin Data Preparation phase (`03_data_preparation.ipynb`): frequency alignment to monthly, outlier treatment, feature engineering, construction of final modeling dataset.
