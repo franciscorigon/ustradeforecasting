@@ -283,4 +283,69 @@ Begin Data Preparation phase (`03_data_preparation.ipynb`): frequency alignment 
 
 ---
 
+### 2026-03-27 — Data Preparation — Variable selection confirmed and preparation pipeline built
+
+**What was done:**
+Confirmed the final list of independent variables for the modeling phase and built the complete Data Preparation pipeline in `notebooks/03_data_preparation.ipynb`.
+
+**Variable selection decisions:**
+
+| Group | Variables Included | Count |
+|---|---|---|
+| Bilateral exchange rate | FX_USD_CAD, FX_USD_MXN, FX_USD_BRL | 3 |
+| REER | REER_USA, REER_CAN, REER_MEX, REER_BRA | 4 |
+| US Macro | FEDFUNDS, CPI_USA, GDP_USA, UNRATE_USA, INDPRO_USA | 5 |
+| Partner interest rates | RATE_CAN, RATE_MEX_3M, RATE_BRA | 3 |
+| Partner CPI | CPI_CAN, CPI_MEX, CPI_BRA | 3 |
+| Partner GDP | GDP_CAN, GDP_MEX, GDP_BRA | 3 |
+| Partner industrial production | INDPRO_CAN, INDPRO_MEX, INDPRO_BRA | 3 |
+| Commodities | WTI_oil, Soybean, Iron_ore | 3 |
+
+**Variables excluded:**
+- `DTWEXBGS` (Trade Weighted USD Index): excluded due to high multicollinearity with REER_USA — both measure USD strength against a basket of currencies.
+- All World Bank indicators: annual frequency makes interpolation to monthly artificial; equivalent coverage already provided by monthly/quarterly FRED series (GDP, CPI, interest rates).
+
+**Frequency alignment decisions:**
+- Daily (FX rates, WTI): monthly mean via `resample('MS').mean()`
+- Quarterly (GDP USA and partners): forward-fill to monthly via `resample('MS').first().ffill()` — avoids look-ahead bias from interpolation
+- Monthly series: aligned to Month Start index
+
+**Target variable approach:**
+Monthly HS2 sectoral trade data is not available from UN Comtrade Plus (only aggregate monthly). Sectoral monthly estimates computed via annual HS2 proportion method: sector_share (from annual HS2 data) applied to monthly total flows within each year. Documented as methodological limitation.
+
+**Train/test split:**
+- Training: 2010-01 to 2021-12 (144 months, 80%)
+- Test: 2022-01 to 2024-12 (36 months, 20%)
+- Chronological split — no shuffling (time series requirement)
+
+**Crisis dummies created:**
+- `dummy_gfc`: 1 for Sep 2008–Jun 2009 (Global Financial Crisis)
+- `dummy_covid`: 1 for Mar 2020–Jun 2021 (COVID-19 disruption)
+
+**Feature engineering applied:**
+- Lags: t-1, t-3, t-6, t-12 for bilateral FX rates and REER
+- Moving averages: 3m, 6m, 12m for bilateral FX rates
+- Percentage changes (MoM) for bilateral FX rates and REER_USA
+- Calendar features: month, quarter, year
+
+**Transformations:**
+- Log (log1p) applied to all trade flow columns
+- First differences of log-trade flows for ARIMA stationarity
+- ADF tests run on raw and differenced series
+- Min-max scaling deferred to Modeling phase (fit only on training set)
+
+**Result:**
+- `notebooks/03_data_preparation.ipynb` — complete pipeline, 10 sections
+- `data/processed/dataset_can.csv`
+- `data/processed/dataset_mex.csv`
+- `data/processed/dataset_bra.csv`
+- `data/processed/dataset_combined.csv`
+- `reports/figures/14_fx_with_crises.png`
+- `reports/figures/15_correlation_matrix.png`
+
+**Next step:**
+Begin Modeling phase (`04_modeling.ipynb`): ARIMA, Random Forest, LightGBM — trained separately per country pair × sector × direction.
+
+---
+
 *End of log. New entries will appear above this line.*
