@@ -348,4 +348,24 @@ Begin Modeling phase (`04_modeling.ipynb`): ARIMA, Random Forest, LightGBM — t
 
 ---
 
+### 2026-03-27 — Data Preparation — Variable catalogue created
+
+**What was done:**
+Created a complete variable catalogue documenting all raw and processed variables in the project. New folder `data/codebook/` created to house project reference documents.
+
+**Technical details:**
+- File: `data/codebook/variable-catalogue.md`
+- Sections: Raw Data (FRED, UN Comtrade, World Bank) + Processed Data (all 97 columns documented)
+- Each variable documented with: source symbol, full name, frequency, period, transformation applied
+- Excluded variables explicitly documented with justification
+- Train/test split documented (2010–2021 train / 2022–2024 test)
+
+**Result:**
+- `data/codebook/variable-catalogue.md` — complete variable reference for the project
+
+**Next step:**
+Begin Modeling phase (`04_modeling.ipynb`).
+
+---
+
 *End of log. New entries will appear above this line.*
