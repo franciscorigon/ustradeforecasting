@@ -1,0 +1,82 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Data (large files)
+data/raw/*.csv
+data/raw/*.xlsx
+data/raw/*.parquet
+data/external/*.csv
+data/external/*.xlsx
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# Models (can be large)
+models/*.pkl
+models/*.joblib
+!models/.gitkeep
+
+# Credentials - NEVER COMMIT
+.env
+.env.local
+*.pem
+*.key
+
+# Generated outputs
+reports/figures/*.png
+reports/figures/*.pdf
+reports/results/*.csv
+reports/results/*.json
+!reports/figures/.gitkeep
+!reports/results/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# TCC files (optional - remove if you want to track)
+tcc/*.docx
+tcc/*.pdf
+!tcc/.gitkeep
+
+# ── AI tooling & personal workflow (not for public repo) ──────────────────────
+.claude/
+CLAUDE.md
+QUICKSTART.md
+memory/
+
+# Project management / sync files (personal use only)
+tcc2-central-sync.md
+tcc2-checklist.md
+
+# Personal research notes
+docs/diario-de-bordo.md
+docs/meetings/
+docs/references/
+
+# Scripts used for notebook manipulation (internal tooling)
+scripts/

@@ -1,0 +1,1923 @@
+
+=== PAGE 1 ===
+UNIVERSIDADE DO VALE DO RIO DOS SINOS - UNISINOS
+UNIDADE ACADÊMICA DE GRADUAÇÃO
+CURSO DE SISTEMAS DE INFORMAÇÃO
+FRANCISCO GIORDANO RIGON
+FORECASTING THE EFFECTS OF EXCHANGE RATE FLUCTUATIONS ON THE
+UNITED STATES’ TRADE FLOWS WITH CANADA, MEXICO AND BRAZIL USING
+MACHINE LEARNING MODELS
+Porto Alegre
+2025
+=== PAGE 2 ===
+FRANCISCO GIORDANO RIGON
+FORECASTING THE EFFECTS OF EXCHANGE RATE FLUCTUATIONS ON THE
+UNITED STATES’ TRADE FLOWS WITH CANADA, MEXICO AND BRAZIL USING
+MACHINE LEARNING MODELS
+Projeto de Pesquisa apresentado como
+requisito parcial para obtenção do título de
+Bacharel em Sistemas de Informação, pelo
+Curso de Sistemas de Informação da
+Universidade do Vale do Rio dos Sinos
+(UNISINOS).
+Orientador(a): Prof.ª Dra. Josiane Brietzke Porto
+Porto Alegre
+2025
+=== PAGE 3 ===
+SUMMARY
+1 INTRODUCTION ............................................................................................. 6
+2 THEORETICAL FRAMEWORK .................................................................... 10
+2.1 Economic key concepts ........................................................................... 10
+2.2 Models for determining the exchange rate and choosing exchange rate
+variables: USD/XXX rate and REER .............................................................. 11
+2.3 Trade flows and sectoral sensitivity ....................................................... 12
+2.3.1 Sectoral impacts of exchange rate fluctuations ....................................... 13
+2.3.2 Commodities vs. manufactured goods vs high technology ...................... 13
+2.4 Macroeconomic control variables .......................................................... 14
+2.5 Historical events ....................................................................................... 15
+2.6 Institutional events ................................................................................... 15
+2.7 Other determinants of trade flows .......................................................... 16
+2.8 Time series forecasting models .............................................................. 17
+2.8.1 ARIMA model .......................................................................................... 18
+2.8.2 Smoothing and decomposition models .................................................... 18
+2.8.3 Stationarity tests ...................................................................................... 19
+2.9 Machine learning in forecasting .............................................................. 19
+2.9.1 Random Forest ........................................................................................ 20
+2.9.2 LightGBM ................................................................................................ 21
+2.9.3 Comparison between traditional approaches and ML ............................. 22
+2.9.4 Hyperparameters and optimization .......................................................... 22
+2.10 Technologies and tools ......................................................................... 23
+2.10.1 Python for data analysis ........................................................................ 24
+2.10.2 SQL for data integration ........................................................................ 25
+2.10.3 Reproducibility and versioning ............................................................... 25
+3 METHODOLOGY .......................................................................................... 27
+3.1 Business understanding .......................................................................... 27
+3.1.1 Business objectives and stakeholders ..................................................... 28
+3.1.2 Scope, core problem and theoretical grounding ...................................... 28
+3.1.3 Linking business understanding to research objectives........................... 29
+3.2 Data understanding .................................................................................. 29
+=== PAGE 4 ===
+3.2.1 Data sources and scope .......................................................................... 30
+3.2.2 Frequency, length and temporal coverage .............................................. 30
+3.2.3 Tools, integration and preliminary transformations .................................. 30
+3.2.4 Exploratory statistics and quality assessment ......................................... 31
+3.3 Data preparation ....................................................................................... 31
+3.3.1 Variable screening and selection ............................................................. 32
+3.3.2 Data sources, integration, frequency conversion and cleaning ............... 32
+3.3.3 Outlier detection and treatment ............................................................... 33
+3.3.4 Transformations: differentiation, normalization and encoding ................. 34
+3.3.5 Feature engineering and temporal features ............................................. 34
+3.3.6 Temporal alignment and final dataset readiness ..................................... 35
+3.4 Modeling .................................................................................................... 35
+3.4.1 General overview of the modeling approach ........................................... 35
+3.4.2 Data format for modeling ......................................................................... 36
+3.4.3 ARIMA model: definition and justification ................................................ 36
+3.4.4 Specific procedures for ARIMA ............................................................... 37
+3.4.5 Preparation and modeling for Random Forest ......................................... 38
+3.4.6 Preparation and modeling for LightGBM ................................................. 38
+3.4.7 Precautions with machine learning models ............................................. 38
+3.4.8 Temporal validation and evaluation ......................................................... 39
+3.4.9 Training, validation and test split ............................................................. 39
+3.4.10 Hyperparameter optimization ................................................................ 40
+3.5 Evaluation ................................................................................................. 40
+3.5.1 Statistical and economic evaluation metrics ............................................ 41
+3.5.2 Interpretation and explainability of models .............................................. 41
+3.5.3 Robustness tests and sensitivity analysis ................................................ 42
+3.6. Deployment .............................................................................................. 43
+3.6.1 Purpose of implementation in predictive modeling projects ..................... 43
+3.6.2 Requirements for predictive model implementation ................................. 43
+3.6.3 Structure of a theoretical prediction pipeline ............................................ 44
+3.6.4 Operational data preparation ................................................................... 44
+3.6.5 Forecast generation: operational issues (Batch vs. Near Real-Time) ..... 45
+3.6.6 Results integration in the business context ............................................. 45
+3.6.7 Theoretical monitoring and maintenance framework ............................... 46
+=== PAGE 5 ===
+3.6.8 Documentation, versioning, and reproducibility ....................................... 46
+3.6.9 Academic reporting ................................................................................. 47
+4 TIMELINE AND SCHEDULE ........................................................................ 48
+5 APPENDIX .................................................................................................... 49
+5.1 Interview script ......................................................................................... 49
+5.1.1 Questionnaire for foreign trade / international business professionals .... 49
+5.1.2 Questionnaire for technology professionals ............................................. 50
+REFERENCES ................................................................................................. 51
+=== PAGE 6 ===
+6
+1 INTRODUCTION
+The purpose of this study is to investigate the impact of exchange rate
+volatility on bilateral trade flows, with particular emphasis on the trading
+relationship between the U.S. and its main partners, Canada, Mexico and Brazil,
+which is its largest partner in Latin America (USITC, 2025).
+Canada and Mexico trade with the USA through USMCA (United States-
+Mexico-Canada Agreement). However, Brazil trades extensively without a full-
+fledged free trading agreement like that (USTR, 2020). The comparison between
+an advanced and a developing economy will enable us to detect nuances or
+differences on the pattern of sensitiveness that foreign trade demonstrates when
+reproducing exchange rate fluctuations, contributing to enhancing the already
+well-established debate (AUBOIN; RUTA, 2011).
+The period analyzed and tested will be from 2000 to 2025, with a
+combination of historical data and forecasts in the determination of trends and
+estimations of future effects. This study is also interested in how fine-grained the
+data will be regarding monthly to semi-annual time slices, so as to accommodate
+the changes of volatile unpredictable trade flows and exchange rate movements
+(SHEN et al., 2021).
+Apart from an aggregate trade perspective, the study will also offer sectoral
+analysis to ascertain why different commodities and services may respond
+asymmetrically to exchange rate fluctuations, offering a better understanding of
+the heterogeneity of effects among sectors.
+The proposed study will use state-of-the-art machine learning models
+(Random Forests, LightGBM) to forecast the effect of such fluctuations and
+compare them to traditional statistical methods such as ARIMA in terms of
+predictive ability (SONG; CHEN, 2024). It will include in its analysis the exports
+and imports of goods between the U.S. and the chosen countries, using as
+explanatory independent variables, macroeconomic indicators such as GDP,
+nominal and real exchange rates, volume indices of production, and inflation
+(KALLIANIOTIS, 2022). In addition, trade relationships and the exchange rate
+=== PAGE 7 ===
+7
+dynamics can be seriously affected by outlier events (such as global financial
+crises and pandemics), therefore the influence of such extreme observations on
+predictive models will be examined to see how well they hold up in these high-
+volatility instances due to nonlinear relationships (BATARSEH et al., 2020). This
+research will follow a structured approach according to CRISP-DM, from business
+understanding to deployment of the model (MARTÍNEZ‐PLUMED et al., 2019).
+The primary question to be answered is: "What is the impact of exchange
+rate variations on export and import flows between the United States and
+Canada, Mexico, and Brazil, and which forecasting models are best for making
+these forecasts?"
+There will also be additional questions regarding: What are the horizons
+where predictive power is most informative for assessing the impact of exchange
+rate movements on international trade, and how does this predictive power vary
+across different models? Which industries are more sensitive with respect to
+exchange rate changes and how does this vary between developed countries
+versus emerging economies? In addition, this study endeavors to explore the
+asymmetric effects on exports and imports in reaction to currency appreciation
+and depreciation with a view to finding differences in behavior. We will also study
+the effect of the depreciation of the dollar on bilateral trade balances, examining
+how this type of monetary adjustment affects American export prices in foreign
+markets as well as import prices for American consumers. Moreover, it will
+compare the forecasting ability of traditional econometric models with that of
+machine learning models in forecasting non-stationary or strongly fluctuating time
+series.
+The general objective of this study is to assess the relative performance of
+Random Forest and LightGBM models with respect to ARIMA model in
+forecasting how continuously changing exchange rates affect bilateral trade flows
+between the United States, Canada, Mexico, and Brazil with granular level
+insights about sectoral movement and macroeconomic effects.
+The specific objectives are:
+=== PAGE 8 ===
+8
+a) To pinpoint which sectors are most vulnerable to exchange rate
+changes;
+b) To determine the impact of these swings across different time horizons;
+c) To evaluate the predictive power of each model;
+d) To examine the effect of macroeconomic factors on the volatility of trade
+flows.
+Ultimately, an end-to-end model-based analysis system for the prediction
+of trade flows is proposed, serving policymakers and traders for strategic
+planning. The model comparison will enable the identification of the most
+adequate methodologies to different context of data and economic scenarios,
+adding knowledge to the advancement of the literature about predictive modeling
+in international trade and multivariate time series.
+Exchange rate volatility is a key factor that in fact affects international
+competitiveness, investment decisions, and resource allocation in the world
+market (RAHMAN et al., 2025). Detailing how exchange rate changes translate
+into trade flow changes is therefore crucial to designing efficient economic
+policies and supporting strategic decisions for exporter and importer companies
+(KIM; LE, 2024).
+Accuracy in predicting these parameters with the use of modern machine
+learning algorithms, when compared to the traditional econometric methods and
+IT tools developed upon these solutions, become highly relevant as going from
+minimizing costs over maximizing profits. This accuracy is an essential asset for
+nations and companies active on the international markets by helping them adapt
+faster to those changes encountered at a global level (ABIR et al., 2024).
+Moreover, beyond its practical contributions, this work is relevant from a
+methodological point of view, as it relies on the implementation of Data Science
+best practices, such as ETL process and experiment tracking, to enforce the
+reproducibility of modeling experiments, and therefore results, in a transparent
+and consistent manner, thus promoting scientific validity. As emphasized by
+Vranješ and Niggemann (2024, p. 1–2),
+=== PAGE 9 ===
+9
+the iterative process of training, testing, and validating ML models
+requires empirical evidence to ensure their accuracy and reliability in
+real-world applications, making experimentation a cornerstone of the
+ML research methodology, which reinforces the relevance of
+structuring, documenting, and monitoring the experimental workflow
+adopted in this study.
+In this way, the paper also extends the literature on predictive modeling of
+international trade, representing a reference framework to scrutinize the ability of
+trade flows to adjust to exchange rate and macroeconomic interferences.
+=== PAGE 10 ===
+10
+2 THEORETICAL FRAMEWORK
+This section presents the theoretical basis to understanding how exchange
+volatility impacts international trade flows, and how predictive models are used to
+assess these dynamics. To ensure these answers are well-founded, we will seek
+support from the fields of economics and international relations, as well as from
+the technological field.
+2.1 Economic key concepts
+Nominal exchange rate: The nominal exchange rate is the relative price of
+two currencies and plays a major part in determining international
+competitiveness due to its impact directly on the price of imports and exports
+(KIM; LE, 2024). As stated by Kallianiotis (2022, p. 46), “Devaluation increases
+the price of imports and reduces the price of exports; and due to the law of
+demand, imports are falling and exports are increasing and the trade account is
+improved”.
+REER: Real Effective Exchange Rate (REER) is a broader-based
+measure that represents the relative price of goods and services of a country with
+respect to those of other countries in its trading partner, adjusted for differences
+in prices while accounting for inflation rates (WAHAB, 2024). It thus offers a better
+understanding and knowledge of an economy’s competitiveness vis-à-vis others
+since it considers inflation differentials that would, otherwise, either erode or
+magnify the impact of nominal exchange rate changes (MWANGE et al., 2022).
+Export and Import: Imports and exports are key parts of international trade.
+Imports represent the purchase of foreign goods or services, while exports are
+the sales of domestic goods or services abroad. These flows are of key
+importance for a country's trade balance and general economy (NOTZ;
+ROSENKRANZ, 2021).
+HS: The Harmonized Commodity Description and Coding System (HS) is
+a multifunctional international nomenclature that offers a common language for
+handling classifications by trade sectors, indispensable for recording trade flows
+=== PAGE 11 ===
+11
+at more detailed levels (SCHMIDT; STEINGRESS, 2019). The granularity offered
+by the HS allows an analysis of how product categories react differently to
+exchange rate changes, yielding very important sector-specific heterogeneities
+(SELLAMI et al., 2024).
+2.2 Models for determining the exchange rate and choosing exchange rate
+variables: USD/XXX rate and REER
+Various theories have been developed to try to explain those factors
+affecting the determination of exchange rates; it can be inappropriate to rely on
+one model to predict, as stated by Mwange (2022, p. 71),
+Even though exchange rates can be confusing, practically everyone
+has to understand them to function in the modern global economy. As
+the world gets smaller, there is a greater likelihood that we will have to
+deal with the risks associated with the fact that there are many different
+currencies in circulation around the globe and that these currencies will
+have a direct impact on our world. We must be able to evaluate how
+changes in exchange rates will impact our financial planning, corporate
+strategies, governmental initiatives, and other life decisions in order to
+take the necessary action (both financial and otherwise). Examining
+various exchange rate theories can help us.
+The analysis of the nominal exchange rate (USD/XXX) is based on
+traditional methods in the literature, which involves the link between interest rates,
+inflation and expectations of devaluation as proposed by the International Fisher
+Effect (IFE), and the relationship that exists between domestic interest rates, on
+one hand, and foreign rates on other hand, in accordance with Interest Rate
+Parity (IRP) which explains how exchange rate is connected to equilibrium among
+money supply as well as demand for it according to monetary approaches.
+Another relevant theoretical framework is the balance of payments theory, which
+considers the exchange rate as being determined by the general conditions of
+foreign transactions and financial exchanges among countries (MWANGE et al.,
+2022). An assessment based on the U.S. dollar's nominal exchange rate is
+conspicuous by its superiority as an anchor currency to inform and shape prices
+internationally even for trade with third countries that do not include the U.S.
+directly (GOPINATH et al., 2020). As SPRING-RAGAIN, (2024, p. 4) states,
+Leading currencies, such as the US dollar (USD) and the euro (EUR),
+play a central role in the global economy due to their extensive use in
+=== PAGE 12 ===
+12
+international transactions, foreign exchange reserves and financial
+markets. Their importance lies in several key aspects: as a store of
+value, where the world's central banks hold substantial reserves in USD
+and EUR to stabilize their own currencies and manage economic crises;
+as a medium of exchange, as the dollar and euro are widely used for
+international trade, facilitating exchanges between countries; and as a
+unit of account, as many financial contracts, including international
+loans, are denominated in USD or EUR, reinforcing their central role.
+Thus, the choice of USD/XXX enables a straightforward analysis about the
+effect of US currency on trade balance.
+The use of the Real Effective Exchange Rate (REER) is justified since it
+adjusts for inflation differentials and trade structures with various partners, hence
+reflecting the logic of Purchasing Power Parity (PPP) but going beyond it by
+addressing its failure to account for shifts in trade flows and bilateral relationships,
+as discussed by Mwange et al. (2022). The REER is a key variable for
+macroeconomic analysis in open economies and essential for interpreting the
+movement of exchange rates and their consequences on economic policy. A
+careful measurement of the REER, using current weights, is required for a better
+understanding of exchange rates and also their consequences on economic
+policy (BAYOUMI et al., 2005). This role of the REER is related to its ability to
+provide crucial information for policymaking, by deeper understanding of
+exchange rate movements and their effects in the world economy, particularly
+during crises (BAYOUMI et al., 2005).
+Therefore, the combined use of the REER exchange rate and the
+USD/XXX allows for combining both sets of perspectives, which consider the
+direct impact of the U.S. dollar and global competitiveness adjusted for inflation,
+thereby improving the predictive power of the analyses to be performed.
+2.3 Trade flows and sectoral sensitivity
+The structure of bilateral trade flows is a prerequisite for examining the
+sensitivity of various sectors to exchange rate changes. The detailed bilateral
+trade data at the Harmonized System (HS) level allows us to determine where
+imports and exports go, what their value, volume, weight and thus modeling
+specific sectoral trade relations. This level of granularity enables the analysis on
+how changes in exchange rates, particularly those of the dollar, affect volumes of
+=== PAGE 13 ===
+13
+trade (GOPINATH et al., 2020). Thus, it is possible to determine areas where
+trade is more vulnerable or stable in the face of exchange rate shocks.
+2.3.1 Sectoral impacts of exchange rate fluctuations
+Exchange rate fluctuations affect sectors and products differently, and are
+considered an important determinant of the competitiveness of goods in
+international markets (NTHEBE; MOSIKARI, 2025).
+Considering sectoral specificity is fundamental for accurately estimating
+the elasticity of export and import demand, especially at the macroeconomic
+level. The specialized literature shows that the exchange rate has had
+differentiated impacts on prices across various sectors (GODA et al., 2024).
+2.3.2 Commodities vs. manufactured goods vs high technology
+Within different product types, such as commodities, manufactured goods,
+and high-tech items, response to the exchange rate vary, as these products have
+a particular complexity in the global value chain, in the elasticity of demand, and
+in their cost dynamics (GODA et al., 2024).
+Commodities, for example, are sensitive to exchange rate fluctuations, as
+they reflect international prices which, in turn, respond directly to variations in the
+dollar. These factors include production costs and the loss of export
+competitiveness in a strong currency environment, automatically affecting export
+incentives and domestic supply in an immediate way (OLIVEIRA et al., 2023).
+Product complexity and the degree of technological intensity play important roles
+in determining the sensitivity of sectors to exchange rate fluctuations, with low-
+complexity sectors in developing countries exhibiting the greatest elasticities in
+relation to variations in the real effective exchange rate. This is because less
+sophisticated sectors generally have more flexible production costs and are much
+more dependent on relative prices to maintain their competitiveness in the
+international market (GODA et al., 2024).
+=== PAGE 14 ===
+14
+From an opposite point of view, BERGIN and CORSETTI (2020) claim that
+industries with differentiated goods, with nominal rigidity and costly entry, are less
+reactive to the exchange rate than members of industries producing very
+substitutable goods. This sensitivity is reduced by the nature of imperfect
+competition character and a dependence on preconditions at the stable
+macroeconomic level.
+2.4 Macroeconomic control variables
+The Gross Domestic Product (GDP) and the GDP per capita are among
+the most commonly employed macroeconomic variables for the modeling of trade
+flows as they track economic development level and the supply and demand
+capacity of countries. The GDP per capita, which is GDP divided by population,
+is especially important for measuring wealth disparities between countries and
+how these might relate to trade patterns. As noted by Wahab (2024), this variable
+helps explain how similarity, or dissimilarity, in factor endowments can affect
+bilateral trade patterns, although it presents potential bias problems, such as the
+accuracy of population data and the inherent limitations of official statistical data.
+Another fundamental variable, conceptually linked to the exchange rate as
+a dynamic condition, is inflation, which exerts a significant influence on the
+international competitiveness of products and on the trade balance. For a
+comprehensive analysis, the examination of the exchange rate regime must also
+consider external equilibrium in monetary policy, depending on the inflation
+targeting regime, since flexible rates are effective in correcting external
+imbalances. Consequently, exchange rate flexibility, a distinctive characteristic of
+a floating exchange rate regime, can lead to inflationary instability, which, in turn,
+influences the trade balance (NASIR; VO, 2020).
+Fluctuations in the nominal exchange rate also disrupt international
+negotiations and directly influence production costs and the competitiveness of
+tradable goods. While depreciation can increase imports of inputs but also make
+exporting companies more competitive, exchange rate appreciation can result in
+lower production costs, reducing import prices of inputs (SANTORO; ROLIM,
+2023).
+=== PAGE 15 ===
+15
+Financial and economic crises, which tend to accompany sharp exchange
+rate movements and financial market turbulence, are also expected to affect trade
+flows through changes in the supply of and demand for goods and services
+(ARÉVALO et al., 2022).
+2.5 Historical events
+The global economy shapes trade flows and exchange-rate patterns as
+booms and busts change investment, consumption, and internationalization. As
+mentioned in SPRING-RAGAIN (2024, p. 2):
+Global economic cycles are characterized by alternating phases of
+expansion and recession, influenced by a multitude of economic,
+political and social factors. These cycles are often punctuated by major
+financial crises, such as the Asian crisis of 1997, the global financial
+crisis of 2008, and more recently, the economic turbulence induced by
+the COVID-19 pandemic.
+2.6 Institutional events
+The United States, Canada, and Mexico are home to one of the world's
+largest free trade areas, initially called the North American Free Trade Agreement
+(NAFTA), established in 1994, which opened trade and reduced barriers to
+investment among the three countries. In 2020, NAFTA was replaced by the
+United States-Mexico-Canada Agreement (USMCA), which preserves regional
+integration and introduces appropriate structural changes, modernizes trade
+rules, and includes new regulations (HIGUERA-COTA et al., 2023).
+On the other hand, Brazil has long resisted comprehensive trade
+agreements like the USMCA with the U.S., opting instead to strengthen regional
+blocs such as MERCOSUR and refusing accession agreements modeled on the
+U.S. Although the United States wished to expand its agreements with Brazil, the
+South American country's policy did not align with the requirements of
+"competitive liberalization" proposed in pacts like the USMCA; instead, Brazil
+focused on seeking agreements with other Latin American nations (KAT, 2022).
+=== PAGE 16 ===
+16
+2.7 Other determinants of trade flows
+Other factors, beyond those previously mentioned, also impact trade
+patterns to a great extent. A country’s population is one of the most important
+factors because it indicates market size and potential import demand. The larger
+the country, the more it can extend its trading network; here countries vary in their
+market size (SELLAMI et al., 2024). Consequently, a nation's economic capacity,
+indicated by Gross Domestic Product and national income per capita, crucially
+affects its involvement in global trade. A strong GDP reflects robust production
+conditions, which significantly impacts both import competitiveness and the level
+of exports, while a high per capita income implies greater purchasing power
+among people, thus promoting demand for higher value-added products and
+improving both the quantity and quality of national export goods (LI et al., 2024).
+Geographical distance is another undeniable determinant of trade, as it
+represents a natural obstacle that results in transportation and time costs, which
+ultimately impact the viability of economic relations at an international level. This
+phenomenon, known as the Gravity Model, has several references in literature,
+according to which trade between two countries is directly proportional to the size
+of their economies, measured through variables such as GDP and population,
+and inversely proportional to the distance that separates them (CONTRERAS,
+2022). Related to this topic is logistics infrastructure, which includes the quality
+and efficiency of ports, airports, highways, and railways. Efficient infrastructure
+reduces costs and distances, favoring the rapid movement of goods, with a
+consequent increase in commercial activities. On the other hand, a scarcity of
+logistics factors can lead to higher transportation costs and inhibit commercial
+transactions globally (MAO et al., 2023).
+Equally important, or even more so, are the connections between states
+that create a diplomatic environment conducive to trade. Currently, negotiations
+no longer address only tariff reductions, but also the migration of people, capital
+and knowledge, as well as cooperation (CARRILLO-MALDONADO; FLORES,
+2024). In this sense, conflicts that block these flows can occur. It can also happen
+that cultural factors, such as similar religious beliefs or a common language,
+associated with certain countries, result in lower trade costs, combined with
+=== PAGE 17 ===
+17
+greater trust between partners and, therefore, weakening barriers to entry in
+trade. A similar culture can correct information asymmetries and influence
+consumer preferences, thus stimulating trade in goods and services. In some
+situations, cultural issues are more important for the trade of goods than the
+quality of the products themselves, especially in goods emotionally linked to
+cultural aspects (COSTA et al., 2023).
+Finally, Global Value Chains (GVCs) are characterized as an international
+network in which production stages are fragmented and a combination of
+domestic and imported intermediate inputs is used to produce final goods and
+services. Countries specialize in different activities, supplying intermediate inputs
+that are used to produce both for export and for the domestic market (GAULIER
+et al., 2020). Contemporary trade patterns are profoundly affected by increasing
+global integration and all the phenomena associated with it, such as productive
+globalization. In particular, the production of advanced high-technology goods
+through international specialization and the fragmentation of production stages
+has intensified trade flows and increased interdependence among participating
+economies (AKMAN et al., 2020).
+2.8 Time series forecasting models
+The goal of time series analysis is to model and predict the behavior of
+sequential data, as well as to discover temporal dependencies or patterns. The
+conventional approach, reflected by econometric models such as ARIMA,
+assumes that the problem is linear and that the data are stationary so that
+statistical patterns remain stable over time and structural relationships can be
+modeled. Preprocessing techniques, such as differencing, are used to make time
+series data stationary (ABIR et al., 2024).
+Time series analysis is considered basic in the understanding of economic
+aspects, particularly regarding international trade and networks. It allows the
+analysis of data at regular intervals in order to identify trends, cycles and patterns
+that will help to explain the evolution of commercial behavior and the effects of
+macro events, providing information on past activities, economical dynamics and
+future performance (YAZAWA, 2023). In this sense, the ability to analyze traffic
+=== PAGE 18 ===
+18
+aims to detect and predict these common temporal patterns in order to make
+strategic decisions at the levels of international trade and finance (ARÉVALO et
+al., 2022).
+2.8.1 ARIMA model
+AutoRegressive Integrated Moving Average (ARIMA) model proposed by
+Box and Jenkins in the 1970s, is regarded as one of the classic statistical tools
+for time series analysis and forecasting applications, especially in the finance field
+(LIN et al., 2020). The model is particularly suitable for the series which have
+linear trend, stationarity and no seasonality or can be transformed to satisfy these
+requirements (HE et al., 2020).
+This model has three main parameters: “p,” which is the order of
+autoregression, “d” as the degree of differencing, such that stationarity is
+reached, and “q”, as the moving average order, that allows capturing internal
+dependencies or removing trends or seasonality in time series (CHATTERJEE et
+al., 2024).
+2.8.2 Smoothing and decomposition models
+Exponential smoothing models are used for forecasting time series, using
+local averaging with weighting of past data. In this case, the data have an
+exponentially diminishing weight as they get older; indeed, any such model will
+tend to give more importance to more recent events than historical data. This
+approach is especially favorable when analyzing series with trends and
+seasonality since exponential smoothing can be modified to accurately model
+these aspects (SHEN et al., 2021).
+Time series decomposition differs by dissecting the data into its structural
+components, e.g., trend, seasonality, cycle, and error, eliminating or minimizing
+noise, making the time series more suitable for forecasting. This decomposition
+allows each part to be modeled separately and then recombined to produce a
+final forecast (HE et al., 2020).
+=== PAGE 19 ===
+19
+For the case at hand, such models are instrumental for deciphering
+complex interactions in economic and financial systems, reporting dynamic
+responses to shocks and their effect durations (ARÉVALO et al., 2022).
+2.8.3 Stationarity tests
+Stationarity is a fundamental subject when applying time-series models,
+such as ARIMA. The differencing (parameter "d") is used where data demonstrate
+non-stationarity to transform the series to make it conducive for ARIMA fitting
+(CHATTERJEE et al., 2024). For the adequacy of time series models, formal tests
+are performed, such as Dickey-Fuller test, to check the unit root and order of
+integration process of the series that served as basis for further analysis, such as
+co-integration (ARÉVALO et al., 2022).
+Non-stationarity of time series, such as trend and seasonality, severely
+damages the accuracy of models like ARIMA. Hence, the removal of non-
+stationarity is an important prerequisite for the application of several time-series
+models like ARIMA, and its elimination or alleviation has been pursued in
+advanced approaches to improve forecasting performance (LIN et al., 2020).
+2.9 Machine learning in forecasting
+Recent advances in machine learning have made possible the
+construction of more resilient and flexible models to forecast time series, which
+are capable of dealing with non-linearity and complexity that characterize several
+economic phenomena, surpassing the shortcomings of traditional statistical
+approaches (CHINN et al., 2023). Machine learning algorithms, like Random
+Forest and LightGBM, are chosen for this study due to their ability to capture non-
+linearity and complex relationships within the data without imposing stringent
+prior assumptions on data distribution or stationarity conditions (CHATTERJEE
+et al., 2024).
+While Random Forest and LightGBM were not specifically developed for
+capturing temporal dependency, they are extensively used in time series
+prediction tasks, due to their flexible ability to model complex relationships and
+=== PAGE 20 ===
+20
+handle high dimensional data. In these applications, time can be combined by
+feature engineering using the calendar information such as year and month as
+well as transformation based on the series itself (ZHANG; JIANG, 2025).
+2.9.1 Random Forest
+Random Forest is one of the most versatile and widely used machine
+learning algorithms for handling complex data. It is non-parametric, that is, it can
+deal with different types of responses and predictors over scales and
+distributions, making it appropriate for high-dimensional setting and complex
+data. Its power becomes evident from the scale invariance of its frequency-based
+functions and the fact that its prediction error remains stable even with an
+increase in the number of trees (HU; SZYMCZAK, 2023). Hence it helps mitigate
+the overfitting problem present in isolated decision trees since this model works
+by creating multiple decision trees at training and outputting the class that is the
+mode of classes (classification) or mean prediction result (regression) of the
+individual trees (CHATTERJEE et al., 2024). This ensemble learning technique
+by combining output from many trees reduces variance and bias, maximizing
+predictive accuracy (LING; WANG, 2024).
+What is more, Random Forest has great practical advantages for
+applications in economics and business. It is moderately resistant to abnormal
+points, can cope with multicollinearity between the predictors as well, and is able
+to generate variable importance measure which further improve applied
+interpretation. These traits can make the Random Forest a good choice for
+balancing accuracy and interpretability on empirical scenarios (SALMAN et al.,
+2024).
+Nevertheless, it is important to recognize some of the methodological
+weaknesses in the model that were raised by SELLAMI et al. (2024, p. 4):
+However, while Random Forest models are well suited for analyzing trade
+data, they have limitations in extrapolation. This inability to extrapolate effectively
+can hinder their accuracy in predicting future trade flows over time. Furthermore,
+=== PAGE 21 ===
+21
+in general, deep learning regression models tend to outperform Random Forest
+models.
+2.9.2 LightGBM
+Otherwise, LightGBM is a gradient boosting framework that shows
+efficiency and accuracy on large data sets while also being optimized for both
+training and memory usages (CHATTERJEE; et al.; 2024). Its architecture can
+make use of training acceleration techniques and reduce memory usage, which
+would make it convenient for high-dimensional sparse scenarios. Such innovation
+significantly contributes to model efficiency when carrying out machine learning
+duties (GUO et al., 2024).
+Gradient boosting models have been designed to be efficient, and it is
+considered as an efficient tool for a machine learning problem where computation
+is a concern and data sizes are very large though some models may behave
+slowly under huge data size (ENKHBAYAR, ŚLEPACZUK, 2025).
+In real-life scenarios, incomplete data is common, and as demonstrated in
+studies, techniques such as oversampling with LightGBM manage this data and
+address class imbalance (GOPINATH et al., 2021).
+While it comes with the advantages of LightGBM, we can acknowledge
+that exactly interpreting LightGBM still is a difficult task due to its naturally high
+complexity in tree boosting models. Thus, although the model may result in highly
+accurate predictions, it may do this less transparently than simple models, which
+is pertinent when explainability is vital (GOPINATH et al., 2021).
+Further, the models like LightGBM are also overly sensitive to overfitting,
+which requires precise adjustments of numerous hyperparameters and careful
+regularization. The optimization of these hyperparameters, which can be very
+computationally demanding, is crucial for avoiding overfitting and promoting the
+model learning to generalize well (SAIED et al., 2013).
+Compared with some other models, which can be so complex that they are
+not interpretable, LightGBM is usually in a good place on this trade-off. This
+=== PAGE 22 ===
+22
+model is known for its high accuracy as well as its interpretability, making it an
+effective option when both predictive accuracy and model understanding are
+important (GUO et al., 2024).
+2.9.3 Comparison between traditional approaches and ML
+The main difference between machine learning models, like LightGBM and
+Random Forest, is that they are intrinsically capable of modeling non-linear
+relationships or complex interactions in the data. Unlike econometric approaches
+that usually impose strong assumptions on the properties and distribution of data,
+machine learning models rely much less on premises and adjust more easily to
+changing data patterns (SELLAMI et al., 2024). This flexibility makes them
+particularly appropriate for the prediction of complex phenomena, like exchange
+rates and flows trade, overcoming the constraints and difficulties inherent in
+traditional methods that do not always reflect the dynamics underlying data (GUO
+et al., 2024).
+Therefore, a main difference between machine learning and econometric
+models is that, while in the former the data speaks for itself regarding patterns, in
+the latter there is a need to make hypotheses based on predetermined model
+specifications (SILVA et al., 2024).
+On the other hand, in terms of data interpretation, available machine
+learning models are consistently described as “black boxes”, making it difficult to
+grasp the justification for their predictions compared with traditional econometric
+models that are a more transparent and built on explicit economic theory
+(ABOUZAID; BOUSSEDRA, 2025).
+2.9.4 Hyperparameters and optimization
+Although the "black box" nature of machine learning models presents
+challenges, interpretability techniques, e.g., SHAP-based methods, are starting
+to close this divide. These methods, inspired by cooperative game theory, allow
+for more interpretable examination of how variables influence predictions of the
+complex modeling task by decomposing predictions into feature contributions and
+=== PAGE 23 ===
+23
+thereby expose non-linear structures and interactions that might have been
+hidden otherwise (ZHANG; JIANG, 2025). SHAP is known to be very powerful in
+understanding the importance of each input feature in a model's prediction about
+a certain case, and in providing an index representing the contribution of each
+variable to the output value of the model. This capability to assess the relative
+importance of each feature for a given prediction improves interpretability and
+trust in machine learning models, even for highly complex models (GUO et al.,
+2024).
+The use of these methods provides an opportunity for policymakers not
+only to follow high-fidelity forecast predictions but also to understand the causal
+reasons behind such forecasts, thus making better and more informed strategic
+decisions (ZHANG; JIANG, 2025).
+However, identifying the essential hyperparameters for model
+performance is a major challenge in which slight changes can result in large
+differences in predictive accuracy (ZHANG; JIANG, 2025).
+Thus, the comparative application of Random Forest and LightGBM in this
+work gives options to evaluate their predictability on trade flows under a
+fluctuating exchange rate as a provision to traditional methodologies. The hands-
+on application of these methods will include extensive exposure to computational
+tools, such as Python and its statistical libraries, data integration tools via SQL,
+visualization resources on GitHub for reproducibility with versioning adopted in
+this study.
+2.10 Technologies and tools
+In this context, we provide an overview on the main technologies and
+platforms used to implement and validate the predicted models. This section is
+devoted to the description of both the libraries used, the hardware and software
+environments in use as well as how we handled issues related to scaling up and
+reducing the computational cost of the analysis. The choice of these tools is to
+maximize the pipeline, including data collection, preprocessing and modeling,
+evaluation, and result deployment.
+=== PAGE 24 ===
+24
+2.10.1 Python for data analysis
+Python gained a lot of attention in the data analysis and machine learning
+world because of its huge collection of libraries and frameworks that are highly
+needed for designing and testing predictive algorithms (ISLAM; RASHID, 2024).
+Python has a robust ecosystem of data manipulation and processing
+libraries like Pandas and NumPy. These libraries play an essential role in
+organizing, cleaning and transforming large amounts of data, which then allows
+for manipulation from a mathematical/statistical point of view and for exploration
+of relationships and patterns within structured datasets (ATOCHERO; LEDO-
+DÍAZ, 2024).
+The Statsmodels library is heavily used for the examination of statistical
+and econometric models, like ARIMA. This library is developed specifically for
+time series analysis and modeling which provides relevant functionality to
+implement ARIMA as well as exponential smoothing models (HEDAYATI; ASL,
+2023).
+In the machine learning space, Scikit-learn and LightGBM for modeling
+and high-performance boosting methods are used. The latter emerges as an
+important factor in the trade-off between computational efficiency and predictive
+accuracy, and it is a very adaptive alternative in order to fit complex prediction
+models for practical applications (SALVADOR, 2024). Some of the more
+traditional search methods, Grid Search and Random Search, are also present
+in Scikit-learn and they form a strong part of model tuning techniques to be used.
+Grid Search performs a systematic search over hyperparameter configurations,
+whereas Random Search samples combinations randomly across the search
+space (CHOWDHURY et al., 2024).
+Other significant library is Optuna, a hyperparameter optimization
+framework that stands out for being algorithm-agnostic and allowing efficient
+searches of more complex search spaces and helping to achieve models with
+better performance (LING; WANG, 2024). Optuna hyperparameter optimization
+is essential to improve Random Forest and LightGBM models guaranteeing fine
+=== PAGE 25 ===
+25
+tuning that captures the complex interactions of exchange rate variations
+(JABBAR; JALIL, 2024).
+These tools together with visualizing libraries like Matplotlib and Seaborn
+are essential for observing patterns as well. Moreover, we can visualize the
+results in high quality through them in machine learning studies. Seaborn, based
+on Matplotlib, is used to analyze and interpret data, and Matplotlib is needed for
+basic data visualization applications. The use of Jupyter Notebook environments,
+which allows the insertion of data visualization, highlights the relevance given to
+these tools for presenting results (ZAIM et al., 2022).
+2.10.2 SQL for data integration
+One of the most important steps in the consolidation of information is to
+merge disparate pieces of data, this requires cleaning, normalization and
+resolving inconsistencies among data sources for coherence and compatibility
+between datasets. Tools like SQL (Structured Query Language) for data retrieval,
+analysis and integration with data-warehouse repositories for efficient access are
+critical. This method is essential in achieving uniform and easily accessible
+datasets, which are crucial for constructing predictive models, especially in the
+machine-learning environment (REMIL et al., 2024). Furthermore, the use of SQL
+allows for the implementation of complex queries as well as stored procedures,
+which is ideal for data accessing and manipulation in a large-scale scenario
+(ISLAM 2024).
+2.10.3 Reproducibility and versioning
+For the purpose of transparent research, being able to replicate and
+reproduce results is essential in order for others to be capable of verifying and
+expanding on the work. In this perspective, version control systems like Git and
+code hosting platforms like GitHub can be very much required to track down in a
+systematic manner the changes of data and code, and to manage different
+versions of the project (KAYIT; ISMAIL, 2025).
+=== PAGE 26 ===
+26
+In addition, a thorough documentation of all steps from data acquisition
+and preprocessing to model calibration and evaluation is required in order to
+provide the basis to accurately repeat the experiments (SEMMELROCK et al.,
+2024).
+Finally, containerization strategies, e.g., Docker, are essential for
+guaranteeing the uniformity of the code execution environment. Because the
+computational environment is “frozen” into an “image” in the sense of a so-called
+container that can be copied from machine to machine, Docker ensures that code
+and its execution environment are homogenous and not impaired by irrelevant
+inconsistencies originating from slightly different software configurations or
+overall systems, thereby also contributing to computational reproducibility
+(PEIKERT; BRANDMAIER 2021).
+=== PAGE 27 ===
+27
+3 METHODOLOGY
+In this research, the Cross-Industry Standard Process for Data Mining
+(CRISP-DM) was used to predict the impacts of changes in exchange rates on
+trade flows between United States and Canada, Mexico, and Brazil. This decision
+was motivated by the need to connect with macroeconomic database, time series
+data and predictive models.
+The methodology of CRISP-DM is widely recognized as one of the most
+commonly used methodologies in data mining projects, which organizes the
+project into well-defined phases. That structure guarantees the quality and
+transparency of the models at all stages, from business understanding to
+deployment, enabling the generation of insights and implementation analytical
+solutions (TRIPATHI et al., 2021).
+The process consists of six phases that will be the focus of this chapter:
+Business Understanding, Data Understanding, Data Preparation, Modeling,
+Evaluation and Deployment (WIRTH; HIPP, 2000).
+3.1 Business understanding
+This is the first phase of the CRISP-DM methodology, where the project's
+goals are set and the required actions are determined. At this stage, requirements
+are transformed to a definition of the data mining problem and project plans
+defining activities for several subsequent steps (SHIMAOKA et al., 2024).
+This stage also covers enlightenment in the economic and institutional
+environment, identification of external forces like exchange rate volatility, global
+macroeconomic shock and structural asymmetry. These factors are very
+important because they affect both analytical models and the interpretation of the
+results, and they should be included in policy making and whenever we evaluate
+global impact (NGALAWA; KUTU, 2017).
+Also, at this stage, the project’s success criteria are defined. These criteria
+will be used as the comparison standard for assessing both the models’ outcomes
+and the practical usefulness of the forecasts produced by them (MANDOLINI et
+al., 2024).
+=== PAGE 28 ===
+28
+3.1.1 Business objectives and stakeholders
+To ensure that the results of the forecasting model are directly useable for
+strategic business decisions, a profound knowledge of the business objectives is
+necessary in order to be able to adjust expectations. This initial comprehension
+covers from theoretically mapping the influence on trade flows and currency
+exchange variations to uncovering relevant actors, including potential users of
+the model such as stakeholders, policy and decision makers (MOTTA et al.,
+2021). This will help in ensuring that the solution developed gives insights for
+actions, supporting business decisions, so the organization can achieve better
+outcome (SATRI et al., 2023).
+Methodologically, business understanding in the first alignment phase is
+important for calling into question what aspects of the economy should be given
+greater depth of analysis later on. The above features encompass, but are not
+limited to, the sectoral sensitivity analysis and export-import variation, as well as
+the effect of macroeconomic incentives on trade flow decisions, an important
+consideration for shaping our understanding of trading patterns and policymaking
+(BATARSEH et al., 2020).
+3.1.2 Scope, core problem and theoretical grounding
+In this study, the Business Understanding phase consists in determining
+which are the most important macroeconomic variables, defining performance
+metrics to evaluate how well predictive models perform and very importantly,
+clearly stating the core problem to be solved. In this respect, the global purpose
+of the project is to assess the accuracy of Random Forest and LightGBM
+compared to ARIMA forecast when predicting trade flows between the United
+States and Canada, Mexico, and Brazil, based on the currency fluctuations rule,
+from the year 2000 to 2025, that dictated the initial definition of project features.
+The choice of these variables and metrics is not arbitrary, it comes directly
+from the prior review of theory and what is known about traditional models such
+as ARIMA being limited for complex macroeconomic time series, and the
+potential of machine learning methods to model nonlinear relationships (LIN et
+=== PAGE 29 ===
+29
+al., 2020). The project will be guided by widely accepted predictive error
+indicators, which will be specified in the Evaluation phase.
+3.1.3 Linking business understanding to research objectives
+Furthermore, Business Understanding should structure the remaining
+stages of the methodology in order to face specific research objectives like the
+following: identifying the sectors most vulnerable to exchange rate changes;
+analyzing how these effects vary over different time horizons; evaluating the
+relative predictive power of each model considered, and examining the role of
+macroeconomic factors in the volatility of trade flows.
+Therefore, the first phase is Business Understanding, which can transform
+the objectives of this work into concrete requirements. This is followed by Data
+Understanding, where the data is explored and assessed to determine its context
+and quality for the expected analysis.
+3.2 Data understanding
+The Data Understanding phase, as it appears in methodologies like
+CRISP-DM, is the time when data is described, explored, and its quality and
+availability are checked. This process will become the basis for a plan for future
+transformations. For recognizing patterns, discovering limitations and hypothesis-
+making, the raw data is being collected and analyzed. This phase is often
+exploratory and concerned with assessing data quality, which underpins the
+success of experiments and the trustworthiness of information (RIESS, 2022).
+The assessment of the completeness, consistency and precision of datasets and
+any potential biases in them is important for subsequent data science tasks. As
+pointed out by MARTÍNEZ et al. (2021), the lack of harmonized diagnoses and
+quality controls, which leads to errors, is a reminder that knowing the data's
+availability, representativeness, and limitations is an important step for successful
+projects.
+=== PAGE 30 ===
+30
+3.2.1 Data sources and scope
+The kind of data for analysis and prediction models is usually composed
+of historical exchange rate data taken from worldwide financial markets or central
+bank respondents, as well as macroeconomic indicators like interest, inflation,
+GDP growth, trade balance, and foreign direct investment obtained from sources
+such as the World Bank (WB), International Monetary Fund (IMF) or national
+statistical bureaus (ABIR et al., 2024).
+In this analysis, these will encompass historical series of USD/CAD,
+USD/MXN, and USD/BRL exchange rates taken from central banks and the
+Federal Reserve (FED), bilateral trade flows retrieved from databases such as
+UN Comtrade or U.S. Census Bureau, general macroeconomic indicators from
+the World Bank or Organization for Economic Co-operation and Development
+(OECD) as well as sectoral data sources such as commodities, manufactured
+goods, and high tech goods useful to capture the sectoral asymmetry of trade
+flows.
+3.2.2 Frequency, length and temporal coverage
+The frequency of this data ranges from monthly to quarterly, depending on
+the existence and consistency of the series. This flexibility is essential for
+adjusting the model to specific time horizons of analysis and enables an
+understanding both of short-term effects and long-term structural activities. Such
+data sets have often had a length of more than a decade, enabling longitudinal
+analyses and the identification of macroeconomic events that influence exchange
+rate dynamics and trade flows. (ABOUZAID; BOUSSEDRA, 2025).
+3.2.3 Tools, integration and preliminary transformations
+Data manipulation and integration for analysis typically occurs using the
+Python programming language with packages including Pandas and NumPy
+used for data loading and processing (BATARSEH et al., 2020). Although specific
+transformation and cleaning steps are formalized in the subsequent phase of the
+method, at this step we identify the requirement for integration of structure,
+=== PAGE 31 ===
+31
+standardization on variables and verification for compatibility between different
+data sources.
+3.2.4 Exploratory statistics and quality assessment
+In the early stage of data exploration, basic descriptive statistics such as
+the mean, median and standard deviation are computed to understand
+distribution patterns and for better investigation of relationships between
+variables (LI et al., 2025). This stage provides initial reports and preliminary
+insights regarding the appropriateness and quality of the data. The identification
+of data quality at this point is especially important since one needs to implement
+cleaning and transformation mechanisms to make the data accurately reflect the
+macroeconomic and sectorial aspects related to the problem under
+consideration, and to guarantee that the result of any analysis will be reliable.
+Therefore, an evaluation is made that guides the following data cleaning and
+transformation to have enough information to be used in analysis processes
+(VERSTRAETE et al., 2021).
+Once Data Understanding is done, we enter the next phase which is Data
+Preparation: organizing database in order to have consistent, complete and data
+fit for the purpose of models that are going to be used.
+3.3 Data preparation
+After the data has been collected and made sense, the Data Preparation
+phase aims to ensure the quality and suitability of the raw data, guaranteeing that
+it is properly cleaned, transformed, and formatted. This includes rectifying errors
+and inconsistencies, treating missing values, re-coding data types to a standard
+format and normalization, standardization or coding of the variables for their
+appropriate use in model building actions (BÂRÃ et al., 2024).
+Models like ARIMA, Random Forest and LightGBM, which this paper is to
+address, require careful data treatment to ensure optimized performance and
+valid predictions. As mentioned in (MA et al., 2024), the adequacy and quality of
+input data are essential indicators of the success and reliability of model results.
+=== PAGE 32 ===
+32
+Data poor quality obscures the attainment of technical goals and meticulous
+preparation of data by maintaining cleanliness, consistency and format ensure
+the validity and applicability of inferences as well as predictive insights rendered
+by the model.
+This is also considered to be one of the most important steps since bad
+data in means bad data out, leading to poor model performance and erroneous
+conclusions, regardless of algorithmic sophistication (MA et al., 2024).
+3.3.1 Variable screening and selection
+Screening variables is an important aspect in the process of data
+preparation, aiming to identify and retain only relevant features that contribute to
+the model's prediction and performance. (MA et al., 2024).
+Macroeconomic variables, such as exchange rates, GDP, interest rates,
+exports and imports, and trade sectors are important factors to be considered in
+studies about economic dynamics and international trade. The use of these
+variables is methodologically well-founded in ample economic literature that
+supports a strong and significant relationship between these factors and the
+specialization patterns and international trade flows (SOUSA; VERÍSSIMO,
+2021).
+3.3.2 Data sources, integration, frequency conversion and cleaning
+Integration of several databases is necessary to create a unified dataset
+that contains consistent and complete information needed for modeling, which
+involves integrating disparate datasets into a single framework for analysis (SOH
+et al., 2021).
+Moreover, the data frequency conversion is also essential for the
+adjustment of models like ARIMA, which may require a certain temporal
+consistency for optimization of predictions (BRYAN et al., 2023).
+At the same time, data standardization is essential to make analysis results
+comparable and valid, particularly in studies that examine different regions or
+=== PAGE 33 ===
+33
+periods. The data heterogeneity in different economies may hinder model
+relevance and obtaining consistent results (ABIR et al., 2025).
+Data integration and manipulation, implemented with the support of Python
+libraries, are important steps for organizing and validating information. This
+includes date control, the verification of data integrity and consistency as well as
+temporal alignment for variables (MANDADAPU 2024). Use of data
+transformation methods, e.g., dummy coding for nominal predictors is also
+important to prepare the dataset for machine learning algorithms (SILVA et al.,
+2024).
+Then, missing values are generally dealt with using both the removal of
+null values and imputation, where methods like that implemented by the k-
+Nearest Neighbors (k-NN) algorithm may be used for improving the estimations
+(BRYAN et al., 2023).
+3.3.3 Outlier detection and treatment
+Outlier detection and processing, which consists of identifying atypical
+observations, is significant as these observations without treatment, may mislead
+statistical results and prediction accuracy (TAJMOUATI et al., 2022).
+The identification of outliers may be carried out by using descriptive
+statistical methods that summarize information on attributes, including the use of
+the quartile range, which detects values that fall far away from the upper and
+lower quartiles, and by visual inspection of graphs, because this is a useful
+technique for identifying odd observations within data (SUDJIANTO; ZHANG
+2024).
+Nevertheless, automatic exclusion of outlier data is generally not
+recommended, because the decision to exclude these anomalous observations
+should always be based on consideration of their collection process and the
+impact they have on predictive models, along with appropriate validation results
+to prevent misclassifications. Sometimes it may be more reasonable to include
+outliers that will be helpful for checking the model robustness, rather than
+claiming about invalid data (DIAS et al., 2020).
+=== PAGE 34 ===
+34
+3.3.4 Transformations: differentiation, normalization and encoding
+Differentiation is a widely used method in time series analysis, especially
+in econometric models where trends and seasonality have to be eliminated,
+thereby stabilizing the series mean and addressing non-stationarity (LIN et al.,
+2020).
+However, in machine learning algorithms, feature normalization and
+standardization, through techniques such as min-max scaling, is employed to
+adjust variables to a common scale, typically between zero and one, preserving
+the relationships inherent in the original data and preventing larger magnitude
+values to swing towards dominating interpretation (VOLOSHKINA et al.,2024;
+HSIEH et al., 2024).
+In addition, the qualitative categorical variables are binarized to avoid
+outliers and allow for a good interpretation of such attributes by the machine
+learning models (GONZÁLEZ et al., 2022).
+3.3.5 Feature engineering and temporal features
+Data Preparation includes feature engineering process for building the
+performance and predictability of ML models, generating and transforming new
+variables from existing ones, which will make data more meaningful to model
+(CHOWDHURY et al., 2024).
+This operation is necessary to extract hidden and non-trivial relationships
+not directly explained by the original variables, to enhance predictive
+performance of machine learning techniques (ABIR et al., 2025).
+Besides, a subset of time series transformations is introduced, in particular
+lags, moving averages and percentage variations, which aid in grasping temporal
+behavior that is indispensable for econometric and machine learning models,
+while preserving the initial sequential structure of the series. The generation of
+lags is worth focusing as the order of lag highly contributes to increase precision
+of the forecast (LIN et al., 2020).
+=== PAGE 35 ===
+35
+3.3.6 Temporal alignment and final dataset readiness
+To make sure the time sequence is consistent, an important part of Data
+Preparation. Since time series are based on the temporal component, fine-
+grained manipulation and alignment of temporal data have to be performed
+correctly in order to avoid wrong lags as well as ensure that causality and
+predictive relationships that the models have learned about still hold valid
+(VERSTRAETE et al., 2021).
+Once these steps are completed, a clean, structured dataset is obtained,
+ready for the Modeling phase, in which the algorithms will be adjusted, compared,
+and evaluated according to the study's objectives.
+3.4 Modeling
+The process flow for Modeling, as an immediate continuation of Data
+Preparation, is next after preparing and engineering features, as outlined in the
+CRISP-DM methodology. At this stage, techniques like statistical tests and
+machine learning algorithms are executed iteratively to construct, select and
+refine predictive models used to detect patterns in the data (CHOWDHURY et
+al., 2024; MA et al., 2024).
+In this paper, we will utilize and compare both econometric models like
+ARIMA and machine learning models such as Random Forest and LightGBM to
+take advantage of their time series forecasting ability.
+3.4.1 General overview of the modeling approach
+In general, the modeling approach in time series prediction problems
+involves a sequence of steps. Firstly, (i) the definition and preparation of features
+for assembling a supervised model, including variable transformation and data
+cleaning. Right away, (ii) finding a prediction window is essential to the predictive
+goal of the model. The (iii) division of the data into training and test sets is a step
+that aims at assessing how well the model's performance on unseen data,
+simulating a real-world context. Afterwards, comes the phase of (iv) model tuning,
+=== PAGE 36 ===
+36
+whereby hyper-parameters are adjusted, e.g., using of cross-validation ensuring
+that the derived models generalize well. Then, the (v) comparative evaluation is
+compared in terms of its strategy impact and economic contributions, based on
+metrics. Finally, (vi) explainability analysis of the model is appreciated to gain
+higher performance and confidence (SILVA; TIMO, 2022).
+Avoiding data leakage, the so-called "contamination zone" effect, is
+important because inconsistency between the training and testing phases can
+lead to erroneous assessments of model performance (REMIL et al., 2024).
+3.4.2 Data format for modeling
+The way to define time series models as inputs is varied, and ARIMA
+models are widely used for univariate time series. Furthermore, models like
+SARIMA, a variation of ARIMA, can also contain mechanisms to deal with non-
+stationary data, such as trends and seasonality (PORTO, 2022).
+For Random Forest and LightGBM, both of which are models based on
+decision trees, the data input can be multivariate and does not require time series
+stationarity. This flexibility allows them to more easily incorporate several
+macroeconomic lagged variables (BOTZ et al., 2025). This flexibility enables the
+incorporation of features derived through feature engineering, e.g., lags, which
+add time delays to allow models to capture short and medium-term
+dependencies, moving averages, and calendar features, all of which are pivotal
+for capturing temporal and seasonal dynamics in the data (ZANOTTI, 2025).
+3.4.3 ARIMA model: definition and justification
+The AutoRegressive Integrated Moving Average (ARIMA) model has been
+used as a benchmark method for time series analysis, such as financial and
+economic time series. Its approach involves the removal of non-stationarity,
+primarily through differentiation, to enable modeling the time series (LIN et al.,
+2020).
+=== PAGE 37 ===
+37
+Its parameterization (p, d, q) models autoregressive dependencies (p), the
+level of differentiation required to remove trends (d), and the moving average
+component (q) (RIZVI, 2024). ARIMA has been employed as a fundamental
+baseline model for comparative forecasting performance studies, and in certain
+applications, it can even emerge as the best approach for short-term forecasts,
+serving as an effective baseline for the evaluation of more complex models
+(BOTZ et al., 2025).
+3.4.4 Specific procedures for ARIMA
+For each single-variable time series, the standard modeling practice starts
+with a stationarity test, for which the Augmented Dickey-Fuller (ADF) test is often
+applied, to determine the order of differentiation (d) of the series. Examination of
+the Autocorrelation Function (ACF) and Partial Autocorrelation Function (PACF)
+plots are useful to suggest the appropriate parameters (p) and (q) for the model.
+These visual analyses allow for the reduction of the parameter search space
+(REICHERT; SOUZA, 2020).
+The final model selection is then performed using information criteria such
+as the Akaike Information Criterion (AIC) and the Bayesian Information Criterion
+(BIC). The goal is to identify the minimum values of these criteria to detect the
+most parsimonious and best-fitted models. Finally, a rigorous diagnostic analysis
+of the residuals is crucial to confirm the absence of heteroscedasticity and
+autocorrelation, which are White Noise properties, thereby validating the model’s
+assumptions and ensuring its adequacy (REICHERT; SOUZA, 2020).
+The backtesting process for models such as ARIMA can occur
+retrospectively using a sliding window approach. Models are trained on historical
+data up to a point in time (t0), and predictions are then generated for the following
+period (t0+1). This process is repeated sequentially, thereby dividing the time
+series into several training and testing windows, which allows for the comparison
+between predictions and actual values and the evaluation of the model's
+predictive stability over time (BOTZ et al., 2025).
+=== PAGE 38 ===
+38
+3.4.5 Preparation and modeling for Random Forest
+Random Forest is implemented using an ensemble approach which
+aggregates multiple decision trees over the supervised matrix, as it is applied in
+prediction tasks (ABIR et al., 2025).
+Unlike ARIMA, it performs well for non-linear relationships and is capable
+of capturing complex interactions between predictors without assuming the
+underlying data to be stationary (CHATTERJEE et al., 2024).
+The aforementioned algorithm is tolerant of various data types and less
+sensitive to outliers and multicollinearity, which is an advantage for dealing with
+macroeconomic and financial data (LING; WANG, 2024; SALMAN et al., 2024).
+3.4.6 Preparation and modeling for LightGBM
+Similar to Random Forest, Light Gradient Boosting Machine (LightGBM) is
+a powerful time series forecasting algorithm. This specific algorithm is known for
+its speed and accuracy, often demonstrating superior performance in processing
+large, high-dimensional datasets (ZANOTTI, 2025). It is also based on a
+supervised matrix, but it requires caution in the optimization of hyperparameters
+and the treatment of missing values (MORTEZANEJAD; WANG, 2025).
+This model is particularly strong when it comes to dealing with complex
+interactions between features and uses a histogram-based method to construct
+trees. By binning the training data, this approach significantly decreases memory
+consumption and speeds up training. For this reason, LightGBM is highly efficient
+for data with many features and can effectively learn complex patterns,
+outperforming other algorithms in both accuracy and execution time
+(MORTEZANEJAD; WANG, 2025).
+3.4.7 Precautions with machine learning models
+Nevertheless, the employment of well-tuned machine learning models for
+financial market prediction, though appealing, should be treated with caution due
+to uncertainty about how well such models can generalize across diverse market
+=== PAGE 39 ===
+39
+conditions and the need for thorough sensitivity analyses to validate model
+stability (WANG; XIE, 2024).
+Besides, the risk of overfitting should also be considered to ensure
+effectiveness in real-world scenarios and durability of the algorithms across
+different historical periods (WANG; XIE, 2024).
+3.4.8 Temporal validation and evaluation
+Temporal validation is key in time series analysis because it maintains the
+temporal order of the data, avoids information leakage from future to past, and
+ensures model evaluation under realistic forecasting settings (MORTEZANEJAD;
+WANG, 2025).
+Techniques like the rolling window and the expanding window are
+employed. With the rolling window, the model is trained on a fixed period and this
+window slides over time. The expanding window, however, adds new data to the
+training set in each iteration, expanding the available historical data horizon
+(ZANOTTI, 2025).
+3.4.9 Training, validation and test split
+To minimize problems of improper evaluation and over-generalization,
+time series should be strictly split according to chronological order (KHAN et al.,
+2024).
+Typically, approximately 80% of the series is employed for model training,
+while the remaining 20% is used for prediction and performance comparison. This
+preserves the temporal structure and prevents access to future data during
+training, thereby mimicking the natural flow of time and consequently avoiding
+data leakage (KHAN et al., 2024; SAFAROV et al., 2025). This approach is
+adopted in this study.
+ARIMA models are univariate and will therefore straightforwardly process
+one time series. Data manipulation and preparation, including the differencing
+operation to achieve stationarity, are done intrinsically at the level of the series
+=== PAGE 40 ===
+40
+itself; that is, no external shifts or alterations are made for target vectors, as in
+other approaches (BOTZ et al., 2025).
+Because of this structure, in addition to training and validation, this
+approach employs backtesting strategies based on sliding window methods. This
+is often referred to as time series cross-validation (TS-CV), which enables
+iterative evaluation of model performance, thereby ensuring that both training and
+test data preserve chronological order during validations (ABIR et al., 2024).
+3.4.10 Hyperparameter optimization
+In Machine Learning model development, hyperparameter tuning is
+essential for maximizing performance, with various techniques being applied
+(VRANJEŠ; NIGGEMANN, 2024).
+The most common methodologies include: Grid Search, an exhaustive
+search approach that evaluates all predefined configurations; Random Search,
+which selects configurations randomly and is often more efficient, finding similar
+performance while shortening the computational time; and Optuna, which
+involves training a probabilistic model relating hyperparameters to the model's
+performance metrics. Each methodology has its unique characteristics that
+impact the efficiency and scope of the hyperparameter search space (RASCHKA
+et al., 2020; LING; WANG, 2024).
+Given the modeling approach, as part of the CRISP-DM process flow, we
+move to Evaluation, which allows models to be compared based on their
+accuracy and practicality of use.
+3.5 Evaluation
+In the CRISP-DM methodology, the evaluation phase is essential to verify
+that the models developed not only meet the business objectives previously
+defined in the Business Understanding phase, but are also sufficiently tuned for
+deployment (SATRI et al., 2023).
+=== PAGE 41 ===
+41
+Model validation is achieved by scrutinizing the performance,
+interpretability, and robustness metrics of a model to confirm its credibility and
+utility in decision-making (SUDJIANTO; ZHANG, 2024).
+3.5.1 Statistical and economic evaluation metrics
+To compare the models, the assessment of predictive accuracy and
+practical relevance requires the use of robust statistical metrics, such as the Root
+Mean Squared Error (RMSE), the Mean Absolute Error (MAE), and the Mean
+Absolute Percentage Error (MAPE), all of which are frequently employed to
+gauge prediction accuracy (AYITEY et al., 2023).
+Besides statistical metrics, economic metrics such as simulated
+investment profit, net and gross financial returns, operating costs, and risk ratios,
+e.g., Sharpe and Sortino ratios, are crucial for evaluating the practical applicability
+and financial viability of the models in real-world market scenarios, thereby
+providing a comprehensive view of performance (MACHADO et al., 2020).
+Performance measures are necessary for the purpose of comparing
+machine learning models to each other and to traditional approaches like ARIMA
+to determine which model is most effective for a specific application. These
+evaluations are essential to quantify the value added by complex models over
+baseline methods and also validate the dependability and generalizability of the
+model (UDDIN et al., 2025).
+3.5.2 Interpretation and explainability of models
+Although machine learning-based models may provide superior
+performance, their interpretability is often difficult to achieve, particularly with
+financial applications where the clarity of the decision-making process and
+transparency are a necessity for decision-making and regulatory compliance
+(SUDJIANTO; ZHANG, 2024).
+To circumvent this opacity, interpretability methods such as feature
+importance analysis and SHAP-based explainers are applied. These methods
+=== PAGE 42 ===
+42
+elucidate the contribution of each input variable to the model's predictions, which
+facilitates a deeper understanding of its decision-making process and the
+individual impact of features on the outcomes (GUO et al., 2024).
+This enables policymakers and financial analysts to understand not only
+“what” is predicted, but also “why” certain predictions are generated. Overcoming
+the opacity of “black boxes” is crucial for cultivating trust and the adoption of these
+predictive tools (ABOUZAID; BOUSSEDRA, 2025). In addition, the model’s
+interpretability is crucial for users such as policymakers and investors to
+understand its forecasting logic and make informed decisions. This indirectly
+validates the coherence of its relationships with economic indicators (KHAN et
+al., 2024).
+Moreover, explainability is crucial to identify potential biases in models and
+to ensure compliance with regulatory requirements, particularly in sensitive
+sectors, e.g., the finance sector (SUDJIANTO; ZHANG, 2024). This ability to
+account for the working of the model, including a detailed explanation of how
+economic variables influence outcomes, is also essential for supporting its
+predictive ability and helps ensure that it reflects a sensible understanding of the
+underlying economic principles (KHAN et al., 2024).
+3.5.3 Robustness tests and sensitivity analysis
+Robustness tests and sensitivity analysis are the methods used to check
+the validity and performance of a model across a variety of market conditions
+(SUDJIANTO; ZHANG, 2024).
+These procedures are also essential in providing systematic assessments
+of model stability, including analysis under various market conditions, adaptability
+to simulated shocks and extreme events, and resilience during high-volatility
+periods. Such investigations could also include diagnostic tests for the stability of
+the coefficients and adaptability to meaningful changes in the data (ABOUZAID;
+BOUSSEDRA, 2025).
+This process confirms that the models are dependable, coherent, and
+congruent with the purposes of this research. Hence, the evaluation provides the
+=== PAGE 43 ===
+43
+necessary basis for the informed choice of the most adequate model, guiding the
+study's conclusion and its potential applications.
+3.6. Deployment
+Deployment is the phase in the CRISP-DM methodology which includes
+all activities to be performed in an operational environment, including packaging
+the code and integrating it into a system such that the organization can use it. It
+includes establishing real-time infrastructure and continually monitoring quality
+and effectiveness in a rapidly changing environment (SHIMAOKA et al., 2024).
+3.6.1 Purpose of implementation in predictive modeling projects
+This is the final and ongoing phase of the model lifecycle, whose aim is
+not only to ensure that developed models work technically but also to bring
+continuous value to the business (TRIPATHI et al., 2021). This involves
+converting predictions and insights into accessible and usable artifacts for end
+users, such as dashboards for analysts, visual notifications on existing systems,
+periodic reports to managers, or automated notifications to operations, ensuring
+that information is delivered in a manner that is understandable and actionable
+for various stakeholders (PODDAR et al., 2024).
+3.6.2 Requirements for predictive model implementation
+Conceptually, implementation requires observing minimum requirements
+on various fronts. This ranges from high-quality data, considering update
+frequency, formats, and sources, to an adequate infrastructure to ensure
+scalability and robustness, and well-established processes, such as data
+ingestion and validation pipelines, to ensure the model's reliability and continuous
+maintenance (TRIPATHI et al., 2021). For this implementation to be effective, it
+requires a multidisciplinary process that's tightly integrated with adopted
+operational systems, along with intuitive and useful user interfaces. This effort
+must encompass making predictions available for consultation, the precise
+=== PAGE 44 ===
+44
+identification of responsible parties for every stage, and covers everything from
+updating the databases to disseminating the results (PODDAR et al., 2024).
+3.6.3 Structure of a theoretical prediction pipeline
+A theoretical prediction pipeline should involve a structured process that
+includes, but is not restricted to: Data ingestion and preprocessing, Feature
+engineering, Model building, Model evaluation, and the Persistence and
+publication of results, including standard components such as Extract, Transform,
+Load (ETL) and API deployment (RASCHKA et al., 2020; PODDAR et al., 2024).
+Every step must apply best practices that enable the traceability and
+auditability of the process, such as mandatory log storage and change
+management, which provide greater transparency by allowing the monitoring of
+changes and model use (NOGARE; SILVEIRA, 2024). These logs record
+performance metrics, missing data, execution times and error events, and can be
+stored in systems (NOGARE; SILVEIRA, 2024).
+Data versioning is fundamental for the reproducibility of experiments,
+reinforcing the importance of recording detailed information at every stage of the
+model lifecycle (PEIKERT; BRANDMAIER, 2021).
+3.6.4 Operational data preparation
+During implementation, the data preparation has an operational aspect
+that goes beyond what has been already done with transformations in the
+research setting. That is, there is a necessity to translate training queries into
+reusable pipelines that deliver data to the model, which may involve infrastructure
+for collecting data periodically or in real-time (PODDAR et al., 2024).
+Preprocessing code, including unit tests, must automate basic checks like
+the validation of data completeness and consistency (PODDAR et al., 2024).
+Such validations may be carried out using specialized frameworks like Great
+Expectations or Deequ, which offer the possibility to define and document
+=== PAGE 45 ===
+45
+expectations regarding the data, guaranteeing its integrity, accuracy, and
+consistency (DIAS et al., 2020).
+3.6.5 Forecast generation: operational issues (Batch vs. Near Real-Time)
+Predictions can be made in a variety of methods. Some of these strategies
+employ historical data and real-time alert information to anticipate the likelihood
+of future incident events, which leads to a Near-Real-Time operation mode where
+execution is performed upon new incoming data (REMIL et al., 2024).
+In contrast, other approaches face with the issue of incident prediction and
+are usually made as predictions within a specific time interval, which suggests an
+operation mode closer to Batch or periodic executions (REMIL et al., 2024).
+In the present work, the most feasible theoretical alternative would be
+Batch generation with a known horizon (t1, t6 and t12), along with validation
+routines that maintain consistency of the outputs before publication.
+3.6.6 Results integration in the business context
+The results integration must be planned based on the practical utility of
+forecasts for each target audience (SILVA; TIMO, 2022). From a conceptual
+perspective, the operationalization of a forecasting system is an issue related to
+clarify definitions about clear output formats, aggregation levels, and delivery
+mechanisms to ensure that the model results are usable by end-users (PODDAR
+et al., 2024). Tables and graphs summarizing forecasts are among the intended
+outputs of this study, which are aggregated by country, sector, and forecast
+horizon, and are made available through periodic reports and interactive
+dashboards.
+User-related technical guidelines and specifications for results are of
+critical importance, as the effectiveness of forecasting software, in turn, depends
+on human perception and acceptance, particularly for non-experts. An opaque
+system can be rejected. Therefore, it is fundamental that the user can assess and
+interpret the forecasts for subsequent tasks (STROMER et al., 2024).
+=== PAGE 46 ===
+46
+3.6.7 Theoretical monitoring and maintenance framework
+The monitoring stage is essential to guarantee that models are not simply
+working technically, but also consistently delivering business value by adapting
+and optimizing based on new information and contextual changes through regular
+recalibration, periodic retraining, and continuous learning with new data
+(SUDJIANTO; ZHANG, 2024).
+Triggers for the model reevaluation, but are not limited to, significant error
+increases evidenced by performance metrics, for example, degradation in RMSE,
+drift detection in data or concept that surfaces as altered input data distribution,
+and which might result in a compromised validity of the model, and changes
+parallel with a changing environment or market can bear direct implications on
+how data behave over time (SUDJIANTO; ZHANG, 2024).
+3.6.8 Documentation, versioning, and reproducibility
+Documentation and versioning are essential for traceability and
+transparency throughout the entire model lifecycle, allowing for the understanding
+of its operation and the audit of its decisions. Version control, for example,
+records changes to files over time so specific versions can be recalled later or
+revert the entire project to a previous state (PEIKERT; BRANDMAIER, 2021).
+In relation to code versioning, systems such as Git and collaborative
+platforms like GitHub are used (SEMMELROCK et al., 2024). Additionally,
+versioning of data, artifacts and parameters is fundamental for reproducibility,
+being supported by domain-specific tools like DVC and MLflow, which are
+responsible for managing several artifacts associated with model performance
+and validation.
+The possibility to easily revert any changes made is a key factor to foster
+experimentation and innovation, as it reduces the perceived risk involved in
+adopting new approaches (STROMER et al., 2024).
+=== PAGE 47 ===
+47
+3.6.9 Academic reporting
+Upon the completion of the implementation, an extensive academic report
+should be compiled to provide clear understanding for the entire process carried
+out, formalizing results and methodologies and insights achieved, and ensuring
+that generated knowledge is captured and disseminated for future applications
+and research (PODDAR et al., 2024).
+In the context of this study, a paper in continuation of this monograph
+should include the applied CRISP-DM methodology, Random Forest and
+LightGBM model architecture and a detailed comparative analysis with ARIMA
+model results. To enable reproducibility, this report must include technical
+appendices, such as code segments, samples of transformed data, and
+information about execution environments.
+A consideration of the limitations of the study, opportunities for future
+research and the ethical and regulatory implications of utilizing advanced
+predictive models in an economic context must also be included (SUDJIANTO;
+ZHANG, 2024).
+=== PAGE 48 ===
+48
+4 TIMELINE AND SCHEDULE
+The timeline below presents the organization of project activities over time,
+distributed between August 2025 and June 2026. It includes all stages of
+development, from initial conception to delivery and defense of the final project,
+demonstrating the logical sequence and time required for each phase.
+Activities Aug/25 Sep/25 Oct/25 Nov/25 Dec/25 Jan/26 Feb/26 Mar/26 Apr/26 May/26 Jun/26
+Project Topic Selection X
+Project Structure X X
+Development
+Development of Objectives, X X
+Theme Delimitation,
+Problem Definition
+Selection and Reading of X X X X
+Works
+Formulation of Justification X X
+and Contextualization
+Definition of Hypotheses or X X
+Research Questions
+Drafting the Monograph X X X X
+Final revision of the X
+Monograph
+Submission of the X
+Monograph
+Data Collection X X
+Data Preparation X X X
+Modeling and Testing X X X
+Evaluation of Results X
+Interview with Experts for X X
+Confirmation
+Consolidation/Interpretation X
+of Findings
+Final revision of the work X
+Project submission X
+Thesis defense X
+=== PAGE 49 ===
+49
+5 APPENDIX
+5.1 Interview script
+In order to validate the results obtained and minimize bias in the research,
+open-ended questions were designed for two distinct profiles: professionals with
+extensive knowledge on foreign trade and international business, and IT
+professionals. The questions had been worded in an unbiased and open way
+specifically not to induce responses so that the participants could communicate
+generally and in detail.
+The script aims at capturing these opinions to add a qualitative validation
+of the models and methodological choices used in this work. The questions
+address the practical applicability of the forecasts, the relevance of the factors
+chosen, the acceptance of the models, and the consistency of the decisions
+adopted in the project.
+5.1.1 Questionnaire for foreign trade / international business professionals
+How do machine learning forecasting models, e.g., Random Forest,
+LightGBM, compare with traditional time-series models such as ARIMA for the
+task of forecasting in foreign trade? What do you perceive are the strengths or
+limitations of each approach?
+Are economic factors considered in the models (exchange rate, inflation,
+GDP, and other variables) relevant to predict international trade indicators? Are
+there other factors that you might be inclined to include?
+How might the outcomes anticipated by these models be valuable in
+decision-making within your field? Can you provide some examples of practical
+applications, e.g., export/import planning or demand analysis, where these
+forecasts would have an impact?
+What is your sense of the interpretability and trust that managers and
+analysts might have in these predictive models? Would you trust a classic
+=== PAGE 50 ===
+50
+statistical model (ARIMA) or a machine learning model (Random Forest,
+LightGBM) more? Why?
+What other fail-safe checks or additional safety measures would you
+recommend to make sure that such models do not introduce unwanted biases in
+the analysis of foreign trade?
+5.1.2 Questionnaire for technology professionals
+Technically speaking, what are the main challenges and benefits of
+utilizing machine learning models (Random Forest, LightGBM etc.) for
+forecasting economic or business indicators compared to traditional time series
+models such as ARIMA? And which approach has proven more effective
+according to your experience?
+In the sense of data and variables, do you think the chosen economic
+factors, e.g., macroeconomic variables, are suitable to feed predictive models?
+Do you think other types of data should be included, e.g., sectoral indicators,
+market data, or alternative sources, to make it more accurate?
+What explainability or visualization strategies do you consider important
+for communicating the results of complex models to a non-technical audience?
+How can transparency be ensured in the modeling process so that the model's
+decisions are understandable?
+How do you feel the technology community, or IT companies, generally
+perceives the acceptance of ML-based predictive models compared to traditional
+statistical approaches? What metrics or technical evidence would be necessary
+to convince stakeholders to adopt an ML model?
+Have you deployed predictions by your model, either ARIMA or ML, into a
+live system/application? What was that experience like? Many of the descriptors
+shared for this were a variation of "I can work with an acceptable model." What
+made the model acceptable, e.g., ease of integration, production performance,
+and user confidence?
+=== PAGE 51 ===
+51
+REFERENCES
+ABIR, S. I.; SAIMON, S. I.; SAHA, T. R.; SARWER, M. H.; HASAN, M.;
+SULTANA, N.; DOLON, M. S. A.; AREFEEN, S. M. S.; SHIMANTO, A. H.;
+ZAKARIA, R.; SHIAM, S. A. A.; SHOHA, S.; ISLAM, I. Comparative Analysis of
+Currency Exchange and Stock Markets in BRICS Using Machine Learning to
+Forecast Optimal Trends for Data-Driven Decision Making. Journal of
+Economics Finance and Accounting Studies, [s. l.], vol. 7, no. 1, p. 26, 2025.
+Available at: https://doi.org/10.32996/jefas.2025.7.1.3. Accessed at: Nov. 2025.
+ABIR, S. I.; SHIAM, S. A. A.; ZAKARIA, R.; SHIMANTO, A. H.; AREFEEN, S.
+M. S.; DOLON, M. S. A.; SULTANA, N.; SHOHA, S. Use of AI-Powered
+Precision in Machine Learning Models for Real-Time Currency Exchange Rate
+Forecasting in BRICS Economies. Journal of Economics Finance and
+Accounting Studies, [s. l.], vol. 6, no. 6, p. 66, 2024. Available at:
+https://doi.org/10.32996/jefas.2024.6.6.6. Accessed at: Nov. 2025.
+ABOUZAID, O.; BOUSSEDRA, F. Artificial Intelligence and Exchange Rate
+Forecasting: Assessing Predictive Accuracy and Macroeconomic Sensitivity.
+Frontiers in Applied Mathematics and Statistics, [s. l.], vol. 11, 2025.
+Available at: https://doi.org/10.3389/fams.2025.1654093. Accessed at: Oct.
+2025.
+AKMAN, E.; KARAMAN, A. S.; KUZEY, C. Visa Trial of International Trade:
+Evidence from Support Vector Machines and Neural Networks. Journal of
+Management Analytics, [s. l.], vol. 7, no. 2, p. 231, 2020. Available at:
+https://doi.org/10.1080/23270012.2020.1731719. Accessed at: Nov. 2025.
+ARÉVALO, J. L. S.; SOUSA, G. M. D.; MEURER, R. M. Efeito Causal entre o
+Indicador de Bolsa de Valores Ibovespa e os Indicadores Shangai, S&P 500,
+Merval y Nikkei. Cuadernos de Economía, [s. l.], vol. 41, no. 87, p. 458, 2022.
+Available at: https://doi.org/10.15446/cuad.econ.v41n87.89520. Accessed at:
+Aug. 2025.
+ATOCHERO, A. V.; LEDO-DÍAZ, A. Importancia de Visualizar el Mensaje
+Extraído con Minería y Ciencia de Datos. Storytelling Con Enfoque Mixto Para
+Comunicación Efectiva. INFONOMY, [s. l.], vol. 2, no. 3, 2024. Available at:
+https://doi.org/10.3145/infonomy.24.036. Accessed at: Oct. 2025.
+AUBOIN, M.; RUTA, M. The Relationship Between Exchange Rates and
+International Trade. WTO Working papers, [s. l.], 2011. Available at:
+https://doi.org/10.30875/13e83562-en. Accessed at: Nov. 2025.
+AYITEY, M.; APPIAHENE, P.; APPIAH, O.; BOMBIE, C. N. Forex Market
+Forecasting Using Machine Learning: Systematic Literature Review and Meta-
+analysis. Journal Of Big Data, [s. l.], vol. 10, no. 1, 2023. Available at:
+https://doi.org/10.1186/s40537-022-00676-2. Accessed at: Nov. 2025.
+=== PAGE 52 ===
+52
+BÂRÃ, A.; OPREA, S.; PANAIT, M. Insights into Bitcoin and Energy Nexus. A
+Bitcoin Price Prediction in Bull and Bear Markets Using a Complex Meta Model
+and SQL Analytical Functions. Applied Intelligence, [s. l.], vol. 54, no. 8, p.
+5996, 2024. Available at: https://doi.org/10.1007/s10489-024-05474-2.
+Accessed at: Oct. 2025.
+BATARSEH, F. A.; GOPINATH, M.; MONKEN, A. Artificial Intelligence Methods
+for Evaluating Global Trade Flows. International Finance Discussion Paper,
+[s. l.], no. 1296, 2020. Available at: https://doi.org/10.17016/ifdp.2020.1296.
+Accessed at: Nov. 2025.
+BAYOUMI, T.; JAYANTHI, S.; LEE, J. W. New Rates from New Weights. IMF
+Staff Papers, [s. l.], vol. 53, no. 2, p. 272, 2005. Available at:
+https://doi.org/10.2307/30036014. Accessed at: Nov. 2025.
+BERGIN, P. R.; CORSETTI, G. Beyond Competitive Devaluations: The
+Monetary Dimensions of Comparative Advantage. American Economic
+Journal Macroeconomics, [s. l.], vol. 12, no. 4, p. 246, 2020. Available at:
+https://doi.org/10.1257/mac.20160094. Accessed at: Aug. 2025.
+BOTZ, J.; THIEL, S.; KANNT, A.; FRÖHLICH, H. Wastewater as an Early
+Indicator for Short-Term Forecasting COVID-19 Hospitalization in Germany.
+BMC Public Health, [s. l.], vol. 25, no. 1, 2025. Available at:
+https://doi.org/10.1186/s12889-025-24149-2. Accessed at: Oct. 2025.
+BRYAN, A.-P. Yhack; DENNIS, V.-M. Lindell; FRED, T.-C. Peru Mining:
+Analysis and Forecast of Mining Production in Peru Using Time Series and
+Data Science Techniques. arXiv (Cornell University), [s. l.], 2023. Available at:
+http://arxiv.org/abs/2307.06293. Accessed at: Oct. 2025.
+CARRILLO‐MALDONADO, P.; FLORES, S. ¿Mejora el Comercio Internacional
+con un Tratado de Libre Comercio? El caso de Alianza del Pacífico.
+Cuadernos de Economía, [s. l.], vol. 43, no. 91, p. 77, 2024. Available at:
+https://doi.org/10.15446/cuad.econ.v43n91.106547. Accessed at: Aug. 2025.
+CHATTERJEE, I.; CHAKRABORTI, S.; TONO, T. A Comparative Study of
+Bitcoin Price Prediction During Pre-Covid19 and Whilst-Covid19 Period Using
+Time Series and Machine Learning Models. Discover Analytics, [s. l.], vol. 2,
+no. 1, 2024. Available at: https://doi.org/10.1007/s44257-024-00024-z.
+Accessed at: Aug. 2025.
+CHINN, M.; MEUNIER, B.; STUMPNER, S. Nowcasting World Trade with
+Machine Learning: a Three-Step Approach. National Bureau of Economic
+Research, [S. l.: s. n.], 2023. Available at: https://doi.org/10.3386/w31419.
+Accessed at: Nov. 2025.
+CHOWDHURY, M.; ISLAM, M. S.; MONTASER, M. A. A.; RASEL, M.; BARUA,
+A.; CHOUKSEY, A.; CHOWDHURY, B. R. Predictive Modeling of Household
+Energy Consumption in the USA: The Role of Machine Learning and
+Socioeconomic Factors. The American Journal of Engineering and
+=== PAGE 53 ===
+53
+Technology, [s. l.], vol. 6, no. 12, p. 99, 2024. Available at:
+https://doi.org/10.37547/tajet/volume06issue12-11. Accessed at: Oct. 2025.
+CONTRERAS, K. G. R. ¿El Tratado de Libre Comercio entre Colombia y
+Estados Unidos Incentivó el Comercio Bilateral?. Cuadernos de Economía, [s.
+l.], vol. 41, no. 86, p. 1, 2022. Available at:
+https://doi.org/10.15446/cuad.econ.v41n86.84973. Accessed at: Oct. 2025.
+COSTA, M. G.; NISHIJIMA, M.; SCHOR, A.; PERLOTTI, E. A. Bilateral Trade of
+Films, Religion, And Democracy (2002–2015). Discover Global Society, [s. l.],
+vol. 1, no. 1, 2023. Available at: https://doi.org/10.1007/s44282-023-00017-5.
+Accessed at: Aug. 2025.
+DIAS, T.; OLIVEIRA, R.; SARAIVA, P.; REIS, M. S. Predictive Analytics in the
+Petrochemical Industry: Research Octane Number (RON) Forecasting and
+Analysis in an Industrial Catalytic Reforming Unit. Computers & Chemical
+Engineering, [s. l.], vol. 139, p. 106912, 2020. Available at:
+https://doi.org/10.1016/j.compchemeng.2020.106912. Accessed at: Jul. 2025.
+ENKHBAYAR, S.; ŚLEPACZUK, R. Predictive Modeling of Foreign Exchange
+Trading Signals Using Machine Learning Techniques. Expert Systems with
+Applications, [s. l.], vol. 285, p. 127729, 2025. Available at:
+https://doi.org/10.1016/j.eswa.2025.127729. Accessed at: Nov. 2025.
+GAULIER, G.; SZTULMAN, A.; ÜNAL, D. Are Global Value Chains Receding?
+The Jury Is Still Out. Key Findings from the Analysis of Deflated World Trade in
+Parts and Components. HAL (Le Centre pour la Communication
+Scientifique Directe), [s. l.], 2020. Available at: https://hal.archives-
+ouvertes.fr/hal-02895279. Accessed at: Aug. 2025.
+GODA, T.; GARCÍA, A. T.; LARRAHONDO, C. Real Exchange Rates and
+Manufacturing Exports in Emerging Economies: The Role of Sectoral
+Heterogeneity and Product Complexity. Review of World Economics, [s. l.],
+vol. 160, no. 3, p. 1057, 2024. Available at: https://doi.org/10.1007/s10290-023-
+00523-3. Accessed at: Oct. 2025.
+GONZÁLEZ, V. M. M.; ARAGÓN, G. D.; ARANGO, F. O. La Popularidad de las
+Marcas y Su Valor Económico en el Marco de Las Finanzas Corporativas: Un
+Análisis de Aprendizaje Máquina. Contaduría y Administración, [s. l.], vol. 68,
+no. 1, p. 379, 2022. Available at:
+https://doi.org/10.22201/fca.24488410e.2023.4665. Accessed at: Aug. 2025.
+GOPINATH, M.; BATARSEH, F. A.; BECKMAN, J.; KULKARNI, A.; JEONG, S.
+International Agricultural Trade Forecasting Using Machine Learning. Data &
+Policy, [s. l.], vol. 3, 2021. Available at: https://doi.org/10.1017/dap.2020.22.
+Accessed at: Nov. 2025.
+GOPINATH, G.; BOZ, E.; CASAS, C.; DÍEZ, F. J.; GOURINCHAS, P.-O.;
+PLAGBORG‐MØLLER, M. Dominant Currency Paradigm. American Economic
+Review, [s. l.], vol. 110, no. 3, p. 677, 2020. Available at:
+https://doi.org/10.1257/aer.20171201. Accessed at: Nov. 2025.
+=== PAGE 54 ===
+54
+GUO, H.; DONG, Y.; BASTIDAS‐ARTEAGA, E.; LEI, X. Life-Cycle Performance
+Prediction and Interpretation for Coastal and Marine RC Structures: An
+Ensemble Learning Framework. Structural Safety, [s. l.], vol. 110, p. 102496,
+2024. Available at: https://doi.org/10.1016/j.strusafe.2024.102496. Accessed at:
+Aug. 2025.
+HE, Y.; MING, L. J.; RUAN, S.; SHUPING, Z. A Hybrid Model for Financial Time
+Series Forecasting—Integration of EWT, ARIMA With The Improved ABC
+Optimized ELM. IEEE Access, [s. l.], vol. 8, p. 84501, 2020. Available at:
+https://doi.org/10.1109/access.2020.2987547. Accessed at: Nov. 2025.
+HEDAYATI, M.; ASL, I. M. Forecasting the health expenditures in Iran by Using
+Time Series Analysis as Machine Learning Model in Python. Research Square
+(Research Square), [s. l.], 2023. Available at: https://doi.org/10.21203/rs.3.rs-
+2979860/v1. Accessed at: Aug. 2025.
+HIGUERA-COTA, M. F.; GUERRA, R. E. M.; BARCELÓ, J. G. A. Efecto de los
+Tratados Comerciales de América del Norte Sobre las Exportaciones Agrícolas
+de México a Estados Unidos. Investigación Económica, [s. l.], vol. 82, no.
+324, p. 126, 2023. Available at:
+https://doi.org/10.22201/fe.01851667p.2023.324.83363. Accessed at: Oct.
+2025.
+HSIEH, W. C.; BI, Z.; CHEN, K.; PENG, B.; ZHANG, S.; XU, J.; WANG, J.; YIN,
+C. H.; ZHANG, Y.; FENG, P.; WEN, Y.; WANG, T.; LI, M.; LIANG, C. X.; REN,
+J.; NIU, Q.; CHEN, S.; YAN, L.; XU, H.; TSENG, H. E.; SONG, X.; JING, B.;
+YANG, J.; SONG, J.; LIU, J.; LIU, M. Deep Learning, Machine Learning,
+Advancing Big Data Analytics and Management. arXiv (Cornell University),
+[s. l.], 2024. Available at: http://arxiv.org/abs/2412.02187. Accessed at: Oct.
+2025.
+HU, J.; SZYMCZAK, S. A Review on Longitudinal Data Analysis with Random
+Forest. Briefings in Bioinformatics, Oxford University Press, 2023.
+Available at: https://doi.org/10.1093/bib/bbad002. Accessed at: Nov. 2025.
+ISLAM, S. Future Trends in Sql Databases and Big Data Analytics: Impact of
+Machine Learning and Artificial Intelligence. International journal of science
+and engineering., [s. l.], vol. 1, no. 4, p. 47, 2024. Available at:
+https://doi.org/10.62304/ijse.v1i04.188. Accessed at: Sep. 2025.
+ISLAM, A.; RASHID, Md. M. Cyberattack Detection Using Unsupervised
+Learning Techniques. Research Square, [s. l.], 2024. Available at:
+https://doi.org/10.21203/rs.3.rs-4328744/v2. Accessed at: Sep. 2025.
+JABBAR, A.; JALIL, S. Q. A Comprehensive Analysis of Machine Learning
+Models for Algorithmic Trading of Bitcoin. arXiv (Cornell University), [s. l.],
+2024. Available at: http://arxiv.org/abs/2407.18334. Accessed at: Sep. 2025.
+KALLIANIOTIS, I. N. Trade Balance and Exchange Rate: The J-Curve. Journal
+of Applied Finance & Banking, [s. l.], Vol. 12, No. 2, 2022, p. 41-64, 2022.
+Available at: https://doi.org/10.47260/jafb/1223. Accessed at: Nov. 2025.
+=== PAGE 55 ===
+55
+KAT, Q. B. Competitive Liberalization, Postneoliberalism, and Hegemony: The
+Case of the US-Peru Free Trade Agreement. Latin American Politics and
+Society, [s. l.], vol. 65, no. 1, p. 126, 2022. Available at:
+https://doi.org/10.1017/lap.2022.33. Accessed at: Aug. 2025.
+KAYIT, A. D.; ISMAIL, M. T. Advancing Stock Price Prediction Through the
+Development of Hybrid Ensembles: A Comprehensive Comparative Analysis of
+Machine Learning Approaches. Journal Of Big Data, [s. l.], vol. 12, no. 1,
+2025. Available at: https://doi.org/10.1186/s40537-025-01185-8. Accessed at:
+Oct. 2025.
+KHAN, M. T.; AKTER, R.; DALIM, H. M.; SAYEED, A. A.; ANONNA, F. R.;
+MOHAIMIN, M. R.; KARMAKAR, M. Predictive Modeling of US Stock Market
+and Commodities: Impact of Economic Indicators and Geopolitical Events Using
+Machine. Journal of Economics Finance and Accounting Studies, [s. l.], vol.
+6, no. 6, p. 17, 2024. Available at: https://doi.org/10.32996/jefas.2024.6.6.3.
+Accessed at: Nov. 2025.
+KIM, M.-J.; LE, T.-T.-H. Influence Analysis of Real Exchange Rate Fluctuations
+on Trade Balance Data Using Feature Important Evaluation Methods.
+Information, [s. l.], vol. 15, no. 3, p. 156, 2024. Available at:
+https://doi.org/10.3390/info15030156. Accessed at: Nov. 2025.
+LI, W.; JIN, X.; JIN, Z. Impact and Mechanism Analysis of Industrial Robot
+Imports on Export Performance of Chinese Firms. Digital Economy and
+Sustainable Development, [s. l.], vol. 2, no. 1, 2024. Available at:
+https://doi.org/10.1007/s44265-024-00040-7. Accessed at: Aug. 2025.
+LI, L.; WANG, J.; WANG, X.; PENG, P.; SHEN, J.; ZHU, H.; ZHANG, Z. Big
+Data and Data Science in Global Governance: Anticipating Future Needs and
+Applications in the UN And Beyond. Frontiers in Political Science, [s. l.], vol.
+7, 2025. Available at: https://doi.org/10.3389/fpos.2025.1583772. Accessed at:
+Sep. 2025.
+LIN, H.; SUN, Q.; CHEN, S.-Q. Reducing Exchange Rate Risks in International
+Trade: A Hybrid Forecasting Approach of CEEMDAN and Multilayer LSTM.
+Sustainability, [s. l.], vol. 12, no. 6, p. 2451, 2020. Available at:
+https://doi.org/10.3390/su12062451. Accessed at: Nov. 2025.
+LING, Y.; WANG, P. P. Ensemble Machine Learning Models in Financial
+Distress Prediction: Evidence from China. Journal of Mathematical Finance,
+[s. l.], vol. 14, no. 2, p. 226, 2024. Available at:
+https://doi.org/10.4236/jmf.2024.142013. Accessed at: Oct. 2025.
+MA, Zhipeng; JÔRGENSEN, B. N.; MA, Zheng. DataPro – A Standardized Data
+Understanding and Processing Procedure: A Case Study of an Eco-Driving
+Project. Lecture Notes in Computer Science. [S. l.], p. 136, 2024. Available
+at: https://doi.org/10.1007/978-3-031-74738-0_10. Accessed at: Sep. 2025.
+MACHADO, E. J.; ASSIS, C. A. S. D.; PEREIRA, A. C. M. Modelagem,
+Implementação e Avaliação de Estratégias de Negociação Baseadas em
+=== PAGE 56 ===
+56
+Algoritmos de Aprendizado de Máquina para o Mercado Financeiro. Revista
+Brasileira de Computação Aplicada, [s. l.], vol. 12, no. 1, p. 16, 2020.
+Available at: https://doi.org/10.5335/rbca.v12i1.9106. Accessed at: Oct. 2025.
+MANDADAPU, P. Forecasting Day-Ahead Electricity Prices in Irish Markets:
+Time Series and Machine Learning Approaches and Performance Evaluation.
+Research Square (Research Square), [s. l.], 2024. Available at:
+https://doi.org/10.21203/rs.3.rs-4233273/v1. Accessed at: Sep. 2025.
+MANDOLINI, M.; MANUGUERRA, L.; SARTINI, M.; PRESTI, G. M. L.;
+PESCATORI, F. A Cost Modelling Methodology Based on Machine Learning for
+Engineered-To-Order Products. Engineering Applications of Artificial
+Intelligence, [s. l.], vol. 136, p. 108957, 2024. Available at:
+https://doi.org/10.1016/j.engappai.2024.108957. Accessed at: Aug. 2025.
+MAO, H.; CUI, G.; HUSSAIN, Z.; SHAO, L. Investigating the Simultaneous
+Impact of Infrastructure and Geographical Factors on International Trade:
+Evidence from Asian Economies. Heliyon, [s. l.], vol. 10, no. 1, 2023. Available
+at: https://doi.org/10.1016/j.heliyon.2023.e23791. Accessed at: Nov. 2025.
+MARTÍNEZ, I.; VILES, E.; OLAIZOLA, I. G. Data Science Methodologies:
+Current Challenges and Future Approaches. Big Data Research, [s. l.], vol. 24,
+p. 100183, 2021. Available at: https://doi.org/10.1016/j.bdr.2020.100183.
+Accessed at: Oct. 2025.
+MARTÍNEZ‐PLUMED, F.; CONTRERAS-OCHANDO, L.; FERRI, C.;
+HERNÁNDEZ‐ORALLO, J.; KULL, M.; LACHICHE, N.; RAMIREZ-QUINTANA,
+M. J.; FLACH, P. CRISP-DM Twenty Years Later: From Data Mining Processes
+to Data Science Trajectories. IEEE Transactions on Knowledge and Data
+Engineering, [s. l.], vol. 33, no. 8, p. 3048, 2019. Available at:
+https://doi.org/10.1109/tkde.2019.2962680. Accessed at: Nov. 2025.
+MORTEZANEJAD, S. A. F.; WANG, R. Addressing Challenges in Time Series
+Forecasting: A Comprehensive Comparison of Machine Learning Techniques.
+arXiv (Cornell University), [s. l.], 2025. Available at:
+http://arxiv.org/abs/2503.20148. Accessed at: Sep. 2025.
+MOTTA, M.; NETO, M. de C.; SARMENTO, P. A Mixed Approach for Urban
+Flood Prediction Using Machine Learning and GIS. International Journal of
+Disaster Risk Reduction, [s. l.], vol. 56, p. 102154, 2021. Available at:
+https://doi.org/10.1016/j.ijdrr.2021.102154. Accessed at: Oct. 2025.
+MWANGE, A.; MATOKA, W.; CHOLA, A.; CHAAMPITA, M. Theories of
+Exchange Rate Determination: A Brief Theoretical Review. European Journal
+of Business and Management, [s. l.], 2022. Available at:
+https://doi.org/10.7176/ejbm/14-20-08. Accessed at: Nov. 2025.
+NASIR, M. A.; VO, X. V. A Quarter Century of Inflation Targeting & Structural
+Change in Exchange Rate Pass-Through: Evidence from the First Three
+Movers. Structural Change and Economic Dynamics, [s. l.], vol. 54, p. 42,
+=== PAGE 57 ===
+57
+2020. Available at: https://doi.org/10.1016/j.strueco.2020.03.010. Accessed at:
+Aug. 2025.
+NGALAWA, H.; KUTU, A. A. Modelling Exchange Rate Variations and Global
+Shocks in Brazil. Zbornik radova Ekonomskog fakulteta u Rijeci, [s. l.], vol.
+35, no. 1, 2017. Available at: https://doi.org/10.18045/zbefri.2017.1.73.
+Accessed at: Sep. 2025.
+NOGARE, D.; SILVEIRA, I. F. Experimentation, Deployment and Monitoring
+Machine Learning Models: Approaches for Applying MLOps. arXiv (Cornell
+University), [s. l.], 2024. Available at: http://arxiv.org/abs/2408.11112.
+Accessed at: Jul. 2025.
+NOTZ, S.; ROSENKRANZ, P. Business Cycles in Emerging Markets: The Role
+of Liability Dollarization and Valuation Effects. International Review of
+Economics & Finance, [s. l.], vol. 76, p. 424, 2021. Available at:
+https://doi.org/10.1016/j.iref.2021.04.010. Accessed at: Aug. 2025.
+NTHEBE, T. C.; MOSIKARI, T. J. The Threshold Effects of Exchange Rates on
+Agricultural Exports: A Flow from South Africa to the Southern African
+Development Community. Economies, [s. l.], vol. 13, no. 2, p. 27, 2025.
+Available at: https://doi.org/10.3390/economies13020027. Accessed at: Nov.
+2025.
+OLIVEIRA, J. G. S. de; SANTOS, L. de L.; GRIGOLETTO, F.; DUVAL, H. C.
+Estoques Públicos e Abastecimento de Arroz na Pandemia da COVID-19:
+Responsabilidades e Atuação do Estado Brasileiro na Garantia do Direito
+Humano à Alimentação Adequada (DHAA). Perspectivas Rurales Nueva
+Época, [s. l.], vol. 21, no. 42, p. 1, 2023. Available at:
+https://doi.org/10.15359/prne.21-42.8. Accessed at: Aug. 2025.
+PEIKERT, A.; BRANDMAIER, A. M. A Reproducible Data Analysis Workflow.
+Quantitative and Computational Methods in Behavioral Sciences, [s. l.],
+vol. 1, 2021. Available at: https://doi.org/10.5964/qcmb.3763. Accessed at: Sep.
+2025.
+PODDAR, M.; MARWAHA, J. S.; YUAN, W.; ROMERO‐BRUFAU, S.; BRAT, G.
+A. An Operational Guide to Translational Clinical Machine Learning in Academic
+Medical Centers. npj Digital Medicine, [s. l.], vol. 7, no. 1, 2024. Available at:
+https://doi.org/10.1038/s41746-024-01094-9. Accessed at: Nov. 2025.
+PORTO, B. M. Previsão de Preços das Commodities Agrícolas: Uma Revisão
+Bibliométrica Sobre Modelos. Revista de Gestão e Secretariado
+(Management and Administrative Professional Review), [s. l.], vol. 13, no. 3,
+p. 881, 2022. Available at: https://doi.org/10.7769/gesec.v13i3.1380. Accessed
+at: Nov. 2025.
+RAHMAN, Md. M.; AREFIN, S.; SULTANA, N.; RAFI, M. A. Forecasting
+Currency Volatility in Global Markets Using Transformer Models: Implications
+for U.S. Trade and Investment Strategies. Journal of Economics Finance and
+=== PAGE 58 ===
+58
+Accounting Studies, [s. l.], vol. 7, no. 5, p. 30, 2025. Available at:
+https://doi.org/10.32996/jefas.2025.7.5.4. Accessed at: Nov. 2025.
+RASCHKA, Sebastian; PATTERSON, Joshua; NOLET, Corey. Machine
+Learning in Python: Main Developments and Technology Trends in Data
+Science, Machine Learning, and Artificial Intelligence. Information, v. 11, n.
+193, 2020. Available at: https://doi.org/10.48550/arXiv.2002.04803. Accessed
+at: Oct. 2025.
+REICHERT, B.; SOUZA, A. M. Impacto da Volatilidade no Preço do Cimento
+Portland. Exacta, [s. l.], vol. 18, no. 3, p. 475, 2020. Available at:
+https://doi.org/10.5585/exactaep.v18n3.10660. Accessed at: Sep. 2025.
+REMIL, Y.; BENDIMERAD, A.; MATHONAT, R.; KAYTOUE, M. AIOps
+Solutions for Incident Management: Technical Guidelines and
+A Comprehensive Literature Review. arXiv (Cornell University), [s. l.], 2024.
+Available at: http://arxiv.org/abs/2404.01363. Accessed at: Oct. 2025.
+RIESS, M. Automating Model Management: A Survey on Metaheuristics for
+Concept-Drift Adaptation. Journal of Data Information and Management, [s.
+l.], vol. 4, p. 211, 2022. Available at: https://doi.org/10.1007/s42488-022-00075-
+5. Accessed at: Oct. 2025.
+RIZVI, M. F. ARIMA Model Time Series Forecasting. International Journal for
+Research in Applied Science and Engineering Technology, [s. l.], vol. 12,
+no. 5, p. 3782, 2024. Available at: https://doi.org/10.22214/ijraset.2024.62416.
+Accessed at: Nov. 2025.
+SAIED, M.; GUIRGUIS, S. K.; MADBOULY, M. M. A Comparative Study of
+Using Boosting-Based Machine Learning Algorithms for IoT Network Intrusion
+Detection. International Journal of Computational Intelligence Systems, [s.
+l.], vol. 16, no. 1, 2023. Available at: https://doi.org/10.1007/s44196-023-00355-
+x. Accessed at: Aug. 2025.
+SALMAN, H. A.; KALAKECH, A.; STEITI, A. Random Forest Algorithm
+Overview. Babylonian Journal of Machine Learning, [s. l.], vol. 2024, p. 69,
+2024. Available at: https://doi.org/10.58496/bjml/2024/007. Accessed at: Nov.
+2025.
+SALVADOR, E. L. Use of Boosting Algorithms in Household-Level Poverty
+Measurement: A Machine Learning Approach to Predict and Classify Household
+Wealth Quintiles in the Philippines. arXiv (Cornell University), [s. l.], 2024.
+Available at: http://arxiv.org/abs/2407.13061. Accessed at: Sep. 2025.
+SANTORO, J. P. C.; ROLIM, L. N. The Brazilian Distributive Conflict in the Early
+21st Century and the Role of the Foreign Sector. Investigación Económica, [s.
+l.], vol. 82, no. 325, p. 125, 2023. Available at:
+https://doi.org/10.22201/fe.01851667p.2023.325.83831. Accessed at: Oct.
+2025.
+SATRI, J.; MOKHI, C. E.; HACHIMI, H. Predicting the Outcome of Regional
+Development Projects Using Machine Learning. IAES International Journal of
+=== PAGE 59 ===
+59
+Artificial Intelligence, [s. l.], vol. 13, no. 1, p. 863, 2023. Available at:
+https://doi.org/10.11591/ijai.v13.i1.pp863-875. Accessed at: Oct. 2025.
+SCHMIDT, J.; STEINGRESS, W. No Double Standards: Quantifying The Impact
+of Standard Harmonization on Trade. Journal of International Economics, [s.
+l.], vol. 137, p. 103619, 2019. Available at:
+https://doi.org/10.1016/j.jinteco.2022.103619. Accessed at: Aug. 2025.
+SELLAMI, B.; OUNOUGHI, C.; KALVET, T.; TIITS, M.; RINCON-YANEZ, D.
+Harnessing Graph Neural Networks to Predict International Trade Flows. Big
+Data and Cognitive Computing, [s. l.], vol. 8, no. 6, p. 65, 2024. Available at:
+https://doi.org/10.3390/bdcc8060065. Accessed at: Nov. 2025.
+SEMMELROCK, H.; ROSS‐HELLAUER, T.; KOPEINIK, S.; THEILER, D.;
+HABERL, A.; THALMANN, S.; KOWALD, D. Reproducibility in Machine
+Learning-based Research: Overview, Barriers and Drivers. arXiv (Cornell
+University), [s. l.], 2024. Available at: http://arxiv.org/abs/2406.14325.
+Accessed at: Aug. 2025.
+SHEN, M.; LEE, C.-F.; LIU, H.-H.; CHANG, P. H. K.; YANG, C. An Effective
+Hybrid Approach for Forecasting Currency Exchange Rates. Sustainability, [s.
+l.], vol. 13, no. 5, p. 2761, 2021. Available at:
+https://doi.org/10.3390/su13052761. Accessed at: Nov. 2025.
+SHIMAOKA, A. M.; FERREIRA, R.; GOLDMAN, A. The evolution of CRISP-DM
+for Data Science: Methods, Processes and Frameworks. SBC Reviews on
+Computer Science, [s. l.], vol. 4, no. 1, p. 28, 2024. Available at:
+https://doi.org/10.5753/reviews.2024.3757. Accessed at: Nov. 2025.
+SILVA, D. H. C.; TIMO, E. M. do N. Machine Learning Aplicado à Atenção
+Domiciliar para Predição de Condição de Óbito. Research Society and
+Development, [s. l.], vol. 11, no. 14, 2022. Available at:
+https://doi.org/10.33448/rsd-v11i14.36078. Accessed at: Aug. 2025.
+SILVA, T. C.; WILHELM, P. V. B.; AMANCIO, D. R. Machine Learning and
+Economic Forecasting: The Role of International Trade Networks. arXiv
+(Cornell University), [s. l.], 2024. Available at: http://arxiv.org/abs/2404.08712.
+Accessed at: Oct. 2025.
+SOH, M. F.; BIGRAS, D.; BARBEAU, D.; DORÉ, S.; FORGUES, D. Bim
+Machine Learning and Design Rules to Improve the Assembly Time in Steel
+Construction Projects. Sustainability, [s. l.], vol. 14, no. 1, p. 288, 2021.
+Available at: https://doi.org/10.3390/su14010288. Accessed at: Aug. 2025.
+SONG, X.; CHEN, Z. S. Enhancing Financial Time Series Forecasting in the
+Shipping Market: A Hybrid Approach with Light Gradient Boosting Machine.
+Engineering Applications of Artificial Intelligence, [s. l.], vol. 136, p. 108942,
+2024. Available at: https://doi.org/10.1016/j.engappai.2024.108942. Accessed
+at: Oct. 2025.
+SOUSA, R. M. de; VERÍSSIMO, M. P. Indicadores de Especialização das
+Exportações Brasileiras de Petróleo: Evidências para o Período de 2000 a
+=== PAGE 60 ===
+60
+2018. Economia e Desenvolvimento, [s. l.], vol. 32, 2021. Available at:
+https://doi.org/10.5902/1414650947963. Accessed at: Mar. 2025.
+SPRING-RAGAIN, H. Emerging Countries’ Counter-Currency Cycles in the
+Face of Crises and Dominant Currencies. Research Square (Research
+Square), [s. l.], 2024. Available at: https://doi.org/10.21203/rs.3.rs-5283456/v1.
+Accessed at: Jul. 2025.
+STROMER, R.; TRIEBE, O.; ZANOCCO, C.; RAJAGOPAL, R. Designing
+Forecasting Software for Forecast Users: Empowering Non-Experts to Create
+and Understand Their Own Forecasts. arXiv (Cornell University), [s. l.], 2024.
+Available at: https://arxiv.org/abs/2404.14575. Accessed at: Oct. 2025.
+SUDJIANTO, A.; ZHANG, A. Model Validation Practice in Banking: A Structured
+Approach. arXiv (Cornell University), [s. l.], 2024. Available at:
+http://arxiv.org/abs/2410.13877. Accessed at: Sep. 2025.
+SAFAROV, R.; SHOMANOVA, Z.; NOSSENKO, Y.; KOPISHEV, E.;
+BEXEITOVA, Z.; KAMATOV, R. Filling Gaps in PM2.5 Time Series: A Broad
+Evaluation from Statistical to Advanced Neural Network Models. PLoS ONE, [s.
+l.], vol. 20, no. 8, 2025. Available at:
+https://doi.org/10.1371/journal.pone.0330211. Accessed at: Sep. 2025.
+TAJMOUATI, S.; WAHBI, B. E.; BEDOUI, A.; ABARDA, A.; DAKKOUN, M.
+Applying K-Nearest Neighbors to Time Series Forecasting: Two New
+Approaches. arXiv (Cornell University), [s. l.], 2022. Available at:
+http://arxiv.org/abs/2103.14200. Accessed at: Oct. 2025.
+TRIPATHI, S.; MUHR, D.; MANUEL, B.; EMMERT‐STREIB, F.; JODLBAUER,
+H.; DEHMER, M. Ensuring the Robustness and Reliability of Data-Driven
+Knowledge Discovery Models in Production and Manufacturing. Frontiers in
+Artificial Intelligence, [s. l.], vol. 4, p. 576892, 2021. Available at:
+https://doi.org/10.3389/frai.2021.576892. Accessed at: Nov. 2025.
+UDDIN, A.; PABEL, M. A. H.; ALAM, M. I.; KAMRUZZAMAN, F.; HAQUE, M.;
+HOSEN, M. M.; SAJAL, A.; MIAH, M. R.; GHOSH, S. K. Advancing Financial
+Risk Prediction and Portfolio Optimization Using Machine Learning Techniques.
+The American Journal of Management and Economics Innovations, [s. l.],
+vol. 7, no. 1, p. 5, 2025. Available at:
+https://doi.org/10.37547/tajmei/volume07issue01-02. Accessed at: Oct. 2025.
+UNITED STATES INTERNATIONAL TRADE COMMISSION. USITC. [S. l.: s.
+n.], 2025. Available at: https://www.usitc.gov/. Accessed at: Oct. 2025.
+UNITED STATES TRADE REPRESENTATIVE. USTR. [S. l.: s. n.], 2020.
+Available at: https://ustr.gov/trade-agreements/free-trade-agreements/united-
+states-mexico-canada-agreement. Accessed at: Oct. 2025.
+VERSTRAETE, J.; ACAR, F.; CONCILIO, G.; PUCCI, P. Turning Data into
+Actionable Policy Insights. Springerbriefs in Applied Sciences and
+Technology. [S. l.], p. 73, 2021. Available at: https://doi.org/10.1007/978-3-030-
+63693-7_6. Accessed at: Oct. 2025.
+=== PAGE 61 ===
+61
+VOLOSHKІNA, O.; KOVALOVA, A.; SIPAKOV, R. Leveraging Quadratic
+Polynomials in Python for Advanced Data Analysis. arXiv (Cornell University),
+[s. l.], 2024. Available at: http://arxiv.org/abs/2402.06133. Accessed at: Sep.
+2025.
+VRANJEŠ, D.; NIGGEMANN, O. Design Principles for Falsifiable, Replicable
+and Reproducible Empirical ML Research. arXiv (Cornell University), [s. l.],
+2024a. Available at: http://arxiv.org/abs/2405.18077. Accessed at: Aug. 2025.
+WAHAB, B. A. Environmental Regulations and BRICS Export Flows: An
+Empirical Test of the Porter Hypothesis. Research Square (Research
+Square), [s. l.], 2024. Available at: https://doi.org/10.21203/rs.3.rs-5304339/v1.
+Accessed at: Aug. 2025.
+WANG, L.; XIE, M. Analysis of the Financial Market via an Optimized Machine
+Learning Algorithm: A Case Study of the Nasdaq Index. International Journal
+of Advanced Computer Science and Applications, [s. l.], vol. 15, no. 1, 2024.
+Available at: https://doi.org/10.14569/ijacsa.2024.0150120. Accessed at: Oct.
+2025.
+WIRTH, R.; HIPP, J. CRISP-DM: Towards a Standard Process Model for Data
+Mining. International Conference on the Practical Applications of
+Knowledge Discovery and Data Mining, [S. l.: s. n.], v. 1, p. 29–39, 2000.
+2000. Accessed at: Sep. 2025.
+YAZAWA, N. Dynamics of international Trade: A 30-Year Analysis of Key
+Exporting Nations. PLoS ONE, [s. l.], vol. 18, no. 8, 2023. Available at:
+https://doi.org/10.1371/journal.pone.0289040. Accessed at: Oct. 2025.
+ZAIM, A.; AHMAD, J.; ZAKARIA, N. H.; SU, G. E.; AMNUR, H. Software Defect
+Prediction Framework Using Hybrid Software Metric. JOIV International
+Journal on Informatics Visualization, [s. l.], vol. 6, no. 4, p. 921, 2022.
+Available at: https://doi.org/10.30630/joiv.6.4.1258. Accessed at: Oct. 2025.
+ZANOTTI, M. The Effects of Retraining on the Stability of Global Models in
+Retail Demand Forecasting. arXiv (Cornell University), [s. l.], 2025. Available
+at: http://arxiv.org/abs/2506.05776. Accessed at: Sep. 2025.
+ZHANG, L.; JIANG, L. Game-Theoretic SHAP-Driven Interpretable Forecasting
+Of Air Cargo Demand Using Bayesian-Optimized Random Forests. Frontiers in
+Physics, [s. l.], vol. 13, 2025. Available at:
+https://doi.org/10.3389/fphy.2025.1705687. Accessed at: Oct. 2025.
