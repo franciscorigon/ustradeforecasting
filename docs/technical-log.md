@@ -387,4 +387,26 @@ Begin Modeling phase (`04_modeling.ipynb`).
 
 ---
 
+### 2026-03-29 — Documentation — Diário de Bordo reorganized + checklist expanded
+
+**What was done:**
+- Rewrote `docs/diario-de-bordo.md` from scratch in correct chronological order (oldest first). Previous version had sessions out of order, steps renumbered per session, and World Bank entry misplaced after the Session 1 summary. New version: 4 sessions, 15 steps numbered continuously.
+- Expanded `tcc2-checklist.md` Phase 4 (Modeling) to list all 72 individual models explicitly: 24 per algorithm (ARIMA, RF, LightGBM) × 3 countries × 2 directions × 4 sectors.
+
+**Modeling scope clarified:**
+- 24 unique target series: 3 countries × 2 directions (exports/imports) × 4 sectors (total, commodities, manufactured goods, high-tech)
+- 73 input features per model run (base features + dummies + lags + MAs + %change + calendar)
+- 72 total models: 24 targets × 3 algorithms
+- ARIMA uses `diff_log_{target}` (stationary); RF and LightGBM use `log_{target}`
+- Raw target columns are for reference and economic interpretation only
+
+**Result:**
+- `docs/diario-de-bordo.md` — fully reorganized, chronological
+- `tcc2-checklist.md` — 72 model checkboxes added to Phase 4
+
+**Next step:**
+Begin Modeling phase (`04_modeling.ipynb`).
+
+---
+
 *End of log. New entries will appear above this line.*
