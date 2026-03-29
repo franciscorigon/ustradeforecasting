@@ -368,4 +368,23 @@ Begin Modeling phase (`04_modeling.ipynb`).
 
 ---
 
+### 2026-03-29 — Documentation — Plain-language variable glossary created
+
+**What was done:**
+Created `data/codebook/glossary.md` — a plain-language reference for all project variables, intended for readers without economics or data science background.
+
+**Technical details:**
+- All base variables documented alphabetically with full name and plain-language explanation
+- Derived feature patterns explained generically (lag, MA, pct, log, diff_log) to avoid 57 near-identical rows
+- Excluded variables listed with justification
+- Complements `variable-catalogue.md` (technical) with an accessible reference
+
+**Result:**
+- `data/codebook/glossary.md`
+
+**Next step:**
+Begin Modeling phase (`04_modeling.ipynb`).
+
+---
+
 *End of log. New entries will appear above this line.*
