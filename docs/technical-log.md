@@ -409,4 +409,27 @@ Begin Modeling phase (`04_modeling.ipynb`).
 
 ---
 
+### 2026-03-31 — Project Management — First meeting with advisor + meeting notes
+
+**What was done:**
+First online meeting with Prof. Josiane Porto (30 min). Progress approved. Key decisions recorded in `docs/meetings/ata_2026-03-31.md`.
+
+**Decisions confirmed:**
+- Model with 2010–2024 first; add 2000–2009 only if beneficial after initial results
+- HS2 sectoral classification kept as-is (OECD technology intensity)
+- 34 variables and monthly window validated — cleared to proceed to modeling
+- EDA charts → appendix (with mention in body text)
+- Variable glossary → appendix of TCC
+- TCC2 limit: 30 pages; ~50% results/discussion, ~50% theory/methodology
+- GitHub: not mandatory, but well received if public
+- Technical documentation is mandatory (most relevant code parts)
+
+**Result:**
+- `docs/meetings/ata_2026-03-31.md` — full meeting notes
+
+**Next step:**
+Begin Modeling phase (`04_modeling.ipynb`).
+
+---
+
 *End of log. New entries will appear above this line.*
