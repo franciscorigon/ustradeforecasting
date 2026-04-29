@@ -432,4 +432,29 @@ Begin Modeling phase (`04_modeling.ipynb`).
 
 ---
 
+### 2026-04-29 — Modeling — Notebook setup and helper functions
+
+**What was done:**
+Started `04_modeling.ipynb`. Created full folder structure for models and results. Defined all helper functions shared across the three algorithms.
+
+**Technical details:**
+- Folder structure: `models/{arima,random_forest,lightgbm}/`, `results/{forecasts,figures}/`
+- Section 1 (Setup): imports, path constants, PARTNERS dict, TARGETS list (8 per country)
+- Section 2 (Load Data): loaded dataset_can/mex/bra.csv; validated shape (180×97), date range (2010-01 to 2024-12), zero NaN in target columns
+- Section 3 (Features & Helpers):
+  - `get_feature_cols(df)`: returns 73 feature columns (excludes all exports/imports columns)
+  - `get_train_test_ml(df, target)`: returns X_train (132×73), X_test (36×73), y_train, y_test on log scale; drops NaN rows from lag12
+  - `get_train_test_arima(df, target)`: returns diff_log train (143,) and test (36,) series
+  - `compute_metrics(y_true, y_pred, iso, target, algorithm)`: returns MAE, RMSE, MAPE dict
+
+**Split confirmed:**
+- ML (RF, LightGBM): 132 train / 36 test (144 - 12 NaN from lag12)
+- ARIMA: 143 train / 36 test (144 - 1 NaN from first difference)
+
+**Result:** `notebooks/04_modeling.ipynb` — Sections 1–3 complete and executed
+
+**Next step:** Section 4 — Train 24 ARIMA models
+
+---
+
 *End of log. New entries will appear above this line.*
