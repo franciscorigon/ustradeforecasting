@@ -457,4 +457,52 @@ Started `04_modeling.ipynb`. Created full folder structure for models and result
 
 ---
 
+### 2026-04-30 — Modeling — 72 models trained (ARIMA, Random Forest, LightGBM)
+
+**What was done:**
+Completed `04_modeling.ipynb` Sections 4–7. Trained all 72 models across 3 algorithms, 3 countries, and 8 target series. Generated metrics, forecast plots, and final ranking.
+
+**Technical details:**
+
+**Section 4 — ARIMA (24 models):**
+- Strategy: walk-forward forecast on `diff_log_{target}` series (stationary)
+- Order selection: AIC grid search over p∈{0–3}, d∈{0–1}, q∈{0–3} on training set
+- Forecast: 1-step-ahead re-fit for each of the 36 test months
+- Reconstruction: diff_log predictions accumulated back to log scale
+- Dominant order: (3,0,3) across most series
+- Results saved: `models/arima/arima_{iso}_{target}.pkl`, `results/forecasts/arima_metrics.csv`
+
+**Section 5 — Random Forest (24 models):**
+- Strategy: direct multi-step forecast using 73 features on log scale
+- Hyperparameter tuning: Optuna, 30 trials, TimeSeriesSplit(5 folds)
+- Search space: n_estimators [100–600], max_depth [3–20], min_samples_leaf [1–20], max_features [0.3–1.0]
+- Results saved: `models/random_forest/rf_{iso}_{target}.pkl`, `results/forecasts/rf_metrics.csv`
+
+**Section 6 — LightGBM (24 models):**
+- Same structure as RF; search space includes learning_rate, num_leaves, subsample, colsample_bytree, reg_alpha, reg_lambda
+- Results saved: `models/lightgbm/lgbm_{iso}_{target}.pkl`, `results/forecasts/lgbm_metrics.csv`
+
+**Section 7 — Results comparison:**
+- Combined metrics table: `results/forecasts/metrics_all.csv` (72 rows)
+- MAPE bar chart: `results/figures/mape_comparison.png`
+- 24 actual vs predicted plots: `results/figures/forecasts/{iso}_{target}.png`
+
+**Final metrics (average across 24 series):**
+
+| Algorithm | MAE | RMSE | MAPE |
+|-----------|-----|------|------|
+| Random Forest | 0.2114 | 0.2347 | 0.94% |
+| LightGBM | 0.2243 | 0.2460 | 0.99% |
+| ARIMA | 0.3185 | 0.3541 | 1.41% |
+
+**Wins per series (best MAPE):** ARIMA 9/24, LightGBM 8/24, Random Forest 7/24
+
+**Decision made:** All metrics on log scale. ARIMA competitive on individual series despite lower aggregate ranking — relevant for thesis discussion.
+
+**Result:** `04_modeling.ipynb` complete and executed end-to-end. All 72 `.pkl` files saved.
+
+**Next step:** Thesis writing — Results and Discussion section
+
+---
+
 *End of log. New entries will appear above this line.*
