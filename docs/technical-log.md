@@ -505,4 +505,36 @@ Completed `04_modeling.ipynb` Sections 4–7. Trained all 72 models across 3 alg
 
 ---
 
+### 2026-04-30 — Evaluation — Phase 5 notebook skeleton created (05_evaluation.ipynb)
+
+**What was done:**
+Created `notebooks/05_evaluation.ipynb` as a structured skeleton for the CRISP-DM Evaluation phase. The notebook is designed to surface the exchange rate–trade flow relationship through three complementary analytical lenses: feature importance, SHAP values, and ARIMA vs ML MAPE gap.
+
+**Motivation:**
+The 72 trained models predict trade volumes but do not directly expose how exchange rate variables influence forecasts. Three analysis paths were defined to answer the thesis research question:
+1. **Feature importance** (RF + LightGBM): ranks FX and REER columns among all 73 features
+2. **SHAP values**: quantifies direction and magnitude of each FX variable's per-prediction contribution
+3. **ARIMA vs ML MAPE gap**: ARIMA has no FX features; the gap `MAPE_ARIMA - MAPE_best_ML` measures predictive value added by exchange rate information
+
+**Technical details:**
+- Section 1 — Setup: imports (`shap`, `pickle`, `matplotlib`, `pandas`, `numpy`); defines `FX_COLS` (USD/CAD, USD/MXN, USD/BRL + lag/MA variants), `REER_COLS`, path constants
+- Section 2 — Load artifacts: loads 48 ML `.pkl` models (24 RF + 24 LightGBM from `models/`); loads `results/forecasts/metrics_all.csv`
+- Section 3 — Feature importance: aggregates `feature_importances_` across all 24 models per algorithm; generates bar chart with FX/REER columns highlighted in red
+- Section 4 — SHAP analysis: `shap.TreeExplainer(model)` on test set for all 24 RF models; `shap.summary_plot` across all series
+- Section 5 — SHAP dependence plots: bilateral FX vs trade for 6 combinations (exports/imports total × 3 countries); shows direction of exchange rate effect
+- Section 6 — ARIMA vs ML gap: merges ARIMA and best-ML MAPE by series; calculates `gap_pp = MAPE_ARIMA - MAPE_best_ML`; positive = ML adds value; bar chart by sector
+- Section 7 — FX sensitivity heatmap: mean |SHAP| of all FX+REER features per (iso, target) combination; 24-cell heatmap
+- Section 8 — Thesis summary: consolidated table for Results and Discussion section
+
+**Prerequisite:** `pip install shap` required before running Sections 4–7.
+
+**Decision made:**
+The SHAP dependence plots and ARIMA/ML gap are the most thesis-relevant outputs — they directly answer "how do exchange rate fluctuations affect trade flows?" The feature importance chart is supporting evidence.
+
+**Result:** `notebooks/05_evaluation.ipynb` — skeleton complete, 8 sections, not yet executed.
+
+**Next step:** Install shap and run 05_evaluation.ipynb end-to-end.
+
+---
+
 *End of log. New entries will appear above this line.*
