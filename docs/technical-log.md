@@ -537,4 +537,54 @@ The SHAP dependence plots and ARIMA/ML gap are the most thesis-relevant outputs 
 
 ---
 
+### 2026-05-01 — Evaluation — Statistical tests, Naïve baseline and Ljung-Box added to 05_evaluation.ipynb
+
+**What was done:**
+Extended `notebooks/05_evaluation.ipynb` with two new sections (Naïve Baseline and ARIMA Residual Diagnostics) and documented the forecasting horizon scope. Notebook restructured from 9 to 10 sections, 27 to 32 cells.
+
+**Additions:**
+
+**Section 3 — Naïve Baseline (new):**
+- Implements a random-walk baseline: `log_trade[t] = log_trade[t-1]` (last observed value)
+- Applied to the same 36-month test window as all other models
+- Purpose: establishes the minimum acceptable performance bar; prevents the "is your model better than trivial?" objection
+- Computes MAE, RMSE, MAPE; appended to `df_all_ext` for side-by-side comparison
+
+**Section 4.1 — ARIMA Residual Diagnostics — Ljung-Box (new):**
+- Re-fits each of the 24 ARIMA models on the full training set (one fit per series, ~5 seconds total)
+- Runs `statsmodels.stats.diagnostic.acorr_ljungbox` at lag=10
+- H₀: residuals are white noise (model adequately specified)
+- Generates ACF plots for exports_total per country: `results/figures/evaluation/arima_residuals_acf.png`
+- Validates ARIMA adequacy before statistical comparison against ML models
+
+**Forecasting horizon scope (documented in Section 3 markdown):**
+- ARIMA: 1-step-ahead walk-forward — re-trains at each of the 36 test months; strictly simulates real-world sequential use
+- RF / LightGBM: 36-step direct — trained once on 2010–2021; predicts all 36 test months in a single call using known feature values
+- Asymmetric protocols are intentional and documented as methodological scope: ARIMA operates under stricter conditions; ML compensates with 73 features
+
+**Revised notebook structure (10 sections):**
+1. Setup
+2. Load Data and Models
+3. Naïve Baseline ← new
+4. Statistical Significance Tests
+   - 4.1 Ljung-Box (ARIMA residuals) ← new
+   - 4.2 Friedman
+   - 4.3 Wilcoxon + Bonferroni
+   - 4.4 Diebold-Mariano
+5. Feature Importance
+6. SHAP Analysis
+7. Exchange Rate Focus
+8. ARIMA vs ML Gap
+9. Sector Sensitivity
+10. Summary for Thesis
+
+**Decision made:**
+Naïve baseline chosen over other simple models (moving average, seasonal naïve) because the series exhibit strong momentum — random walk is both the most common benchmark in trade forecasting literature and the hardest to beat for monthly macro data.
+
+**Result:** `notebooks/05_evaluation.ipynb` — 32 cells, ready to execute (requires `pip install shap` first).
+
+**Next step:** Execute 05_evaluation.ipynb end-to-end and write Results and Discussion section.
+
+---
+
 *End of log. New entries will appear above this line.*
