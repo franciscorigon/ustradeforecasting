@@ -587,4 +587,64 @@ Naïve baseline chosen over other simple models (moving average, seasonal naïve
 
 ---
 
+### [2026-05-01] — Evaluation — 05_evaluation.ipynb: full review + LightGBM SHAP + bug fixes
+
+**What was done:**
+Full review of `05_evaluation.ipynb` after end-to-end execution. Notebook expanded from 32 to 36 cells — SHAP analysis now covers both RF and LightGBM. Three bugs identified and corrected.
+
+**Key execution results (confirmed from cell outputs):**
+
+*Naïve Baseline (Section 3):*
+- Naïve MAPE: 0.32% — beats all three models (RF 0.94%, LightGBM 1.03%, ARIMA 1.41%)
+- Expected: Naïve has structural information advantage (observes actual t-1 at each step); ML models predict all 36 months without test-period feedback
+- Documented asymmetry in notebook markdown and diary; framed as methodological scope for thesis
+
+*Ljung-Box — ARIMA residuals (Section 4.1):*
+- 22/24 series: p >= 0.05 → white noise → ARIMA well-specified
+- 2 problematic: CAN exports_commodities (p=0.0006), CAN imports_total (p=0.0146)
+- Residual autocorrelation in Canada commodity series may reflect oil price shock dynamics not captured by selected ARIMA order
+
+*Statistical significance (Sections 4.2–4.4):*
+- Friedman: chi2=1.75, p=0.417 — not significant; low power with n=24
+- Wilcoxon+Bonferroni: all three pairs are ties (Bonferroni-adjusted p > 0.05)
+- Diebold-Mariano: RF > LightGBM in 83% of series; RF > ARIMA in 75%; LightGBM > ARIMA in 83%
+- DM is more powerful: uses 36-step error sequences (864 obs) vs 24 MAPE summaries in Wilcoxon
+
+*Feature importance (Section 5):*
+- RF: WTI_oil #1; FX_USD_CAD_ma6 rank 13, REER_MEX_lag3 rank 14
+- LightGBM: FX_USD_CAD_pct #3, FX_USD_MXN_pct #4 — FX changes appear more prominently
+- Interpretation: LightGBM captures FX shocks (pct); RF captures medium-term trends (ma6)
+
+*ARIMA vs ML gap (Section 8):*
+- Mean gap: +0.54 pp favouring ML (10.9% average MAPE reduction)
+- Largest gains: CAN imports_high-tech (2.48 pp, 71%), BRA exports_commodities (2.04 pp, 70%)
+- 8/24 series: ARIMA outperforms ML — documented, not treated as failure
+
+**SHAP LightGBM — 5 new cells:**
+
+| Cell | Content |
+|------|---------|
+| 21 | TreeExplainer on all 24 LightGBM models; stores shap_lgbm_values, shap_lgbm_X_test |
+| 23 | SHAP summary plot — LightGBM (all 24 models, 864 test observations) |
+| 24 | Side-by-side RF vs LightGBM mean|SHAP| per feature (top 15, FX/REER highlighted red) |
+| 27 | SHAP FX dependence plots — LightGBM (exports_total and imports_total) |
+| 32 | Sector sensitivity updated: average of RF + LightGBM sensitivity scores per series |
+
+**Bug fixes:**
+1. fx_reer_cols (Cell 18) was used in Cell 28 — hidden dependency removed: Cell 28 now uses inline `any(fx in c for fx in FX_COLS + REER_COLS)`; FX_COLS/REER_COLS in Setup (Cell 2)
+2. Heatmap title (Cell 33): "Random Forest" → "RF + LightGBM average"
+3. Naive Baseline markdown (Cell 5): added paragraph on information asymmetry between Naive and ML forecasters
+
+**Decision:**
+SHAP extended to LightGBM because: (a) TreeExplainer supports LightGBM natively; (b) RF and LightGBM weight different FX representations (RF: ma6; LightGBM: pct) — cross-model agreement strengthens thesis; (c) RF+LightGBM average for sector sensitivity is more robust than single-model attribution.
+
+**Result:**
+- notebooks/05_evaluation.ipynb — 36 cells
+- Figures from previous execution confirmed: arima_residuals_acf.png, feature_importance_top15.png, shap_rf_summary.png, shap_fx_dependence.png, arima_ml_gap_by_sector.png, fx_sensitivity_heatmap.png
+- Pending re-execution (Section 6+): shap_lgbm_summary.png, shap_comparison_rf_lgbm.png, shap_lgbm_fx_dependence.png
+
+**Next step:** Re-run notebook from Cell 19 (Section 6) to generate LightGBM SHAP figures. Then write Results and Discussion section of thesis.
+
+---
+
 *End of log. New entries will appear above this line.*
