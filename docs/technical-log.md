@@ -647,4 +647,20 @@ SHAP extended to LightGBM because: (a) TreeExplainer supports LightGBM natively;
 
 ---
 
+### [2026-05-04] — Evaluation — 05_evaluation.ipynb re-executed end-to-end (36 cells)
+
+**What was done:**
+Full re-execution of `05_evaluation.ipynb` after LightGBM SHAP expansion. All 36 cells ran without errors.
+
+**New figures confirmed generated:**
+- `results/figures/evaluation/shap_lgbm_summary.png` — LightGBM SHAP summary plot (864 observations × 73 features)
+- `results/figures/evaluation/shap_comparison_rf_lgbm.png` — RF vs LightGBM mean|SHAP| side-by-side (top 15 features, FX/REER highlighted)
+- `results/figures/evaluation/shap_lgbm_fx_dependence.png` — bilateral FX vs LightGBM SHAP contribution for exports/imports_total
+
+**Result:** Phase 5 (Evaluation) complete. All statistical tests, interpretability analyses, and thesis figures generated and verified.
+
+**Next step:** Write Results and Discussion section of TCC2.
+
+---
+
 *End of log. New entries will appear above this line.*
