@@ -663,4 +663,37 @@ Full re-execution of `05_evaluation.ipynb` after LightGBM SHAP expansion. All 36
 
 ---
 
+### [2026-05-04] — Writing — Master writing plan created + data validation
+
+**What was done:**
+Pre-writing session: all reference documents in `/docs` read, actual performance metrics validated from CSV, master writing plan document created.
+
+**Technical details:**
+- Read: `docs/Plagio.md`, `docs/tcc1/Modelo_Latex_TCC_II.md`, `docs/meetings/ata_2026-03-31.md`
+- Attempted to read 5 PDF papers in `docs/references/papers/` — failed (pdftoppm not installed on Windows). Citations available from TCC1 text. Poppler installation instructions provided.
+- Validated all model metrics from `results/forecasts/metrics_all.csv` (72 models):
+  - MAPE averages: RF 0.9381%, LightGBM 1.0276%, ARIMA 1.4143%
+  - Wins (lowest MAPE per series): RF 9/24, ARIMA 8/24, LightGBM 7/24
+  - Corrected prior sync entry (30/04) which had wins inverted: was "ARIMA 9, RF 7" — correct is "RF 9, ARIMA 8"
+- Created `tcc/tcc2-writing-plan.md` — master reference for all writing:
+  - 10 inviolable rules (ABNT, citation preservation, page limit, SI emphasis)
+  - Full structure with per-section page estimates
+  - Section-by-section writing guide with TCC1 reuse map
+  - Actual performance data (country-level and sector-level breakdowns)
+  - Citation list per section
+  - Writing order recommendation: Results → Discussion → Methodology → Theory → Introduction → Conclusion → Abstract
+- Fixed checklist: Phase 5 marked complete; corrected wins and LightGBM MAPE
+- Added trigger in CLAUDE.md: always read `tcc/tcc2-writing-plan.md` before any writing task
+
+**Decision made:**
+No retraining of models needed. Evaluation findings are legitimate results, not process errors. 2 problematic ARIMA series (CAN exports_commodities, CAN imports_total — Ljung-Box fail) documented as limitation. Naïve baseline advantage explained as structural information asymmetry, not model failure.
+
+Deployment section = written text only (no live demo, no pipeline execution needed). Interviews with experts = still pending, must happen before 31/05/2026.
+
+**Result:** `tcc/tcc2-writing-plan.md` created. Checklist and sync updated. Ready to begin writing Results section.
+
+**Next step:** Write Section 6 — Results (start with descriptive overview, then model comparison table, then statistical tests, then SHAP).
+
+---
+
 *End of log. New entries will appear above this line.*
