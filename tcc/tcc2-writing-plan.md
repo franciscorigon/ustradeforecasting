@@ -24,6 +24,7 @@
    - Dois autores: `SURNAME; SURNAME, year`
    - Três ou mais: `SURNAME et al., year`
 10. **Entrevistas:** ainda NÃO realizadas mas PLANEJADAS para antes de 31/05. Não mencionar na Metodologia como já executadas. Quando realizadas, os insights vão para a Discussão (validação qualitativa dos resultados). Deixar espaço na Discussão §7.9 para isso.
+11. **CRISP-DM completo (§5 Metodologia):** Todas as 6 fases do CRISP-DM devem ser mencionadas explicitamente na §5. Modelagem e Avaliação recebem mais profundidade; Business Understanding é o mais curto; Deployment é 1 parágrafo. Abrir a §5 com: *"This study adopted CRISP-DM as its guiding methodological framework (SHIMAOKA et al., 2024; MARTÍNEZ-PLUMED et al., 2019), a technology-independent process model structured into six iterative phases..."*
 
 ---
 
@@ -291,6 +292,48 @@ d) To examine the effect of macroeconomic factors on the volatility of trade flo
 - `(SATRI et al., 2023)` — evaluation no CRISP-DM
 - `(ABIR et al., 2024)` — TS-CV e backtesting
 
+**Texto guia por fase CRISP-DM (REGRA 11 — todas obrigatórias):**
+
+**§5.1 — Business Understanding** (1–2 parágrafos | adaptar TCC1 §3.1 para passado)
+- Abrir a seção com a adoção do CRISP-DM como framework: citar `(SHIMAOKA et al., 2024)` e `(MARTÍNEZ-PLUMED et al., 2019)` — ambos já estão no TCC1
+- Descrever o objetivo de negócio (impacto cambial no comércio) e o objetivo de Data Mining (comparar os três modelos em 24 séries)
+- Mencionar que as fases são iterativas, não estritamente sequenciais
+
+**§5.2 — Data Understanding** (1 parágrafo | adaptar TCC1 §3.2 para passado)
+- Fontes: FRED (câmbio, macro), UN Comtrade (fluxos HS2), World Bank
+- Período: 2000–2024 coletado; 2010–2024 modelado (180 observações mensais)
+- 24 séries-alvo: 3 países × 2 direções (exports/imports) × 4 setores
+- EDA realizada — detalhes no Apêndice B; mencionar brevemente aqui
+
+**§5.3 — Data Preparation** (2–3 parágrafos | usar `03_data_preparation.ipynb`)
+- Alinhamento de frequências: diário → mensal (média), trimestral → forward-fill
+- Transformações: log nas targets para RF/LightGBM; log + diferenciação para ARIMA; ADF test
+- Outliers via IQR; forward-fill para câmbio diário
+- Feature engineering: lags 1,3,6,12 meses; MAs 3,6,12; variação percentual; dummies GFC + COVID-19
+- Dataset final: 180 obs. × 97 colunas (73 features + 24 targets)
+- Split: treino 2010–2021 (132 meses ML / 143 ARIMA), teste 2022–2024 (36 meses)
+
+**§5.4 — Modeling** (maior profundidade | usar `04_modeling.ipynb`)
+- 24 séries treinadas independentemente; 73 features (country-pair agnostic)
+- ARIMA: walk-forward validation, reajuste mensal, identificação p,d,q via ACF/PACF
+- RF: previsão direta 36-step, bootstrap sampling, Optuna 30 trials
+- LightGBM: mesma estratégia RF, leaf-wise split
+- Naïve baseline: log[t] = log[t-1]
+- Total: 72 modelos (24 séries × 3 algoritmos) + 24 Naïve
+
+**§5.5 — Evaluation** (segunda maior profundidade | usar `05_evaluation.ipynb`)
+- Métricas: RMSE, MAE, MAPE — citar `(AYITEY et al., 2023)` do TCC1
+- Ljung-Box nos resíduos in-sample do ARIMA
+- Friedman test (comparação múltipla não-paramétrica)
+- Diebold-Mariano com correção Harvey et al. (1997) — citar Harvey et al.
+- SHAP via `shap.TreeExplainer` — citar `(GUO et al., 2024)` e `(SUDJIANTO; ZHANG, 2024)` do TCC1
+- FX sensitivity heatmap: média |SHAP| das features FX+REER por país/setor
+
+**§5.6 — Deployment** (1 parágrafo | adaptar TCC1 §3.6 para passado)
+- Descrever o repositório Git público com notebooks reproduzíveis e pipeline de dados
+- Deployment no CRISP-DM = empacotamento dos resultados para uso — `(SHIMAOKA et al., 2024)` do TCC1
+- NÃO requer demonstração de código ou Git na defesa — apenas descrição textual
+
 ---
 
 ### 4.7 RESULTADOS
@@ -480,18 +523,18 @@ d) To examine the effect of macroeconomic factors on the volatility of trade flo
 | Plagio cartilha UNISINOS | `docs/Plagio.md` | ✅ Lido |
 | Programa da atividade | `docs/Programa_da_Atividade_Academica.md` | ✅ Lido |
 | Caracterização TCC II | `docs/Caracterização da Atividade Acadêmica.pdf` | ✅ Lido |
-| Resolução UNISINOS | `docs/Resolução.pdf` | ⚠️ PDF não legível sem pdftoppm |
-| Paper: Gopinath et al. 2020 (ML trade) | `docs/references/papers/GOPINATH...pdf` | ⚠️ PDF não legível |
-| Paper: Salman et al. 2024 (RF overview) | `docs/references/papers/SALMAN...pdf` | ⚠️ PDF não legível |
-| Paper: Shimaoka et al. 2023 (CRISP-DM) | `docs/references/papers/SHIMAOKA...pdf` | ⚠️ PDF não legível |
-| Paper: Abir et al. 2024 (BRICS ML) | `docs/references/papers/ABIR...pdf` | ⚠️ PDF não legível |
-| Paper: Rahman et al. 2025 (volatility) | `docs/references/papers/RAHMAN...pdf` | ⚠️ PDF não legível |
+| Resolução UNISINOS | `docs/Resolução.pdf` | ✅ Lido |
+| Paper: Gopinath et al. 2020 (ML trade) | `docs/references/papers/GOPINATH...pdf` | ✅ Lido |
+| Paper: Salman et al. 2024 (RF overview) | `docs/references/papers/SALMAN...pdf` | ✅ Lido |
+| Paper: Shimaoka et al. 2023 (CRISP-DM) | `docs/references/papers/SHIMAOKA...pdf` | ✅ Lido |
+| Paper: Abir et al. 2024 (BRICS ML) | `docs/references/papers/ABIR...pdf` | ✅ Lido |
+| Paper: Rahman et al. 2025 (volatility) | `docs/references/papers/RAHMAN...pdf` | ✅ Lido |
 | `03_data_preparation.ipynb` (41 células) | `notebooks/03_data_preparation.ipynb` | ✅ — usar para §Metodologia: Data Preparation |
 | `04_modeling.ipynb` (25 células) | `notebooks/04_modeling.ipynb` | ✅ — usar para §Metodologia: Modeling |
 | `05_evaluation.ipynb` (36 células) | `notebooks/05_evaluation.ipynb` | ✅ — usar para §Resultados e §Discussão |
 | Métricas CSV | `results/forecasts/metrics_all.csv` | ✅ Existente |
 
-> **Nota sobre PDFs dos papers:** o sistema não tem `pdftoppm`. As citações desses papers já estão transcritas no TCC1 e devem ser reaproveitadas diretamente do TCC1 sem necessidade de reler os PDFs originais.
+> **Nota sobre papers:** Os papers foram lidos (Poppler instalado em 05/05/2026). São referência de **estilo de escrita** apenas — as citações já estão no TCC1 e devem ser reaproveitadas diretamente de lá. Não adicionar novas citações a partir destes PDFs.
 
 ---
 
@@ -506,4 +549,41 @@ d) To examine the effect of macroeconomic factors on the volatility of trade flo
 
 ---
 
-*Última atualização: 04/05/2026*
+## 10. ESTILO DE ESCRITA — REFERÊNCIA PRIMÁRIA: TCC1
+
+> **O estilo de escrita do TCC2 deve seguir o TCC1 (`docs/tcc1/TCC I - Francisco G. Rigon.pdf`), escrito pelo próprio Francisco.**
+> Os papers lidos são apenas referência de domínio/contexto. NÃO usar os papers como modelo de escrita.
+
+### 10.1 Regra de ouro de estilo
+
+**Antes de escrever qualquer parágrafo:** ler o trecho equivalente no TCC1 e manter:
+- O mesmo nível de formalidade e vocabulário
+- A mesma forma de introduzir tabelas e figuras
+- A mesma forma de citar autores (inline vs. parentética)
+- A mesma forma de estruturar parágrafos (topic sentence → argumento → evidência)
+
+**O que mudar em relação ao TCC1:**
+- Verbos: futuro → passado ("will compare" → "compared", "will use" → "used")
+- Adicionar parágrafos com os resultados obtidos (inexistentes no TCC1)
+- Condensar seções de teoria (TCC2 tem menos páginas de fundamentação que TCC1)
+
+### 10.2 O que os papers confirmam sobre domínio (não sobre estilo)
+
+| Paper | O que confirma sobre o domínio do TCC2 |
+|-------|----------------------------------------|
+| SHIMAOKA et al. (2024) | CRISP-DM como framework iterativo e tecnologia-independente |
+| GOPINATH et al. (2021) | ML aplicado a forecasting de comércio bilateral é metodologia legítima |
+| SALMAN et al. (2024) | RF via bootstrap aggregation e OOB são conceitos consolidados |
+| ABIR et al. (2024) | Log + ADF + IQR + Optuna são práticas padrão em forecasting de câmbio |
+| RAHMAN et al. (2025) | SHAP para interpretabilidade em modelos financeiros é prática aceita |
+
+### 10.3 Resolução UNISINOS n.º 01/2013 — pontos relevantes para a defesa
+
+- **Art. 4, VII:** apresentação escrita em ABNT é obrigatória
+- **Art. 17:** banca examinadora com até 3 membros (presencial)
+- **Art. 20:** conceitos de avaliação: REPROVADO / APROVADO / APROVADO PLENAMENTE / APROVADO COM DISTINÇÃO
+- **Art. 22:** homologação pode ser condicionada a correções solicitadas pelos avaliadores
+
+---
+
+*Última atualização: 05/05/2026*

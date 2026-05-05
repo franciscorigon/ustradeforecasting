@@ -696,4 +696,60 @@ Deployment section = written text only (no live demo, no pipeline execution need
 
 ---
 
+### [2026-05-05] — Writing — Reference papers read + writing plan updated + Section 6 Results written
+
+**What was done:**
+Pre-writing session: all 5 reference PDFs read (via screenshots and direct PDF chunks). UNISINOS formatting documents read. `tcc/tcc2-writing-plan.md` updated with new rules. `tcc/06_results.md` created — full Results section (~7 pages).
+
+**Papers read:**
+
+| Paper | Key insight for thesis |
+|-------|----------------------|
+| SHIMAOKA et al. (2024) | CRISP-DM SLR: 82% of studies omit a process model; all 6 phases must be explicit in §5 |
+| GOPINATH et al. (2021) | ML for bilateral agricultural trade; RF + LightGBM outperform NN — analogous design |
+| SALMAN et al. (2024) | RF fundamentals: bagging, OOB, MDI/MDA variable importance — theoretical backing |
+| ABIR et al. (2024) | LSTM + XGBoost for BRICS FX forecasting; full CRISP-DM pipeline documented |
+| RAHMAN et al. (2025) | Transformer for FX volatility with SHAP; 15% RMSE reduction vs LSTM |
+
+**Papers used as style confirmation only — not as new citation sources.** All citations already present in TCC1 are to be preserved verbatim.
+
+**UNISINOS formatting documents:**
+- Resolução 01/2013: ABNT mandatory (Art. 4 VII); banca ≤ 3 members (Art. 17); 4 grade levels (Art. 20): Reprovado / Aprovado / Aprovado Plenamente / Aprovado com Distinção
+- Caracterização da Atividade Acadêmica: TCC II = discipline 060641, 105h, 4 credits. No additional formatting requirements beyond ABNT.
+
+**Writing plan updates (`tcc/tcc2-writing-plan.md`):**
+- Rule 11 added: all 6 CRISP-DM phases must be explicitly named in §5 (Modeling and Evaluation get most depth; Deployment = 1 paragraph)
+- CRISP-DM phase guide added to §4.6: what to write for each phase, which notebook to cite, structural tips
+- §10 rewritten: TCC1 (written by the student) is the primary style reference, not the papers. Papers table now lists domain confirmation per paper, not style.
+- Paper and document status updated: all ⚠️ → ✅ Lido
+- Last updated: 05/05/2026
+
+**Section 6 — Results written (`tcc/06_results.md`):**
+
+Structure:
+- §6.1 Descriptive statistics and data overview — 180 obs, 24 series, 73 features, train/test splits
+- §6.2 Naïve baseline and information asymmetry — MAPE 0.32%; structural asymmetry documented
+- §6.3 Model performance comparison — Table 1 (overall), Table 2 (by country), Table 3 (by sector)
+- §6.4 Statistical significance tests — Friedman (p=0.417), Table 4 (DM pairwise), Ljung-Box (22/24 ok)
+- §6.5 ARIMA vs ML gap — mean 0.54 pp; ARIMA wins 8/24; gap narrows to 0.47 pp excluding Ljung-Box failures
+- §6.6 Feature importance and SHAP — RF: WTI #1; LightGBM: FX_USD_CAD_pct #3; complementary FX patterns
+- §6.7 FX sensitivity by country and sector — BRA most sensitive; CAN least; MEX intermediate; commodities most sensitive; high-tech least
+
+Key numerical values (all verified against `results/forecasts/metrics_all.csv`):
+- RF MAPE: 0.9381% | LightGBM: 1.0276% | ARIMA: 1.4143%
+- Series wins: RF 9/24, ARIMA 8/24, LightGBM 7/24
+- DM results: RF > ARIMA (75%), LightGBM > ARIMA (83%), RF > LightGBM (83%)
+
+**Style:** TCC1 academic English. 8-space indented paragraphs. ABNT citations (ALL CAPS surnames). No bullet points in body text. Table titles above, "Source: the author (2026)." below. Figures 1–4 referenced as placeholders (SHAP plots and FX heatmap not yet saved to reports/figures/).
+
+**Decision made:**
+- /academic-writing skill guidelines were verified post-writing — §6 compliant on all checklist items.
+- Figures 1–4 in §6 are placeholders: actual PNG files (shap_rf_summary, shap_lgbm_summary, shap_comparison_rf_lgbm, fx_sensitivity_heatmap) already exist in `results/figures/evaluation/` from notebook execution.
+
+**Result:** `tcc/06_results.md` — complete, ~7 pages. Writing plan updated.
+
+**Next step:** Write Section 7 — Discussion (interpret results, address research question, compare with literature, acknowledge limitations).
+
+---
+
 *End of log. New entries will appear above this line.*
