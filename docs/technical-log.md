@@ -899,4 +899,55 @@ Created `tcc/04_theoretical_framework.md` — full Theoretical Framework section
 
 ---
 
+### [2026-05-07] — Writing — Sections 1, 2, 3 written (Introduction, Objectives, Justification)
+
+**What was done:**
+Created three files corresponding to the front-matter sections of the TCC2:
+- `tcc/01_introduction.md` (~2 pages, 6 paragraphs)
+- `tcc/02_objectives.md` (~0.5 page)
+- `tcc/03_justification.md` (~1 page, 4 paragraphs)
+
+**Section 1 — Introduction structure:**
+
+| Paragraph | Content | Source |
+|-----------|---------|--------|
+| 1 | Context: U.S. + CAN/MEX/BRA partners; USMCA vs. no agreement | TCC1 §1 (USITC, USTR, AUBOIN; RUTA) |
+| 2 | Period 2000–2025 → modeled 2010–2024; sectoral granularity | TCC1 §1 (SHEN et al.) |
+| 3 | ML vs. ARIMA; CRISP-DM | TCC1 §1 (SONG; CHEN, KALLIANIOTIS, BATARSEH, MARTÍNEZ‐PLUMED) |
+| 4 | Primary research question + 3 subsidiary questions | TCC1 §1 |
+| 5 | **NEW** — Summary of obtained results (DM 75-83%, RF best, BRA most sensitive, commodities most responsive) | TCC2 results |
+| 6 | Article structure (Section 2 through Section 8) | TCC2 organization |
+
+**Tense adaptation applied:** all "will" forms changed to past tense ("will investigate" → "investigated"; "will use" → "adopted"; "will be" → "was"; "will offer" → "was conducted").
+
+**Section 2 — Objectives:**
+- §2.1 General objective: transcribed verbatim from TCC1 with verb adapted to past tense ("This study assessed..." instead of "This study aims to assess...")
+- §2.2 Specific objectives: four items (a–d), past tense ("To identify which sectors were most vulnerable..." instead of "are most vulnerable")
+
+**Section 3 — Justification structure:**
+
+| Paragraph | Content | Source |
+|-----------|---------|--------|
+| 1 | FX volatility importance | TCC1 §1 (RAHMAN et al., KIM; LE) |
+| 2 | ML predictive accuracy + **NEW** empirical confirmation | TCC1 §1 (ABIR et al.) |
+| 3 | IS methodological relevance + Vranješ; Niggemann (2024, p.1–2) **long quote** | TCC1 §1 |
+| 4 | **NEW** Reproducibility commitment + public repository | TCC2 |
+
+**Citations preserved verbatim from TCC1:**
+- USITC (2025), USTR (2020), AUBOIN; RUTA (2011), SHEN et al. (2021), SONG; CHEN (2024), KALLIANIOTIS (2022), BATARSEH et al. (2020), MARTÍNEZ‐PLUMED et al. (2019), RAHMAN et al. (2025), KIM; LE (2024), ABIR et al. (2024)
+
+**Long direct quote (ABNT >3 lines):**
+- Vranješ; Niggemann (2024, p. 1–2) — formatted as blockquote in §3
+
+**Decision made:**
+- USMCA mention kept in §1 (par. 1) — fulfills the writing plan note that institutional events (TCC1 §2.6) should be briefly mentioned in the introduction rather than reused as a full theoretical framework subsection.
+- Three separate files (01_, 02_, 03_) rather than one combined file, following the per-section convention established by 04_, 05_, 06_, 07_.
+- §1 paragraph 5 (results summary) explicitly references Section 6 and Section 7 to maintain forward-pointer consistency with the article structure paragraph immediately after.
+
+**Result:** TCC2 body now: §1+§2+§3 (~3.5 pp) + §4 (~6 pp) + §5 (~5 pp) + §6 (~7 pp) + §7 (~5 pp) ≈ 26.5 pages. Within the 25–30 page envelope of the writing plan.
+
+**Next step:** Section 8 — Conclusion (1–2 pages) + Resumo (PT-BR, 150–250 words) + Abstract (EN translation). The Resumo/Abstract is written last per the plan §7 ordering recommendation.
+
+---
+
 *End of log. New entries will appear above this line.*
