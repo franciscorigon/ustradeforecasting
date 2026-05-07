@@ -845,4 +845,58 @@ Created `tcc/05_methodology.md` — full Methodology section (~4–5 pages, 6 su
 
 ---
 
+### [2026-05-07] — Writing — Section 4 Theoretical Framework written
+
+**What was done:**
+Created `tcc/04_theoretical_framework.md` — full Theoretical Framework section (~5–6 pages, 6 subsections plus 4 sub-subsections in §4.6), condensed from TCC1 §2.
+
+**Section 4 structure:**
+
+| § | Title | TCC1 source |
+|---|-------|-------------|
+| 4.1 | Economic key concepts | TCC1 §2.1 |
+| 4.2 | Models for determining the exchange rate | TCC1 §2.2 |
+| 4.3 | Trade flows and sectoral sensitivity | TCC1 §2.3 |
+| 4.4 | Macroeconomic control variables | TCC1 §2.4 |
+| 4.5 | Time series forecasting models | TCC1 §2.8 |
+| 4.6 | Machine learning in forecasting | TCC1 §2.9 (longest subsection — IS emphasis) |
+
+**§4.6 sub-structure (IS emphasis per writing plan rule 6):**
+- §4.6.1 Random Forest — bootstrap aggregation, OOB, variable importance
+- §4.6.2 LightGBM — gradient boosting, regularization, overfitting sensitivity
+- §4.6.3 Comparison between traditional approaches and ML — flexibility vs. interpretability trade-off
+- §4.6.4 Hyperparameter optimization and model interpretability — Optuna + SHAP
+
+**Sections omitted from TCC1 §2 (per writing plan §4.5):**
+- TCC1 §2.5 Historical events (GFC, COVID) — to be mentioned briefly in methodology
+- TCC1 §2.6 Institutional events (NAFTA/USMCA) — to be mentioned briefly in introduction
+- TCC1 §2.7 Other determinants of trade flows — incorporated into §4.4 economic concepts
+- TCC1 §2.10 Technologies and tools — moved to appendix or omitted
+
+**Long direct quotes formatted as blockquotes (ABNT >3 lines rule):**
+- Mwange (2022, p. 71) — exchange rate theories — in §4.2
+- Spring-Ragain (2024, p. 4) — USD/EUR as anchor currencies — in §4.2
+- Sellami et al. (2024, p. 4) — Random Forest extrapolation limitations — in §4.6.1
+
+**Short direct quote (≤3 lines, inline):**
+- Kallianiotis (2022, p. 46) — devaluation effect on imports/exports — in §4.1
+
+**Citations preserved verbatim from TCC1 (~30 distinct references):**
+- Economics: KIM; LE (2024), KALLIANIOTIS (2022), WAHAB (2024), MWANGE et al. (2022), MWANGE (2022), NOTZ; ROSENKRANZ (2021), SCHMIDT; STEINGRESS (2019), SELLAMI et al. (2024), GOPINATH et al. (2020), SPRING-RAGAIN (2024), BAYOUMI et al. (2005), NTHEBE; MOSIKARI (2025), GODA et al. (2024), OLIVEIRA et al. (2023), BERGIN; CORSETTI (2020), NASIR; VO (2020), SANTORO; ROLIM (2023), ARÉVALO et al. (2022)
+- ML / Methodology: ABIR et al. (2024), YAZAWA (2023), LIN et al. (2020), HE et al. (2020), CHATTERJEE et al. (2024), CHINN et al. (2023), ZHANG; JIANG (2025), HU; SZYMCZAK (2023), LING; WANG (2024), SALMAN et al. (2024), GUO et al. (2024), ENKHBAYAR; ŚLEPACZUK (2025), GOPINATH et al. (2021), SAIED et al. (2013), SILVA et al. (2024), ABOUZAID; BOUSSEDRA (2025)
+
+**Style consistency check:**
+- 8-space indented paragraphs ✓
+- ABNT format ✓
+- No bullet points in body text ✓
+- Math notation in plain text (p, d, q in §4.5) — initial draft used LaTeX delimiters; corrected for consistency with §5
+- Connector sentences between paragraphs ✓
+- IS emphasis: §4.6 is the longest subsection of §4 — equal weight to economic content as required by writing plan rule 6
+
+**Result:** `tcc/04_theoretical_framework.md` complete. TCC2 body now: §4 (~6 pp) + §5 (~5 pp) + §6 (~7 pp) + §7 (~5 pp) ≈ 23 pages.
+
+**Next step:** Sections 1–3 (Introduction, Objectives, Justification) — adapt TCC1 §1, §1.2, §1.3 from future tense to past tense, add a closing paragraph in §1 summarizing the obtained results, and reference the article structure ("Section 4 presents the theoretical framework... Section 8 concludes").
+
+---
+
 *End of log. New entries will appear above this line.*
