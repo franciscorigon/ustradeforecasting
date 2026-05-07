@@ -950,4 +950,61 @@ Created three files corresponding to the front-matter sections of the TCC2:
 
 ---
 
+### [2026-05-07] — Writing — Section 8 Conclusion + Resumo (PT) + Abstract (EN) — TCC2 DRAFT COMPLETE
+
+**What was done:**
+Created the final three pieces of the TCC2 draft:
+- `tcc/08_conclusion.md` (~1.5 pages, 5 paragraphs)
+- `tcc/00_resumo_abstract.md` (Portuguese Resumo + English Abstract, ~240 words each)
+
+**Section 8 — Conclusion structure:**
+
+| Paragraph | Content |
+|-----------|---------|
+| 1 | Reaffirmation of the general objective and how it was answered |
+| 2 | Main empirical findings (RF MAPE 0.94%, DM 75-83%, BRA most sensitive, commodities most responsive) |
+| 3 | Methodological contributions (CRISP-DM, dual-model SHAP, DM Harvey, public reproducibility) — IS emphasis |
+| 4 | Limitations (sectoral approximation, n=24 power, asymmetric protocol, pending interviews) |
+| 5 | Future work (extend to 2000-2009, deep learning, recursive multi-step, expert interviews, asymmetric appreciation/depreciation, operational pipeline) |
+
+**Resumo + Abstract:**
+- Word count: ~240 words each (within ABNT NBR 6028 range of 150–250)
+- Structure: objective + methodology + main results + conclusion
+- Resumo (PT-BR) per ABNT requirement for Brazilian academic submissions
+- Abstract (EN) parallel translation
+- Keywords: 5 each — exchange rate forecasting; machine learning; ARIMA; bilateral trade flows; SHAP
+
+**TCC2 draft now complete:**
+
+| Section | File | Approx. pages |
+|---------|------|--------------|
+| Resumo + Abstract | `tcc/00_resumo_abstract.md` | 1 |
+| Introduction | `tcc/01_introduction.md` | 2 |
+| Objectives | `tcc/02_objectives.md` | 0.5 |
+| Justification | `tcc/03_justification.md` | 1 |
+| Theoretical Framework | `tcc/04_theoretical_framework.md` | 6 |
+| Methodology | `tcc/05_methodology.md` | 5 |
+| Results | `tcc/06_results.md` | 7 |
+| Discussion | `tcc/07_discussion.md` | 5 |
+| Conclusion | `tcc/08_conclusion.md` | 1.5 |
+| **Total body** | | **~29 pages** |
+
+Within the 25–30 page envelope established by the writing plan.
+
+**Decision made:**
+- Resumo and Abstract placed in a single file (`00_`) rather than two separate files. Both serve the same function in different languages and are typically presented contiguously in the final document layout.
+- Confirmed ABNT NBR 6028 requirement that Brazilian academic submissions include a Portuguese Resumo even when the work is written in English. The user will validate this with the advisor before submission; if only the Abstract is required, the Resumo can be removed without affecting the rest of the document.
+- Future work items in §8 mirror the limitations in §7.8 to maintain narrative coherence between Discussion and Conclusion.
+
+**Result:** TCC2 first draft is complete. All sections written, citations preserved verbatim from TCC1, single-author style maintained throughout, IS emphasis applied per writing plan rule 6.
+
+**Pending tasks (post-draft):**
+1. Final ABNT review (formatting, citation list consolidation)
+2. Document assembly (PDF or Word, with proper section numbering, table of contents, page breaks)
+3. Conduct expert interviews (per Section 7.9 placeholder) before 31/05/2026
+4. Build appendices: variable glossary, EDA figures, code snippets
+5. Consolidate references bibliography (~50 distinct sources across all sections)
+
+---
+
 *End of log. New entries will appear above this line.*
