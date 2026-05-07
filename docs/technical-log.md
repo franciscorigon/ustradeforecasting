@@ -788,4 +788,61 @@ Created `tcc/07_discussion.md` — full Discussion section (~5 pages, 9 subsecti
 
 ---
 
+### [2026-05-07] — Writing — Section 5 Methodology written
+
+**What was done:**
+Created `tcc/05_methodology.md` — full Methodology section (~4–5 pages, 6 subsections covering all CRISP-DM phases per writing plan rule 11).
+
+**Section 5 structure:**
+
+| § | CRISP-DM phase | Source notebook / TCC1 section |
+|---|----------------|-------------------------------|
+| 5.1 | Business Understanding | TCC1 §3.1 (adapted to past) |
+| 5.2 | Data Understanding | TCC1 §3.2 + EDA artifacts → Appendix B |
+| 5.3 | Data Preparation | `03_data_preparation.ipynb` |
+| 5.4 | Modeling | `04_modeling.ipynb` (most depth) |
+| 5.5 | Evaluation | `05_evaluation.ipynb` (second-most depth) |
+| 5.6 | Deployment | TCC1 §3.6 (1 paragraph, repository as reproducibility deliverable) |
+
+**Key technical details documented:**
+- Three data sources: FRED (FX, macro, WTI), UN Comtrade (HS2 trade flows), World Bank (partner indicators)
+- Modeling window 2010–2024 (180 obs) restricted by monthly Comtrade availability
+- 24 target series structured as 3 countries × 2 directions × 4 sectors
+- Frequency alignment: daily → monthly mean; quarterly → forward-fill
+- Two target representations: log (ML) and diff_log (ARIMA); ADF stationarity verified
+- Feature engineering: lags 1/3/6/12, MAs 3/6/12, monthly pct change, GFC + COVID-19 dummies
+- Final dataset: 180 × 97 (73 features + 24 targets); chronological split 132/36 ML, 143/36 ARIMA
+- ARIMA: walk-forward, 1-step-ahead, AIC grid search over (p,d,q) ∈ [0,3]×[0,1]×[0,3]
+- RF/LightGBM: direct 36-step, Optuna 30 trials, TimeSeriesSplit(5)
+- Naïve baseline: log[t] = log[t-1] (informational reference, not competitive comparator)
+- Evaluation: MAPE primary; Ljung-Box; Friedman + Wilcoxon+Bonferroni + Diebold-Mariano (Harvey 1997); SHAP via TreeExplainer for both ML models; composite FX sensitivity heatmap
+
+**New citations introduced (not in TCC1):**
+- AKIBA et al. (2019) — Optuna for hyperparameter optimization
+- LUNDBERG; LEE (2017) — SHAP original paper
+- Harvey et al. (1997) — already used in §6 and §7
+
+**TCC1 citations preserved verbatim:**
+- KHAN et al. (2024); MORTEZANEJAD; WANG (2025) — chronological split / temporal validation
+- WANG; XIE (2024) — overfitting in temporal data
+- RASCHKA et al. (2020); LING; WANG (2024) — hyperparameter optimization
+- ABIR et al. (2024) — TS-CV in financial forecasting
+- SATRI et al. (2023) — evaluation in CRISP-DM
+- AYITEY et al. (2023) — RMSE/MAE/MAPE
+- GUO et al. (2024); SUDJIANTO; ZHANG (2024) — SHAP / interpretability
+- SHIMAOKA et al. (2024); MARTÍNEZ‐PLUMED et al. (2019) — CRISP-DM framework
+
+**Style:** TCC1 academic English. 8-space indented paragraphs. ABNT format. Past tense throughout (this study adopted; were trained; was implemented). No bullet points in body text. Math notation in inline plain text (e.g., "p ∈ {0, 1, 2, 3}", "log(y_t) = log(y_{t-1})") rather than LaTeX delimiters, matching the §6 convention.
+
+**Decision made:**
+- §5.1 framed the research as an Information Systems / Data Mining problem rather than purely an economic study (Rule 6, IS emphasis).
+- §5.6 Deployment kept to a single paragraph and reframed as "reproducibility as the primary deployment deliverable" — avoids over-promising any production artifact while satisfying CRISP-DM completeness.
+- Did not include tables in §5 (kept narrative-only) to avoid renumbering conflicts with the §6 tables already labeled 1–4. Tables can be inserted later if needed for the final document assembly.
+
+**Result:** `tcc/05_methodology.md` complete. Combined progress on TCC2 body: §5 (~5 pages) + §6 (~7 pages) + §7 (~5 pages) ≈ 17 pages of new material.
+
+**Next step:** Write Section 4 — Theoretical Framework (condense TCC1 §2 to ~5–6 pages; preserve all key citations; balance economics and ML/IS content per Rule 6).
+
+---
+
 *End of log. New entries will appear above this line.*
