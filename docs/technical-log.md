@@ -752,4 +752,40 @@ Key numerical values (all verified against `results/forecasts/metrics_all.csv`):
 
 ---
 
+### [2026-05-07] — Writing — Section 7 Discussion written
+
+**What was done:**
+Created `tcc/07_discussion.md` — full Discussion section (~5 pages, 9 subsections), following the structure defined in `tcc/tcc2-writing-plan.md` §4.8 and the TCC1 academic English style established in §6.
+
+**Section 7 structure:**
+
+| § | Title | Focus |
+|---|-------|-------|
+| 7.1 | Machine learning gains over ARIMA | Non-linear interactions; WTI×FX joint effects; gap largest in high-tech/manufactured |
+| 7.2 | When ARIMA outperforms — eight series and the role of structure | Lower-volatility series; protocol asymmetry (1-step walk-forward vs 36-step direct); excluding Ljung-Box failures narrows gap to 0.47 pp |
+| 7.3 | The Naïve baseline and information asymmetry | Structural advantage from t-1 access; not a competing strategy; multi-month operational value of ML forecasts |
+| 7.4 | Exchange rate as a relevant predictor | SHAP confirms in both models; RF via MA6 (medium-term), LightGBM via pct (short-term shocks); convergence reinforces robustness |
+| 7.5 | Country-level heterogeneity | BRA most sensitive (emerging economy, no preferential agreement); CAN least (USMCA integration); MEX intermediate (hybrid profile) |
+| 7.6 | Sectoral patterns | Commodities most sensitive (USD pricing); high-tech least (long contracts, GVCs); manufactured intermediate |
+| 7.7 | Methodological contributions | CRISP-DM end-to-end; dual-model SHAP; DM with Harvey et al. (1997) correction; public reproducibility — IS emphasis |
+| 7.8 | Limitations | Sectoral approximation distortion; low Friedman power (n=24); 2022-2024 macro shocks; asymmetric protocol; pending interviews |
+| 7.9 | Planned qualitative validation | Placeholder for expert interviews (planned before 31/05) |
+
+**Citations used (all from TCC1 except Harvey et al. 1997):**
+- Economics: SONG; CHEN (2024), GOPINATH et al. (2020), KIM; LE (2024), GODA et al. (2024), BERGIN; CORSETTI (2020), OLIVEIRA et al. (2023), RAHMAN et al. (2025), ABIR et al. (2024), BATARSEH et al. (2020)
+- Methodology / IS: SHIMAOKA et al. (2024), MARTÍNEZ‐PLUMED et al. (2019), GUO et al. (2024), SUDJIANTO; ZHANG (2024), KHAN et al. (2024), VRANJEŠ; NIGGEMANN (2024), Harvey et al. (1997)
+
+**Style:** TCC1 academic English. 8-space indented paragraphs. ABNT format `(SURNAME; SURNAME, year)` and `Surname (year)` inline. No bullet points in body text. 2–3 paragraphs per subsection.
+
+**Decision made:**
+- Reordered §7.8 (Limitations) before §7.9 (Planned qualitative validation) compared to the writing plan's listing — limitations belong near the end of the section, with the placeholder for interview content as the closing subsection.
+- §7.9 written as a structured placeholder, not as completed content. Interviews remain planned before the 31/05 submission deadline; the subsection can be expanded once they are conducted, without restructuring the rest of §7.
+- IS emphasis applied per writing plan rule 6: §7.7 (Methodological contributions) is the longest of the second-tier subsections and explicitly frames the four contributions as Information Systems deliverables (CRISP-DM pipeline, dual-model interpretability, statistical evaluation framework, reproducibility).
+
+**Result:** `tcc/07_discussion.md` — complete. Combined with §6, the Results+Discussion bloc now totals approximately 12 pages.
+
+**Next step:** Write Section 5 — Methodology (all 6 CRISP-DM phases per writing plan rule 11; sources: `03_data_preparation.ipynb`, `04_modeling.ipynb`, `05_evaluation.ipynb`).
+
+---
+
 *End of log. New entries will appear above this line.*
