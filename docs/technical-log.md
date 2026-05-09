@@ -1007,4 +1007,87 @@ Within the 25–30 page envelope established by the writing plan.
 
 ---
 
+### [2026-05-09] — Writing — Natural-language pass on TCC2 sections
+
+**What was done:**
+Applied the natural-writing skill to remove AI-sounding phrasing from the TCC2 sections, while respecting the principle that paragraphs inherited verbatim from TCC1 must not be rewritten.
+
+**Principle (clarified mid-task by user):**
+If a TCC2 paragraph is identical to TCC1, it must not be changed — TCC1 was already submitted and approved, and divergence in TCC2 prose creates inconsistency. Edits are restricted to:
+- New content (§6, §7, §8, parts of §5)
+- Paraphrases I had already written that diverged from TCC1
+
+**Files edited:**
+- `tcc/01_introduction.md` — par. 1, 2, 3, 4, 5 tightened (paraphrases I had introduced)
+- `tcc/03_justification.md` — par. 1, 2, 3, 4 tightened (paraphrases I had introduced)
+- `tcc/04_theoretical_framework.md` — minor tightenings on previously paraphrased passages; **restored** "Imports and exports are the two key components of international trade." (cut by mistake earlier — came from TCC1)
+- `tcc/05_methodology.md` — §5.1, §5.4, §5.6 tightened
+- `tcc/06_results.md` — §6.2, §6.4, §6.5, §6.6, §6.7 tightened
+- `tcc/07_discussion.md` — §7.1, §7.2, §7.3, §7.4, §7.5, §7.6, §7.7, §7.8 tightened
+- `tcc/08_conclusion.md` — paragraphs 1, 2, 3, 4, 5 tightened
+
+**Files NOT edited:**
+- `tcc/02_objectives.md` — near-verbatim TCC1 transcription
+- `tcc/00_resumo_abstract.md` — already concise
+
+**AI-tells removed (representative list):**
+- "comprehensive free trade agreement of equivalent scope" → "free trade agreement of equivalent scope"
+- "Operational constraints imposed by the data sources" → "Data availability"
+- "in a structured manner" → cut
+- "rather than dismissal" → "rather than dismissal" kept where short, "warrants careful interpretation rather than dismissal" → "warrants interpretation rather than dismissal"
+- "is consistent with theoretical expectations regarding" → "matches theoretical expectations for"
+- "is consistent with the broader literature" → "matches the literature" (where second occurrence)
+- "should be acknowledged" → "apply" / "should be noted"
+- "follow naturally from" → "emerge from"
+- "in order to qualify" → "to qualify"
+- "the combination of both tests is therefore necessary" → "combining both tests is therefore necessary"
+- "frequently neglected" → "often neglected"
+- "substantively different from that of" → "have different operational uses"
+- Multiple "this study" repetitions trimmed
+- "of relevance for" → "for"
+- "by integrating systematic algorithmic comparison, statistical rigor, and interpretability tools within a single coherent pipeline" → "...within a single pipeline"
+
+**Result:** TCC2 sections read more naturally while preserving formal academic tone. No facts changed, no citations added or removed.
+
+**Next step:** Final assembly review (Word/PDF), bibliography consolidation, expert interviews, appendices.
+
+---
+
+### [2026-05-09] — Writing — CRITICAL CORRECTION: TCC1 verbatim restoration in §1, §2, §3, §4
+
+**Problem identified:**
+A sentence-by-sentence comparison between TCC1 source paragraphs and TCC2 inherited sections (§1, §3, §4) revealed extensive rewriting that violated the explicit principle: "if the TCC2 paragraph is identical to TCC1, do not change it; only past-tense adaptation and cuts are allowed". Many paragraphs in §1, §3, §4 had been paraphrased rather than preserved.
+
+**User's reasoning (recorded):**
+TCC1 was already submitted and approved. Discrepancies between TCC1 and TCC2 wording would (a) lose the user's connection to the work he had previously done, and (b) be challenged by the advisor and evaluators. Scientific consistency demands fidelity to the prior work.
+
+**Specific concern from user:**
+The importance of the exchange rate as a central variable, established in TCC1, must be preserved in TCC2 even though the empirical FX importance was moderate (not dominant). The TCC1 framing of FX as a key factor must be maintained. The unauthorized paraphrasing in §3 and §4 had partially diluted this framing.
+
+**Files rewritten verbatim from TCC1:**
+
+- `tcc/01_introduction.md` — restored from TCC1 §1 (lines 105–209). Allowed changes: verb tenses ("will" → "did") in 6 places. New content: results-summary paragraph + article-structure paragraph at the end. All TCC1 sentences preserved verbatim including: "The purpose of this study was to investigate the impact of exchange rate volatility...", "Canada and Mexico trade with the USA through USMCA...", "The proposed study used state-of-the-art machine learning models...", and the full primary + subsidiary research questions.
+
+- `tcc/02_objectives.md` — restored "to pinpoint" (TCC1 §1 specific objective a) — earlier draft had it as "to identify". General objective preserved verbatim with only "is" → "was" change.
+
+- `tcc/03_justification.md` — restored from TCC1 §1 (justification paragraphs, lines 181–209). Preserved key opening: "Exchange rate volatility is a key factor that in fact affects international competitiveness, investment decisions, and resource allocation in the world market (RAHMAN et al., 2025)." — emphasizes FX centrality as in TCC1. Vranješ; Niggemann long quote verbatim. New content: empirical-confirmation paragraph at the end.
+
+- `tcc/04_theoretical_framework.md` — restored from TCC1 §2 (2.1, 2.2, 2.3 + 2.3.1 + 2.3.2, 2.4, 2.8 + 2.8.1 + 2.8.3, 2.9 + 2.9.1 + 2.9.2 + 2.9.3 + 2.9.4). Preserved label markers in §4.1 (Nominal exchange rate:, REER:, Export and Import:, HS:). Preserved TCC1 subsection structure (§4.3.1, §4.3.2, §4.5.1, §4.5.2, §4.6.1, §4.6.2, §4.6.3, §4.6.4). Long quotes (Mwange, Spring-Ragain, Sellami) verbatim. Cuts (allowed): TCC1 §2.5 Historical events, §2.6 Institutional events, §2.7 Other determinants, §2.8.2 Smoothing models, §2.10 Technologies.
+
+**Specific reverted changes:**
+- "Detailing how exchange rate changes" had been changed to "Understanding how exchange rate movements" — restored to TCC1 wording
+- "depreciation can increase imports of inputs but also make exporting companies more competitive" — restored to TCC1 (a previous draft had reworded this in a way that potentially altered the economic meaning)
+- "Dickey-Fuller test" — restored (a previous draft had it as "Augmented Dickey-Fuller test")
+- "Random Forests" (with terminal s, as TCC1 has it in §1) — restored
+- All "U.S." vs "United States" usage matches TCC1
+- "to pinpoint" — restored in §2.2 (a)
+
+**No data, no number, no citation changed.** All 49 distinct citations identified earlier remain in their original ABNT format. Long direct quotes preserved verbatim.
+
+**Result:** §1, §2, §3, §4 now match TCC1 wording with only the allowed changes (tense + cuts + new closing additions). Scientific consistency between TCC1 and TCC2 restored.
+
+**Next step:** Commit and push the corrections.
+
+---
+
 *End of log. New entries will appear above this line.*
