@@ -1090,4 +1090,46 @@ The importance of the exchange rate as a central variable, established in TCC1, 
 
 ---
 
+### [2026-05-09] — Writing — §5 Methodology restored with TCC1 §3 verbatim citations
+
+**Problem identified:**
+User noticed that the opening of §5 used `(SHIMAOKA et al., 2024; MARTÍNEZ‐PLUMED et al., 2019)` while TCC1 §3 opens with `(TRIPATHI et al., 2021)` and `(WIRTH; HIPP, 2000)`. The same fidelity violation found earlier in §1/§3/§4 was also present in §5 — citations from elsewhere in TCC1 had been used in place of the actual TCC1 §3 citations.
+
+**Files rewritten:**
+- `tcc/05_methodology.md` — fully restored to use TCC1 §3 text and citations verbatim
+
+**TCC1 §3 citations now correctly used in §5:**
+
+| Subsection | TCC1 citations preserved |
+|------------|--------------------------|
+| Opening | TRIPATHI et al. (2021); WIRTH; HIPP (2000) |
+| §5.1 Business Understanding | SHIMAOKA et al. (2024); NGALAWA; KUTU (2017); BATARSEH et al. (2020); LIN et al. (2020) |
+| §5.2 Data Understanding | RIESS (2022); ABIR et al. (2024); ABOUZAID; BOUSSEDRA (2025); BATARSEH et al. (2020); VERSTRAETE et al. (2021) |
+| §5.3 Data Preparation | MA et al. (2024); BRYAN et al. (2023); ABIR et al. (2025); TAJMOUATI et al. (2022); SUDJIANTO; ZHANG (2024); DIAS et al. (2020); LIN et al. (2020); CHOWDHURY et al. (2024); VERSTRAETE et al. (2021) |
+| §5.4 Modeling | CHOWDHURY; MA (2024); SILVA; TIMO (2022); REMIL et al. (2024); PORTO (2022); BOTZ et al. (2025); ZANOTTI (2025); LIN et al. (2020); RIZVI (2024); REICHERT; SOUZA (2020); ABIR et al. (2025); CHATTERJEE et al. (2024); LING; WANG (2024); SALMAN et al. (2024); MORTEZANEJAD; WANG (2025); WANG; XIE (2024); KHAN et al. (2024); SAFAROV et al. (2025); ABIR et al. (2024); VRANJEŠ; NIGGEMANN (2024); RASCHKA et al. (2020) |
+| §5.5 Evaluation | SATRI et al. (2023); SUDJIANTO; ZHANG (2024); AYITEY et al. (2023); UDDIN et al. (2025); GUO et al. (2024); ABOUZAID; BOUSSEDRA (2025); KHAN et al. (2024) |
+| §5.6 Deployment | SHIMAOKA et al. (2024); TRIPATHI et al. (2021); PODDAR et al. (2024); RASCHKA et al. (2020); NOGARE; SILVEIRA (2024); PEIKERT; BRANDMAIER (2021); SEMMELROCK et al. (2024); STROMER et al. (2024) |
+
+**New citations (not in TCC1) preserved:**
+- AKIBA et al. (2019) — Optuna
+- LUNDBERG; LEE (2017) — SHAP original paper
+- Harvey et al. (1997) — DM small-sample correction
+
+**Structure:**
+- TCC1 §3.1 to §3.6 (with sub-subsections 3.1.1–3.6.9) condensed into §5.1 to §5.6 main subsections
+- Each main subsection: TCC1 framing paragraphs (verbatim, past-tense adjusted) + 1 closing paragraph with actual implementation details (notebooks, 180 obs, 73 features, 72 models, Optuna 30 trials, etc.)
+
+**Impact on page count:**
+- §5 expanded from ~5 pages to ~8–10 pages
+- New TCC2 total estimate: ~33–35 pages
+- **Exceeds the 30-page limit established with the advisor**
+- Decision pending: trim §5 or other sections to fit limit
+- Item added to advisor questions document for clarification on page-limit policy (does the 30-page limit include all the methodology content TCC1 had, or can §5 be more selective?)
+
+**Result:** §5 now faithful to TCC1 §3, with all key citations preserved. Page-count tradeoff to be discussed with advisor.
+
+**Next step:** Commit and push the §5 correction. Discuss page-limit handling with advisor in pre-submission meeting.
+
+---
+
 *End of log. New entries will appear above this line.*
