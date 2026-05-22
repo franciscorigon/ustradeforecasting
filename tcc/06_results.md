@@ -58,6 +58,14 @@ Source: the author (2026).
 
 Source: the author (2026).
 
+        The same comparative picture is rendered visually in Figure 1, which shows the mean MAPE per algorithm aggregated by country and globally.
+
+![MAPE comparison across models and countries](../results/figures/mape_comparison.png)
+
+**Figure 1 — Mean MAPE by algorithm and country**
+
+Source: the author (2026).
+
 ## 6.4 Statistical significance tests
 
         **Friedman test.** A non-parametric Friedman test was applied to assess whether statistically significant differences in predictive accuracy existed across the three models simultaneously, treating each of the 24 series as a block. The test yielded a p-value of 0.417, indicating that the null hypothesis of no difference among models could not be rejected at conventional significance levels. This result reflects in part the limited number of series (n = 24), which constrains the statistical power of the Friedman test. Failure to detect significance through this test does not mean model equivalence; it reflects the test's low discriminatory power under the present sample size.
@@ -74,27 +82,79 @@ Source: the author (2026).
 
 Source: the author (2026).
 
-        **Ljung-Box test.** To validate the residual structure of the ARIMA models, the Ljung-Box test was applied to in-sample residuals for each of the 24 series. Of these, 22 passed the test at the 5% significance level, indicating that their residuals exhibited no significant autocorrelation and that the fitted models were adequately specified. Two series registered significant residual autocorrelation: Canadian exports of commodities (p = 0.0006) and Canadian total imports (p = 0.0146). These cases are interpreted as potential ARIMA misspecification and may partially account for the model's comparatively weaker performance on these specific series.
+        **Ljung-Box test.** To validate the residual structure of the ARIMA models, the Ljung-Box test was applied to in-sample residuals for each of the 24 series. Of these, 22 passed the test at the 5% significance level, indicating that their residuals exhibited no significant autocorrelation and that the fitted models were adequately specified. Two series registered significant residual autocorrelation: Canadian exports of commodities (p = 0.0006) and Canadian total imports (p = 0.0146). These cases are interpreted as potential ARIMA misspecification and may partially account for the model's comparatively weaker performance on these specific series. Figure 2 displays the autocorrelation function (ACF) plots of the in-sample ARIMA residuals for representative series, supporting the visual inspection of the diagnostic.
+
+![ARIMA residual autocorrelation function plots](../results/figures/evaluation/arima_residuals_acf.png)
+
+**Figure 2 — ACF plots of ARIMA in-sample residuals (representative series)**
+
+Source: the author (2026).
 
 ## 6.5 ARIMA versus ML performance gap
 
         The overall performance gap between ARIMA and the ML models — the absolute difference in mean MAPE — was approximately 0.54 percentage points in favor of ML. The gap was not uniform across series: ARIMA achieved a lower MAPE than both ML models in 8 of 24 series, showing that the linear autoregressive approach retains comparative advantages under specific conditions. Inspection of the series in which ARIMA outperformed ML reveals a pattern of lower volatility and more predictable structure — notably Mexican total exports (MAPE = 0.40%), Canadian exports of commodities (0.63%), and Brazilian high-technology series, where shorter lags and near-linear dynamics favor parsimonious ARIMA specifications.
 
-        Among the two series with Ljung-Box violations — Canadian exports of commodities and Canadian total imports — ARIMA registered errors that were markedly higher than both ML models, suggesting that residual misspecification was a material contributing factor in these cases. When these two problematic series are excluded, the average performance gap between ARIMA and RF narrows to approximately 0.47 percentage points, indicating that a properly specified ARIMA model remains a competitive baseline for well-behaved time series.
+        Among the two series with Ljung-Box violations — Canadian exports of commodities and Canadian total imports — ARIMA registered errors that were markedly higher than both ML models, suggesting that residual misspecification was a material contributing factor in these cases. When these two problematic series are excluded, the average performance gap between ARIMA and RF narrows to approximately 0.47 percentage points, indicating that a properly specified ARIMA model remains a competitive baseline for well-behaved time series. The distribution of the ARIMA–ML gap across sectors is shown in Figure 3.
+
+![ARIMA versus ML performance gap by sector](../results/figures/evaluation/arima_ml_gap_by_sector.png)
+
+**Figure 3 — ARIMA versus ML performance gap by sector (percentage points of MAPE)**
+
+Source: the author (2026).
 
 ## 6.6 Feature importance and SHAP analysis
 
-        Feature importance and SHAP (SHapley Additive exPlanations) analysis were conducted for both RF and LightGBM to identify the variables most influential in driving trade flow predictions. The SHAP summary plots for each model are presented in Figures 1 and 2, respectively, with a side-by-side comparison shown in Figure 3.
+        Feature importance and SHAP (SHapley Additive exPlanations) analysis were conducted for both RF and LightGBM to identify the variables most influential in driving trade flow predictions. Figure 4 reports the top-15 feature importance scores aggregated across all 24 models per algorithm, highlighting the exchange rate and REER variables. The SHAP summary plots for each model are presented in Figures 5 and 6, respectively, with a side-by-side comparison shown in Figure 7 and the exchange rate dependence pattern shown in Figure 8.
 
-        For the Random Forest model, the WTI crude oil price index emerged as the most globally influential feature, reflecting the central role of energy markets in determining trade volumes, particularly for the commodity-intensive Canada–U.S. and Brazil–U.S. corridors. Exchange rate variables — most notably the USD/CAD percentage change (FX_USD_CAD_pct) — ranked among the top predictors, alongside lagged target values and six-month moving averages. The prominence of moving average features in the RF importance profile suggests that the model captures medium-term trend persistence as a key driver of trade dynamics.
+![Top-15 feature importance for RF and LightGBM, with FX/REER highlighted](../results/figures/evaluation/feature_importance_top15.png)
 
-        For the LightGBM model, the USD/CAD percentage change (FX_USD_CAD_pct) ranked third in global feature importance, reaffirming the centrality of the exchange rate signal. While the top-ranked features differed between the two models, a consistent pattern emerged: RF assigned comparatively greater weight to lagged levels and moving averages — features that capture accumulated trend information — while LightGBM placed proportionally higher weight on percentage change features, capturing short-term directional movements. Figure 3 illustrates this complementarity in the SHAP profiles of the two models.
+**Figure 4 — Top-15 feature importance (FX and REER variables highlighted)**
+
+Source: the author (2026).
+
+        For the Random Forest model, the WTI crude oil price index emerged as the most globally influential feature, reflecting the central role of energy markets in determining trade volumes, particularly for the commodity-intensive Canada–U.S. and Brazil–U.S. corridors. Exchange rate variables — most notably the USD/CAD percentage change (FX_USD_CAD_pct) — ranked among the top predictors, alongside lagged target values and six-month moving averages. The prominence of moving average features in the RF importance profile suggests that the model captures medium-term trend persistence as a key driver of trade dynamics. The SHAP summary plot for Random Forest is presented in Figure 5.
+
+![SHAP summary plot for Random Forest models across all 24 series](../results/figures/evaluation/shap_rf_summary.png)
+
+**Figure 5 — SHAP summary plot — Random Forest (864 test observations across 24 series)**
+
+Source: the author (2026).
+
+        For the LightGBM model, the USD/CAD percentage change (FX_USD_CAD_pct) ranked third in global feature importance, reaffirming the centrality of the exchange rate signal. The SHAP summary plot for LightGBM is presented in Figure 6.
+
+![SHAP summary plot for LightGBM models across all 24 series](../results/figures/evaluation/shap_lgbm_summary.png)
+
+**Figure 6 — SHAP summary plot — LightGBM (864 test observations across 24 series)**
+
+Source: the author (2026).
+
+        While the top-ranked features differed between the two models, a consistent pattern emerged: RF assigned comparatively greater weight to lagged levels and moving averages — features that capture accumulated trend information — while LightGBM placed proportionally higher weight on percentage change features, capturing short-term directional movements. Figure 7 illustrates this complementarity by placing the mean absolute SHAP values of the two models side by side, with FX and REER features highlighted in red.
+
+![Side-by-side comparison of mean absolute SHAP values for Random Forest and LightGBM, top-15 features each, with FX and REER variables highlighted](../results/figures/evaluation/shap_comparison_rf_lgbm.png)
+
+**Figure 7 — Comparative SHAP feature importance: Random Forest versus LightGBM (top-15 features each, FX/REER highlighted)**
+
+Source: the author (2026).
+
+        The directional response of trade flows to exchange rate variation can be examined through SHAP dependence plots. Figure 8 shows the LightGBM SHAP contribution of the bilateral exchange rate features for the total exports and total imports series of each country pair, evidencing the asymmetric pattern of currency transmission to exports and imports already discussed in the theoretical framework.
+
+![SHAP dependence plots for bilateral exchange rate features under LightGBM, for exports and imports total series](../results/figures/evaluation/shap_lgbm_fx_dependence.png)
+
+**Figure 8 — SHAP dependence plots — LightGBM bilateral exchange rate effect on exports and imports**
+
+Source: the author (2026).
 
         The presence of exchange rate variables among the top predictors of both RF and LightGBM confirms that exchange rate fluctuations exert a measurable and directionally consistent influence on bilateral trade flows, addressing the primary research question (SONG; CHEN, 2024).
 
 ## 6.7 Exchange rate sensitivity by country and sector
 
-        To quantify the relative sensitivity of each country-sector combination to exchange rate dynamics, a composite FX sensitivity metric was constructed as the mean absolute SHAP value of the exchange rate and REER features across all 24 series, averaged between the RF and LightGBM models. The resulting heatmap is presented in Figure 4.
+        To quantify the relative sensitivity of each country-sector combination to exchange rate dynamics, a composite FX sensitivity metric was constructed as the mean absolute SHAP value of the exchange rate and REER features across all 24 series, averaged between the RF and LightGBM models. The resulting heatmap is presented in Figure 9.
+
+![Heatmap of exchange rate sensitivity by country and sector, averaged between RF and LightGBM SHAP values](../results/figures/evaluation/fx_sensitivity_heatmap.png)
+
+**Figure 9 — Exchange rate sensitivity heatmap (mean |SHAP| of FX and REER features, averaged between Random Forest and LightGBM)**
+
+Source: the author (2026).
 
         Brazil emerged as the most exchange-rate-sensitive trading partner, particularly in the commodities and total imports categories. This result matches theoretical expectations for emerging economies: less diversified export structures, higher commodity dependence, and the absence of a preferential trade agreement with the United States produce greater exposure to bilateral exchange rate movements (GODA et al., 2024). Canada, in contrast, exhibited the lowest FX sensitivity across all sectors, consistent with the stabilizing effect of deep productive integration under USMCA and the structural complementarity of the U.S.–Canada trade relationship. Mexico occupied an intermediate position, reflecting partial insulation through USMCA alongside marked dependence on manufactured exports, which retain some — though not complete — sensitivity to bilateral exchange rate shifts.
 
