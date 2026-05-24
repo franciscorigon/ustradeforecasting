@@ -23,7 +23,7 @@
    - Direta longa (>3 linhas): parágrafo separado, recuo 4 cm, fonte 10, sem aspas
    - Dois autores: `SURNAME; SURNAME, year`
    - Três ou mais: `SURNAME et al., year`
-10. **Entrevistas:** ainda NÃO realizadas mas PLANEJADAS para antes de 31/05. Não mencionar na Metodologia como já executadas. Quando realizadas, os insights vão para a Discussão (validação qualitativa dos resultados). Deixar espaço na Discussão §7.9 para isso.
+10. **Entrevistas:** ✅ ATUALIZADO em 22/05 (reunião Profª) — entrevistas PODEM ocorrer mas o trabalho NÃO menciona elas no estado atual. Quando forem realizadas, inserir 1–2 trechos como CITAÇÃO direta no §7 (Discussão). Não criar §7.9 placeholder — se não acontecerem, fica desnecessário.
 11. **CRISP-DM completo (§5 Metodologia):** Todas as 6 fases do CRISP-DM devem ser mencionadas explicitamente na §5. Modelagem e Avaliação recebem mais profundidade; Business Understanding é o mais curto; Deployment é 1 parágrafo. Abrir a §5 com: *"This study adopted CRISP-DM as its guiding methodological framework (SHIMAOKA et al., 2024; MARTÍNEZ-PLUMED et al., 2019), a technology-independent process model structured into six iterative phases..."*
 
 ---
@@ -32,7 +32,7 @@
 
 | # | Seção | Tipo | Páginas Est. |
 |---|-------|------|-------------|
-| — | Resumo (PT + EN) | Novo | 1 |
+| — | Abstract (EN apenas — decisão Profª 22/05) | Novo | 0.5 |
 | 1 | Introdução | Adapt. TCC1 + novo | 2–3 |
 | 2 | Objetivos (geral + específicos) | Reuso TCC1 (passado) | 0.5 |
 | 3 | Justificativa | Reuso TCC1 (passado) | 1 |
@@ -137,9 +137,10 @@ naive_comparison.png
 
 ## 4. SEÇÃO POR SEÇÃO — GUIA DE REDAÇÃO
 
-### 4.1 RESUMO (Abstract)
+### 4.1 ABSTRACT (apenas EN — decisão Profª 22/05)
 
-- **Tamanho:** 150–250 palavras (PT-BR) + tradução EN
+- **Tamanho:** 150–250 palavras (EN)
+- **Sem Resumo em português** — trabalho 100% em inglês permitido
 - **Conteúdo obrigatório:** objetivo, metodologia, principais resultados, conclusão
 - **Palavras-chave:** 3–5. Sugestão: exchange rate forecasting; machine learning; ARIMA; trade flows; SHAP
 - **Escrever por último** (após todas as seções)
@@ -586,4 +587,14 @@ d) To examine the effect of macroeconomic factors on the volatility of trade flo
 
 ---
 
-*Última atualização: 05/05/2026*
+*Última atualização: 22/05/2026 — atualizado após reunião 02 com Profª Josiane (`docs/meetings/ata_2026-05-22.md`).*
+
+## 11. DECISÕES DA REUNIÃO 02 (22/05/2026)
+
+- **Câmbio:** reconhecer como ACHADO; framar como limitação ligada às características da variável
+- **Estrutura:** Objetivos + Justificativa podem ficar dentro da Introdução (não precisa separar)
+- **Abstract:** apenas EN, sem Resumo PT
+- **Entrevistas:** podem ocorrer; trabalho não menciona elas no estado atual; quando ocorrerem, inserir 1–2 trechos como citação no §7
+- **Apêndices:** NÃO contam no limite de 30 páginas; mover excedente para lá; resultados completos só com prévia + link do repo
+- **Páginas:** atual 46 com ABNT, meta 30 — reduzir após entrevistas
+- **Idioma:** 100% inglês permitido
