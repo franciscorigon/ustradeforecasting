@@ -1,6 +1,6 @@
 # 4 THEORETICAL FRAMEWORK
 
-        This section presents the theoretical basis for understanding how exchange volatility impacts international trade flows, and how predictive models assess these dynamics. The discussion draws support from economics, international relations, and the technological field.
+        This section presents the theoretical basis for understanding how exchange rate volatility impacts international trade flows, and how predictive models assess these dynamics. The discussion draws support from economics, international relations, and the technological field.
 
 ## 4.1 Economic key concepts
 
@@ -8,19 +8,11 @@
 
         REER: The Real Effective Exchange Rate (REER) is a broader measure representing the relative price of goods and services of a country versus its trading partners, adjusted for price differences and inflation (WAHAB, 2024). It thus reflects an economy's competitiveness, considering inflation differentials that would otherwise erode or magnify the impact of nominal exchange rate changes (MWANGE et al., 2022).
 
-        Export and Import: Imports represent the purchase of foreign goods or services, while exports are the sales of domestic goods or services abroad. These flows are central to a country's trade balance and general economy (NOTZ; ROSENKRANZ, 2021).
-
         HS: The Harmonized Commodity Description and Coding System (HS) is an international nomenclature for trade sector classification, indispensable for recording detailed trade flows (SCHMIDT; STEINGRESS, 2019). Its granularity allows analyzing how product categories react differently to exchange rate changes, revealing sector-specific heterogeneities (SELLAMI et al., 2024).
 
 ## 4.2 Models for determining the exchange rate and choosing exchange rate variables: USD/XXX rate and REER
 
-        Various theories have been developed to explain the factors that determine exchange rates; relying on a single model can be inappropriate, as stated by Mwange (2022, p. 71):
-
-> Even though exchange rates can be confusing, practically everyone has to understand them to function in the modern global economy. As the world gets smaller, there is a greater likelihood that we will have to deal with the risks associated with the fact that there are many different currencies in circulation around the globe and that these currencies will have a direct impact on our world. We must be able to evaluate how changes in exchange rates will impact our financial planning, corporate strategies, governmental initiatives, and other life decisions in order to take the necessary action (both financial and otherwise). Examining various exchange rate theories can help us.
-
-        The analysis of the nominal exchange rate (USD/XXX) builds on traditional approaches: the International Fisher Effect (IFE), linking interest rates, inflation and devaluation expectations; Interest Rate Parity (IRP), connecting domestic and foreign rates; and the balance of payments theory, which considers the exchange rate as determined by foreign transactions and financial exchanges among countries (MWANGE et al., 2022). The U.S. dollar's superiority as an anchor currency further justifies its use, since it shapes prices internationally even for trades not involving the U.S. (GOPINATH, G. et al., 2020). As Spring-Ragain (2024, p. 4) states:
-
-> Leading currencies, such as the US dollar (USD) and the euro (EUR), play a central role in the global economy due to their extensive use in international transactions, foreign exchange reserves and financial markets. Their importance lies in several key aspects: as a store of value, where the world's central banks hold substantial reserves in USD and EUR to stabilize their own currencies and manage economic crises; as a medium of exchange, as the dollar and euro are widely used for international trade, facilitating exchanges between countries; and as a unit of account, as many financial contracts, including international loans, are denominated in USD or EUR, reinforcing their central role.
+        Various theories have been developed to explain the factors that determine exchange rates, and relying on a single model can be inappropriate (MWANGE et al., 2022). The analysis of the nominal exchange rate (USD/XXX) builds on traditional approaches: the International Fisher Effect (IFE), linking interest rates, inflation and devaluation expectations; Interest Rate Parity (IRP), connecting domestic and foreign rates; and the balance of payments theory, which considers the exchange rate as determined by foreign transactions and financial exchanges among countries (MWANGE et al., 2022). The U.S. dollar's superiority as an anchor currency further justifies its use, since it shapes prices internationally even for trades not involving the U.S. (GOPINATH, G. et al., 2020).
 
         Thus, the choice of USD/XXX enables a straightforward analysis of the U.S. currency's effect on the trade balance.
 
@@ -34,13 +26,9 @@
 
 ### 4.3.1 Sectoral impacts of exchange rate fluctuations
 
-        Exchange rate fluctuations affect sectors and products differently, and are considered an important determinant of competitiveness in international markets (NTHEBE; MOSIKARI, 2025).
-
         Considering sectoral specificity is fundamental for accurately estimating export and import demand elasticity. The literature shows that exchange rates have differentiated impacts across various sectors (GODA et al., 2024).
 
 ### 4.3.2 Commodities vs. manufactured goods vs high technology
-
-        Different product types, such as commodities, manufactured goods, and high-tech items, respond differently to the exchange rate due to their complexity in global value chains, demand elasticity, and cost dynamics (GODA et al., 2024).
 
         Commodities, for example, are sensitive to exchange rate fluctuations, as they reflect international prices that respond directly to dollar variations. Production costs and loss of export competitiveness in a strong currency environment immediately affect export incentives and domestic supply (OLIVEIRA et al., 2023). Product complexity and technological intensity determine sectoral sensitivity to exchange rate fluctuations, with low-complexity sectors in developing countries showing the greatest elasticities. Less sophisticated sectors have more flexible production costs and depend more on relative prices to maintain international competitiveness (GODA et al., 2024).
 
@@ -48,9 +36,9 @@
 
 ## 4.4 Macroeconomic control variables
 
-        Gross Domestic Product (GDP) and GDP per capita are among the most common macroeconomic variables for modeling trade flows, tracking economic development and supply-demand capacity. GDP per capita is especially important for measuring wealth disparities and their relation to trade patterns. As noted by Wahab (2024), this variable helps explain how similarity or dissimilarity in factor endowments affects bilateral trade patterns, although it presents potential bias from population data and statistical limitations.
+        Gross Domestic Product (GDP) and GDP per capita are among the most common macroeconomic variables for modeling trade flows, tracking economic development and supply-demand capacity. As noted by Wahab (2024), these variables help explain how similarity or dissimilarity in factor endowments affects bilateral trade patterns.
 
-        Another fundamental variable linked to the exchange rate is inflation, which significantly influences the international competitiveness of products and the trade balance. The exchange rate regime must also consider external equilibrium in monetary policy: flexible rates effectively correct external imbalances. However, exchange rate flexibility, a characteristic of floating regimes, can lead to inflationary instability that in turn influences the trade balance (NASIR; VO, 2020).
+        Inflation is another fundamental variable linked to the exchange rate, significantly influencing the international competitiveness of products and the trade balance (NASIR; VO, 2020).
 
         Nominal exchange rate fluctuations also disrupt international negotiations and directly influence production costs and the competitiveness of tradable goods. While depreciation can increase imports of inputs while making exporters more competitive, appreciation reduces import prices of inputs (SANTORO; ROLIM, 2023).
 
@@ -59,8 +47,6 @@
 ## 4.5 Time series forecasting models
 
         Time series analysis aims to model and predict the behavior of sequential data and discover temporal dependencies. The conventional approach, represented by econometric models such as ARIMA, assumes linearity and stationarity, so that statistical patterns remain stable and structural relationships can be modeled. Preprocessing techniques such as differencing make the data stationary (ABIR et al., 2024).
-
-        Time series analysis is fundamental to understanding economic dynamics, particularly in international trade. It analyzes data at regular intervals to identify trends, cycles and patterns explaining commercial behavior and the effects of macro events (YAZAWA, 2023), supporting strategic decisions in trade and finance (ARÉVALO et al., 2022).
 
 ### 4.5.1 ARIMA model
 
@@ -71,8 +57,6 @@
 ### 4.5.2 Stationarity tests
 
         Stationarity is fundamental for time-series models like ARIMA. Differencing (parameter "d") is used when data are non-stationary, to make them conducive for ARIMA fitting (CHATTERJEE et al., 2024). Formal tests such as the Dickey-Fuller test check the unit root and order of integration, serving as basis for further analysis such as co-integration (ARÉVALO et al., 2022).
-
-        Non-stationarity, in the form of trend or seasonality, severely undermines ARIMA accuracy. Its removal is therefore an important prerequisite for time-series models, pursued in advanced approaches to improve forecasting performance (LIN et al., 2020).
 
 ## 4.6 Machine learning in forecasting
 
@@ -94,30 +78,14 @@
 
         LightGBM is a gradient boosting framework with efficiency and accuracy on large data sets, optimized for training time and memory usage (CHATTERJEE et al., 2024). Its training acceleration techniques and reduced memory usage suit high-dimensional sparse scenarios, contributing significantly to model efficiency (GUO et al., 2024).
 
-        Gradient boosting models are efficient tools for machine learning problems where computation is a concern and data are large, though some models may slow down under very large data (ENKHBAYAR; ŚLEPACZUK, 2025).
-
-        Incomplete data is common in real-life scenarios, and techniques such as oversampling with LightGBM address class imbalance (GOPINATH et al., 2021).
-
         Despite its advantages, interpreting LightGBM is difficult due to the high complexity of tree boosting models. Although the model produces accurate predictions, it does so less transparently than simple models, which matters when explainability is vital (GOPINATH et al., 2021).
-
-        LightGBM is also sensitive to overfitting, requiring precise hyperparameter adjustment and careful regularization. This optimization, although computationally demanding, is crucial for avoiding overfitting and ensuring good generalization (SAIED et al., 2013).
-
-        Compared with other models that are too complex to interpret, LightGBM stands in a good position on this trade-off, known for high accuracy and interpretability, making it effective when both are important (GUO et al., 2024).
 
 ### 4.6.3 Comparison between traditional approaches and ML
 
-        The main difference between ML models like Random Forest and LightGBM and traditional econometric approaches is their intrinsic ability to model non-linear relationships and complex interactions, without imposing strong assumptions on data distribution (SELLAMI et al., 2024). This flexibility suits the prediction of complex phenomena such as exchange rates and trade flows, overcoming constraints of traditional methods (GUO et al., 2024).
-
-        Therefore, while in machine learning the data reveals patterns, in econometrics hypotheses are based on predetermined model specifications (SILVA et al., 2024).
-
-        However, machine learning models are consistently described as "black boxes", making it difficult to grasp prediction logic compared with traditional econometric models, which are more transparent and built on explicit economic theory (ABOUZAID; BOUSSEDRA, 2025).
+        The main difference between ML models like Random Forest and LightGBM and traditional econometric approaches is their intrinsic ability to model non-linear relationships and complex interactions, without imposing strong assumptions on data distribution (SELLAMI et al., 2024). This flexibility suits the prediction of complex phenomena such as exchange rates and trade flows, overcoming constraints of traditional methods (GUO et al., 2024). However, machine learning models are consistently described as "black boxes", making it difficult to grasp prediction logic compared with traditional econometric models, which are more transparent and built on explicit economic theory (ABOUZAID; BOUSSEDRA, 2025).
 
 ### 4.6.4 Hyperparameters and optimization
 
         Although machine learning models present "black box" challenges, interpretability techniques such as SHAP are starting to close this gap. Inspired by cooperative game theory, SHAP decomposes predictions into feature contributions, exposing non-linear structures and interactions otherwise hidden (ZHANG; JIANG, 2025). It assesses each feature's relative importance for individual predictions, improving interpretability and trust in complex models (GUO et al., 2024).
-
-        These methods allow policymakers to follow high-fidelity forecasts and understand their causal reasons, supporting better strategic decisions (ZHANG; JIANG, 2025).
-
-        However, identifying essential hyperparameters is a major challenge: slight changes can yield large differences in predictive accuracy (ZHANG; JIANG, 2025).
 
         Thus, the comparative application of Random Forest and LightGBM in this work evaluates their predictability on trade flows under fluctuating exchange rates, as an alternative to traditional methodologies. The implementation used Python and its statistical libraries, SQL for data integration, and GitHub for versioning and reproducibility.
