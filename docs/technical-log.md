@@ -1132,4 +1132,42 @@ User noticed that the opening of §5 used `(SHIMAOKA et al., 2024; MARTÍNEZ‐P
 
 ---
 
+### [2026-05-26] — Meeting — Advisor meeting 03 + final refinement strategy
+
+**Meeting:** Reunião 03 with Prof. Josiane (`docs/meetings/ata_2026-05-26.md`).
+
+**Fixed timeline:**
+- 30/05/2026: deliver complete TCC (no interviews) for advisor review
+- 01/06/2026: receive corrections; ask about interview feasibility
+- 05/06/2026: FINAL submission (no further changes after this date)
+
+**Critical clarifications:**
+- Everything below the Conclusion section does NOT count toward the 30-page limit (references, appendices, annexes all excluded)
+- Current state: 40 numbered pages in ABNT formatting (after text reduction). 10 pages over the limit.
+- 10 figures is too many — focus on the most important ones
+
+**Strategy: "sell the fish"** — main results stay inline in Results section; less important content goes to appendix.
+
+**Three banca evaluation criteria (CRITICAL for final refinement):**
+1. Does the work answer the proposed research question?
+2. Were the objectives achieved?
+3. Defense in Conclusion → were objectives achieved? (demonstrated via Results, Discussion, Conclusion, final considerations)
+
+**Action plan agreed:**
+
+| Priority | Task | Status |
+|----------|------|--------|
+| P1 | Refine to "sell the fish": direct answer to research question + explicit objective→evidence mapping | Pending |
+| P2 | Reduce figures 10 → 5 inline + 5 appendix | Pending |
+| P3 | Cut more citations paragraph-by-paragraph | Pending |
+| P4 | Verify 40 → 30 pages reduction | Pending |
+
+**Figure triage decided:**
+- Keep inline (5): Fig 1 MAPE, Fig 2 forecasts grid, Fig 5 feature importance, Fig 8 SHAP comparison RF vs LightGBM, Fig 10 FX sensitivity heatmap
+- Move to appendix (5): Fig 3 ARIMA residuals ACF, Fig 4 ARIMA vs ML gap, Fig 6 SHAP summary RF, Fig 7 SHAP summary LightGBM, Fig 9 SHAP FX dependence
+
+**Interviews:** Francisco will ask on 01/06 if there's still time. If yes, conduct and insert 1-2 excerpts as citations in §7.
+
+---
+
 *End of log. New entries will appear above this line.*

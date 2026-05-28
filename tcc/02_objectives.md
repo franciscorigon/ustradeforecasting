@@ -10,7 +10,7 @@
 
         a) To pinpoint which sectors are most vulnerable to exchange rate changes;
 
-        b) To determine the impact of these swings across different time horizons;
+        b) To determine the impact of these swings across different time lags;
 
         c) To evaluate the predictive power of each model;
 

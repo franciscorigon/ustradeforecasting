@@ -1,6 +1,6 @@
 # 7 DISCUSSION
 
-        This section interprets the results from two complementary perspectives: methodological, in the practice of Information Systems and applied machine learning, and economic, within the literature on exchange rate transmission and bilateral trade flows. The discussion proceeds from model comparison toward feature-level interpretability, heterogeneity, methodological contributions and limitations.
+        This section interprets the results from two complementary perspectives: methodological, in the practice of Information Systems and applied machine learning, and economic, within the literature on exchange rate transmission and bilateral trade flows. The interpretation confirms an affirmative answer to the research question on three fronts: exchange rate fluctuations have measurable predictive content for trade flows, Random Forest is the most accurate of the three models, and exchange rate sensitivity is heterogeneous across countries and sectors. The discussion proceeds from model comparison toward feature-level interpretability, heterogeneity, methodological contributions and limitations.
 
 ## 7.1 Machine learning gains over ARIMA
 
