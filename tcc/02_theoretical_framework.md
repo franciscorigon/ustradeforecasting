@@ -1,6 +1,6 @@
 # 2 THEORETICAL FRAMEWORK
 
-        This section presents the theoretical basis for understanding how exchange rate volatility impacts international trade flows, and how predictive models assess these dynamics. The discussion draws support from economics, international relations, and the technological field.
+        The theoretical basis for this study spans how exchange rate volatility impacts international trade flows and how predictive models assess these dynamics, drawing on economics, international relations, and the technological field.
 
 ## 2.1 Economic key concepts
 
@@ -88,4 +88,4 @@
 
         Although machine learning models present "black box" challenges, interpretability techniques such as SHAP are starting to close this gap. Inspired by cooperative game theory, SHAP decomposes predictions into feature contributions, exposing non-linear structures and interactions otherwise hidden (ZHANG; JIANG, 2025). It assesses each feature's relative importance for individual predictions, improving interpretability and trust in complex models (GUO et al., 2024).
 
-        Thus, the comparative application of Random Forest and LightGBM in this work evaluates their predictability on trade flows under fluctuating exchange rates, as an alternative to traditional methodologies. The implementation used Python and its statistical libraries, SQL for data integration, and GitHub for versioning and reproducibility.
+        This study therefore applied Random Forest and LightGBM to test their predictive ability on trade flows under fluctuating exchange rates, as an alternative to traditional methods. The implementation used Python and its statistical libraries, SQL for data integration, and GitHub for versioning and reproducibility.

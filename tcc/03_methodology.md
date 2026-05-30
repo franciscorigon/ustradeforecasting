@@ -1,8 +1,8 @@
 # 3 METHODOLOGY
 
-        In this research, CRISP-DM (Cross-Industry Standard Process for Data Mining) was used to predict the impact of exchange rate changes on trade flows between the United States and Canada, Mexico, and Brazil. Widely recognized in data mining projects, CRISP-DM organizes the work into well-defined phases, guaranteeing quality and transparency from business understanding to deployment (TRIPATHI et al., 2021).
+        This study used CRISP-DM (Cross-Industry Standard Process for Data Mining) to predict the impact of exchange rate changes on trade flows between the United States and Canada, Mexico, and Brazil. Widely recognized in data mining projects, CRISP-DM organizes the work into well-defined phases, guaranteeing quality and transparency from business understanding to deployment (TRIPATHI et al., 2021).
 
-        The process consists of six phases addressed in this chapter: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation and Deployment (WIRTH; HIPP, 2000). Although presented sequentially, the actual research involved repeated cycles between Data Preparation and Modeling, and between Modeling and Evaluation, consistent with the iterative nature of the framework.
+        The process consists of six phases addressed in this section: Business Understanding, Data Understanding, Data Preparation, Modeling, Evaluation and Deployment (WIRTH; HIPP, 2000). Although presented sequentially, the research involved repeated cycles between Data Preparation and Modeling, and between Modeling and Evaluation, consistent with the iterative nature of the framework.
 
 ## 3.1 Business Understanding
 
@@ -12,7 +12,7 @@
 
 ## 3.2 Data Understanding
 
-        In this analysis, data included USD/CAD, USD/MXN and USD/BRL exchange rates from central banks and the Federal Reserve (FED), bilateral trade flows from UN Comtrade and the U.S. Census Bureau, macroeconomic indicators from the World Bank and OECD, and sectoral data on commodities, manufactured goods and high-tech to capture sectoral asymmetry.
+        This study drew on USD/CAD, USD/MXN and USD/BRL exchange rates from central banks and the Federal Reserve (FED), bilateral trade flows from UN Comtrade and the U.S. Census Bureau, macroeconomic indicators from the World Bank and OECD, and sectoral data on commodities, manufactured goods and high-tech to capture sectoral asymmetry.
 
         The data covered the period from 2000 to 2024 at multiple frequencies, daily for exchange rates and monthly for macroeconomic variables and trade flows. The modeling window was restricted to 2010–2024 by the availability of monthly Comtrade data, yielding 180 monthly observations. The 24 target series combined three countries (Canada, Mexico, Brazil), two directions (exports and imports) and four sectors (commodities, manufactured goods, high-technology and total), producing the 3 × 2 × 4 design used in subsequent phases.
 
@@ -28,9 +28,9 @@
 
 ## 3.4 Modeling
 
-        The Modeling phase applied ARIMA, Random Forest and LightGBM to the prepared dataset, comparing their predictive performance on the 24 bilateral trade flow series.
+        The Modeling phase applied ARIMA, Random Forest (RF) and LightGBM to the prepared dataset, comparing their predictive performance on the 24 bilateral trade flow series.
 
-        ARIMA was used as a univariate benchmark, while Random Forest and LightGBM accepted multivariate inputs without requiring stationarity, allowing the incorporation of lagged macroeconomic variables and feature-engineered transformations (PORTO, 2022; BOTZ et al., 2025; ZANOTTI, 2025).
+        ARIMA served as a univariate benchmark, while Random Forest and LightGBM accepted multivariate inputs without requiring stationarity, incorporating lagged macroeconomic variables and feature-engineered transformations (PORTO, 2022; BOTZ et al., 2025; ZANOTTI, 2025).
 
         For each univariate time series, ARIMA modeling started with a stationarity test (Augmented Dickey-Fuller, ADF) to determine the differentiation order (d). Final model selection used information criteria such as AIC and BIC, identifying the most parsimonious and best-fitted models. Residual diagnostics confirmed the absence of heteroscedasticity and autocorrelation, validating model assumptions (REICHERT; SOUZA, 2020). The backtesting process used a sliding window approach, with models trained on historical data up to a point in time and predictions generated for the following period (BOTZ et al., 2025).
 
@@ -50,7 +50,7 @@
 
         Although ML-based models may provide superior performance, their interpretability is often difficult to achieve (SUDJIANTO; ZHANG, 2024). To address this opacity, SHAP-based explainers were applied, elucidating the contribution of each input variable to the model's predictions (GUO et al., 2024). Overcoming the opacity of "black boxes" is crucial for trust and adoption of these predictive tools (ABOUZAID; BOUSSEDRA, 2025).
 
-        In this study, the evaluation combined four elements. Point-forecast metrics were RMSE, MAE and MAPE, with MAPE adopted as the primary metric due to its scale invariance. The Ljung-Box test at lag 10 verified the ARIMA in-sample residuals. The significance tests were the Friedman test for the omnibus comparison, the Wilcoxon signed-rank with Bonferroni correction for pairwise comparisons, and the Diebold-Mariano test with the Harvey et al. (1997) small-sample correction, used as the primary instrument for ranking the three algorithms. SHAP (SHapley Additive exPlanations) values were computed through the TreeExplainer algorithm of the shap library (LUNDBERG; LEE, 2017), generated independently for Random Forest and LightGBM. A composite exchange rate sensitivity metric, the mean absolute SHAP value of FX and REER features averaged between the two models, was visualized as a heatmap across the 24 country-sector combinations.
+        In this study, the evaluation combined four elements. Point-forecast metrics were RMSE, MAE and MAPE, with MAPE as the primary metric. The Ljung-Box test at lag 10 verified the ARIMA in-sample residuals. The significance tests were the Friedman test for the omnibus comparison, the Wilcoxon signed-rank with Bonferroni correction for pairwise comparisons, and the Diebold-Mariano test with the Harvey et al. (1997) small-sample correction, used as the primary instrument for ranking the three algorithms. SHAP (SHapley Additive exPlanations) values were computed through the TreeExplainer algorithm of the shap library (LUNDBERG; LEE, 2017), generated independently for Random Forest and LightGBM. A composite exchange rate sensitivity metric, the mean absolute SHAP value of FX and REER features averaged between the two models, was visualized as a heatmap across the 24 country-sector combinations.
 
 ## 3.6 Deployment
 
@@ -58,4 +58,4 @@
 
         Documentation and versioning are essential for traceability and transparency throughout the model lifecycle. Code versioning uses systems such as Git and collaborative platforms like GitHub (SEMMELROCK et al., 2024). The ability to easily revert changes fosters experimentation and innovation by reducing the perceived risk of adopting new approaches (STROMER et al., 2024).
 
-        Although a production-grade forecasting service was outside the scope of this academic study, the Deployment phase of CRISP-DM was operationalized through the publication of a reproducible artifact set. The complete pipeline (raw and processed datasets, feature engineering scripts, trained models, hyperparameter configurations, forecast outputs and evaluation notebooks) was organized in a public Git repository (XXXXXXXXXX, accessed May 2026) with versioned commits, treating reproducibility as the primary deployment deliverable.
+        Although a production-grade forecasting service was outside the scope of this academic study, the complete pipeline (raw and processed datasets, feature engineering scripts, trained models, hyperparameter configurations, forecast outputs and evaluation notebooks) was organized in a public Git repository (https://github.com/franciscorigon/us-trade-forecasting, accessed May 2026) with versioned commits.

@@ -1,22 +1,22 @@
 # 4 RESULTS
 
-        This section presents the outcomes of the evaluation phase applied to the 24 target series of bilateral U.S. trade flows with Canada, Mexico and Brazil over the out-of-sample period from January 2022 to December 2024. Three forecasting algorithms (ARIMA, Random Forest and LightGBM) were compared against a Naïve baseline using error metrics, statistical significance tests and explainability tools.
+        The evaluation covered the 24 target series of bilateral U.S. trade flows with Canada, Mexico and Brazil over the out-of-sample period from January 2022 to December 2024. Three forecasting algorithms (ARIMA, Random Forest and LightGBM) were compared against a Naïve baseline using error metrics, statistical significance tests and explainability tools.
 
 ## 4.1 Descriptive statistics and data overview
 
-        The final dataset contained 180 monthly observations from January 2010 to December 2024. The lower bound of 2010 ensured enough post-Global Financial Crisis observations for training, while the upper bound matches the most recent trade flow data. The 24 target series resulted from three countries (Canada, Mexico and Brazil), two directions (exports and imports) and four sectors (commodities, manufactured goods, high-technology and total), producing the 3 × 2 × 4 evaluation design.
+        The final dataset held 180 monthly observations, from January 2010 to December 2024. Starting in 2010 was deliberate: it left enough post-Global Financial Crisis history to train on, while 2024 captured the most recent trade data available. The 24 target series kept the 3 × 2 × 4 design defined in Section 3.2: three countries, two directions and four sectors.
 
-        The 73 input features were country-pair agnostic. They included nominal exchange rates (USD/CAD, USD/MXN, USD/BRL), Real Effective Exchange Rate (REER) indices, macroeconomic variables (Federal Funds Rate, WTI crude oil price, industrial production, CPI, GDP per capita), lagged target values at 1, 3, 6 and 12 months, moving averages at 3, 6 and 12 months, percentage variations and a binary crisis indicator for the COVID-19 pandemic (2020–2021).
+        All 73 input features were country-pair agnostic. The core set covered the three nominal exchange rates (USD/CAD, USD/MXN, USD/BRL) and Real Effective Exchange Rate (REER) indices, alongside macroeconomic controls: the Federal Funds Rate, WTI crude oil price, industrial production, CPI and GDP per capita. The rest came from feature engineering. It added lagged target values at 1, 3, 6 and 12 months, moving averages at 3, 6 and 12 months, percentage variations, and a binary indicator for the COVID-19 pandemic (2020–2021).
 
-        The training period covered January 2010 to December 2021 and the out-of-sample test set comprised 36 monthly observations from January 2022 to December 2024.
+        Training covered January 2010 to December 2021. The out-of-sample test set held the final 36 months, January 2022 to December 2024.
 
 ## 4.2 Naïve baseline and information asymmetry
 
-        Prior to the model comparison, a Naïve baseline was established as the one-step-ahead forecast equal to the previous observed value (log y_t = log y_{t-1}). Across the 24 series, the Naïve baseline achieved a mean MAPE of 0.32%, lower than all three forecasting models.
+        Before comparing the models, the study set a Naïve baseline: each one-step-ahead forecast repeated the previous observed value (log y_t = log y_{t-1}). Across the 24 series, it reached a mean MAPE of 0.32%, lower than that of all three forecasting models.
 
-        This result reflects an informational asymmetry. At each step of the test period, the Naïve predictor accesses the realized value of the previous observation. The RF and LightGBM models, by contrast, were configured as direct 36-step-ahead forecasters: after training on data through December 2021, they generated all 36 predictions at once, without access to intermediate realized values. ARIMA, although reestimated through walk-forward validation, generates one-step-ahead forecasts, a structurally simpler task than the 36-month direct forecast horizon.
+        This result reflects an informational asymmetry. At each step of the test period, the Naïve predictor accessed the realized value of the previous observation. The RF and LightGBM models worked differently. Configured as direct 36-step-ahead forecasters, they trained on data through December 2021 and then produced all 36 predictions at once, with no access to intermediate realized values. ARIMA, although reestimated through walk-forward validation, generated one-step-ahead forecasts, a structurally simpler task than the 36-month direct forecast.
 
-        The primary comparison is therefore conducted among the three forecasting algorithms, with the Naïve baseline serving as an informational upper-bound reference only.
+        The primary comparison therefore focuses on the three forecasting algorithms, with the Naïve baseline serving as an informational upper-bound reference only.
 
 ## 4.3 Model performance comparison
 
@@ -33,7 +33,7 @@
 
 Source: the author (2026).
 
-        Country-level disaggregation in Table 2 reveals that the ML advantage was consistent across the three trading partners, though with varying magnitudes. For Canada, both RF (0.85%) and LightGBM (0.84%) substantially outperformed ARIMA (1.48%). For Mexico, RF (0.93%) maintained a clear margin over ARIMA (1.20%), while LightGBM (1.22%) performed comparably. For Brazil, RF (1.03%) and LightGBM (1.02%) surpassed ARIMA (1.56%), which registered the highest country-level error.
+        Country-level disaggregation in Table 2 reveals that the ML advantage was consistent across the three trading partners, though its magnitude varied. In Canada the gap was widest: RF (0.85%) and LightGBM (0.84%) both substantially outperformed ARIMA (1.48%). Mexico was more mixed, with RF (0.93%) maintaining a clear margin over ARIMA (1.20%) while LightGBM (1.22%) performed comparably. For Brazil, RF (1.03%) and LightGBM (1.02%) surpassed ARIMA (1.56%), which registered the highest country-level error.
 
 **Table 2 — Mean MAPE by country and model (%)**
 
@@ -45,7 +45,7 @@ Source: the author (2026).
 
 Source: the author (2026).
 
-        Sectoral disaggregation in Table 3 shows that the performance differential between ARIMA and ML was most pronounced for high-technology products (gap of 0.91 pp for RF) and manufactured goods (0.46 pp), while commodities had the smallest divergence.
+        By sector, the performance gap was most pronounced for high-technology products (0.91 pp for RF) and manufactured goods (0.46 pp), while commodities showed the smallest divergence (Table 3).
 
 **Table 3 — Mean MAPE by sector and model (%)**
 
@@ -66,7 +66,7 @@ Source: the author (2026).
 
 Source: the author (2026).
 
-        Figure 2 complements the aggregate metrics with concrete forecast examples, in a 3 × 3 grid showing the best, median and worst forecast cases for each algorithm. The best case corresponds to the series with the lowest MAPE for that algorithm, the median to the middle of the ranking, and the worst to the highest MAPE. The grid makes visible the variability of model behavior across the 24 series.
+        Figure 2 complements the aggregate metrics with concrete forecast examples, in a 3 × 3 grid showing the best, median and worst forecast cases for each algorithm. The best case corresponds to the series with the lowest MAPE for that algorithm, the median to the middle of the ranking, and the worst to the highest MAPE. The grid shows how model behavior varies across the 24 series.
 
 ![Best, median and worst forecast cases for each algorithm in the test window](../results/figures/evaluation/best_median_worst_forecasts.png)
 
@@ -76,9 +76,9 @@ Source: the author (2026).
 
 ## 4.4 Statistical significance tests
 
-        **Friedman test.** A non-parametric Friedman test assessed whether statistically significant differences in predictive accuracy existed across the three models, treating each of the 24 series as a block. The test yielded a p-value of 0.417, so the null hypothesis of no difference among models could not be rejected. This reflects in part the limited number of series (n = 24), which constrains the test's statistical power; the result does not mean model equivalence.
+        **Friedman test.** A non-parametric Friedman test assessed whether predictive accuracy differed significantly across the three models, treating each of the 24 series as a block. The test yielded a p-value of 0.417, so the null hypothesis of no difference among models could not be rejected. The limited number of series (n = 24) partly explains this, constraining the test's statistical power. It does not mean the models are equivalent.
 
-        **Diebold-Mariano test.** The Diebold-Mariano test with the Harvey et al. (1997) small-sample correction was applied to each of the 24 series for the three model pairs (Table 4). These are pairwise comparisons — distinct from the series-level wins reported in Table 1, which reflect the best model among all three simultaneously. RF was superior to ARIMA in 75% of series (18 of 24); LightGBM outperformed ARIMA in 83% (20 of 24); and RF outperformed LightGBM in 83% (20 of 24). These results establish a consistent hierarchy (RF > LightGBM > ARIMA), with the ML advantage statistically supported in the majority of the series.
+        **Diebold-Mariano test.** The Diebold-Mariano test, with the Harvey et al. (1997) small-sample correction, was applied to each of the 24 series across the three model pairs (Table 4). These are pairwise comparisons, unlike the series-level wins in Table 1, which reflect the best model among all three at once. RF was superior to ARIMA in 75% of the series (18 of 24); LightGBM outperformed ARIMA in 83% (20 of 24); and RF outperformed LightGBM in 83% (20 of 24). Together, these establish a consistent hierarchy (RF > LightGBM > ARIMA), with the ML advantage statistically supported across most series.
 
 **Table 4 — Pairwise Diebold-Mariano test results (Harvey et al., 1997 correction)**
 
@@ -90,13 +90,13 @@ Source: the author (2026).
 
 Source: the author (2026).
 
-        **Ljung-Box test.** The Ljung-Box test was applied to the in-sample residuals of the 24 ARIMA models. Of these, 22 passed at the 5% significance level, indicating no significant residual autocorrelation and adequate model specification. Two series showed significant autocorrelation: Canadian exports of commodities (p = 0.0006) and Canadian total imports (p = 0.0146). These cases suggest potential ARIMA misspecification, which may partially explain the model's weaker performance on these series. The ACF plots of representative ARIMA residuals are presented in Figure 6 (Appendix).
+        **Ljung-Box test.** The Ljung-Box test examined the in-sample residuals of the 24 ARIMA models. Of these, 22 passed at the 5% significance level, showing no significant residual autocorrelation and adequate specification. Two series did not: Canadian exports of commodities (p = 0.0006) and Canadian total imports (p = 0.0146). This points to possible ARIMA misspecification, which may partly explain the model's weaker performance on them. The ACF plots of representative ARIMA residuals appear in Figure 6 (Appendix).
 
 ## 4.5 ARIMA versus ML performance gap
 
-        The overall performance gap between ARIMA and the ML models was approximately 0.43 percentage points in favor of ML (0.48 pp against Random Forest and 0.39 pp against LightGBM). The gap was not uniform: ARIMA had a lower MAPE than both ML models in 8 of 24 series, showing that the linear approach retains advantages under specific conditions. ARIMA's best cases show lower volatility and more predictable structure, notably Mexican total exports (MAPE = 0.40%), Canadian exports of commodities (0.63%) and Brazilian exports and imports of high-technology products (0.58% each).
+        The overall performance gap between ARIMA and the ML models was approximately 0.43 percentage points in favor of ML (0.48 pp against Random Forest and 0.39 pp against LightGBM). The gap was not uniform. In 8 of 24 series, ARIMA had a lower MAPE than both ML models, showing that the linear approach retained advantages under specific conditions. ARIMA's best cases showed lower volatility and more predictable structure, such as Mexican total exports (MAPE = 0.40%), Canadian exports of commodities (0.63%) and Brazilian exports and imports of high-technology products (0.58% each).
 
-        For the two series with Ljung-Box violations (Canadian exports of commodities and Canadian total imports), ARIMA registered errors markedly higher than both ML models, suggesting residual misspecification as a contributing factor. Even excluding these two series, the average gap between ARIMA and RF remains at 0.51 percentage points, confirming that the ML advantage is not driven solely by ARIMA misspecification cases. The distribution of the gap across sectors is presented in Figure 7 (Appendix).
+        For the two series with Ljung-Box violations (Canadian exports of commodities and Canadian total imports), ARIMA registered errors markedly higher than both ML models, suggesting residual misspecification as a contributing factor. Even excluding these two series, the average gap between ARIMA and RF remained at 0.51 percentage points, confirming that the ML advantage was not driven solely by ARIMA misspecification cases. The distribution of the gap across sectors appears in Figure 7 (Appendix).
 
 ## 4.6 Feature importance and SHAP analysis
 
@@ -110,9 +110,9 @@ Source: the author (2026).
 
         For Random Forest, the WTI crude oil price index emerged as the most influential feature, reflecting the central role of energy markets in trade volumes, particularly in the commodity-intensive Canada–U.S. and Brazil–U.S. corridors. Among exchange rate variables, the six-month moving average of the USD/CAD rate (FX_USD_CAD_ma6, Rank 13) was the most relevant FX predictor, consistent with the model capturing medium-term trend persistence in currency dynamics (left panel of Figure 8, Appendix).
 
-        For LightGBM, the USD/CAD percentage change (FX_USD_CAD_pct) ranked third in global feature importance, reaffirming the centrality of the exchange rate signal (right panel of Figure 8, Appendix).
+        LightGBM relied even more on the exchange rate: the USD/CAD percentage change (FX_USD_CAD_pct) ranked third in global feature importance (right panel of Figure 8, Appendix).
 
-        Although the top-ranked features differed between the two models, a consistent pattern emerged: RF assigned greater weight to lagged levels and moving averages (which capture accumulated trend information), while LightGBM placed higher weight on percentage change features (capturing short-term directional movements). Figure 4 illustrates this complementarity, comparing mean absolute SHAP values side by side with FX and REER features highlighted in red.
+        Although the top-ranked features differed between the two models, a consistent pattern stood out. RF assigned greater weight to lagged levels and moving averages (which capture accumulated trend information), while LightGBM placed higher weight on percentage change features (capturing short-term directional movements). Figure 4 illustrates this complementarity, comparing mean absolute SHAP values side by side with FX and REER features highlighted in red.
 
 ![Side-by-side comparison of mean absolute SHAP values for Random Forest and LightGBM, top-15 features each, with FX and REER variables highlighted](../results/figures/evaluation/shap_comparison_rf_lgbm.png)
 
@@ -120,9 +120,9 @@ Source: the author (2026).
 
 Source: the author (2026).
 
-        The directional response of trade flows to exchange rate variation is examined through SHAP dependence plots. Figure 9 (Appendix) shows the LightGBM SHAP contribution of the bilateral exchange rate for total exports and total imports of each country pair, evidencing the asymmetric transmission of currency movements to exports and imports.
+        SHAP dependence plots map the directional response of trade flows to exchange rate variation. Figure 9 (Appendix) shows the LightGBM SHAP contribution of the bilateral exchange rate for total exports and total imports of each country pair, revealing the asymmetric transmission of currency movements to exports and imports.
 
-        The presence of exchange rate variables among the top predictors of both models confirms that exchange rate fluctuations exert a measurable and directionally consistent influence on bilateral trade flows, answering the primary research question.
+        The presence of exchange rate variables among the top predictors of both models confirmed that exchange rate fluctuations exerted a measurable and directionally consistent influence on bilateral trade flows, answering the primary research question.
 
 ## 4.7 Exchange rate sensitivity by country and sector
 
@@ -134,10 +134,10 @@ Source: the author (2026).
 
 Source: the author (2026).
 
-        Brazil emerged as the most exchange-rate-sensitive trading partner, with imports of manufactured goods registering the highest sensitivity in the entire heatmap (0.0044). Canada exhibited the lowest FX sensitivity across all sectors, while Mexico occupied an intermediate position — though its imports of high-technology products showed elevated sensitivity (0.0033), above the Brazil equivalent.
+        Brazil emerged as the most exchange-rate-sensitive trading partner, with imports of manufactured goods registering the highest sensitivity in the entire heatmap (0.0044). Canada exhibited the lowest FX sensitivity across all sectors. Mexico occupied an intermediate position, though its imports of high-technology products showed elevated sensitivity (0.0033), above the Brazil equivalent.
 
-        At the sectoral level, the pattern varied by trade direction. On the exports side, commodities showed the highest sensitivity across the three country pairs. On the imports side, manufactured goods led — driven particularly by Brazil. High-technology products and manufactured goods exports registered the lowest sensitivities overall, suggesting that more complex and differentiated trade flows are comparatively less exposed to short-term currency movements.
+        At the sectoral level, the pattern varied by trade direction. On the exports side, commodities showed the highest sensitivity across the three country pairs. On the imports side, manufactured goods led, driven particularly by Brazil. High-technology products and manufactured goods exports registered the lowest sensitivities overall, suggesting that more complex and differentiated trade flows were comparatively less exposed to short-term currency movements.
 
 ## 4.8 Synthesis of findings
 
-        Taken together, the results provide a direct empirical answer to the research question. First, exchange rate variables appeared among the most relevant predictors in both machine learning models (Figures 3 and 4), confirming that exchange rate fluctuations have measurable predictive content for bilateral trade flows. Second, Random Forest was the most accurate model (mean MAPE 0.94%), and the Diebold-Mariano test confirmed its superiority over ARIMA in 75% of the series and over LightGBM in 83% (Table 4), establishing the hierarchy RF > LightGBM > ARIMA. Third, exchange rate sensitivity varied systematically across countries and sectors (Figure 5): Brazil was the most sensitive partner and Canada the least, with the sectoral pattern differing by trade direction — exports of commodities and imports of manufactured goods showed the highest sensitivity, while exports of manufactured goods and high-technology products showed the lowest.
+        The results answered the research question directly. Exchange rate variables appeared among the most relevant predictors in both machine learning models (Figures 3 and 4), confirming that exchange rate fluctuations had measurable predictive content for bilateral trade flows. Random Forest was the most accurate model (mean MAPE 0.94%), and the Diebold-Mariano test confirmed its superiority over ARIMA in 75% of the series and over LightGBM in 83% (Table 4), establishing the hierarchy RF > LightGBM > ARIMA. Sensitivity varied systematically across countries and sectors (Figure 5): Brazil was the most sensitive partner and Canada the least, and the sectoral pattern differed by trade direction. Exports of commodities and imports of manufactured goods showed the highest sensitivity, while exports of manufactured goods and high-technology products showed the lowest.
