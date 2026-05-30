@@ -1170,4 +1170,41 @@ User noticed that the opening of §5 used `(SHIMAOKA et al., 2024; MARTÍNEZ‐P
 
 ---
 
+### [2026-05-29] — Writing — Final content review: §7 Discussion + §6 Conclusion
+
+**What was done:**
+Full subcapítulo-by-subcapítulo content review of §7 Discussion (intro + §7.1–§7.8) and §6 Conclusion, targeting three goals: assertiveness for the banca ("sell the fish"), citation hygiene, and removal of self-imposed weaknesses.
+
+**Technical details:**
+- **§7 intro:** RQ paraphrase corrected to match §1 verbatim; redundant 3-front anticipation paragraph removed
+- **§7.1:** Four phrase-level fixes — ARIMA parametric assumptions clarified, non-linear channel specified, heterogeneity connector reformulated, structural ML advantage strengthened
+- **§7.2 — critical numerical fix:** Python calculation on `metrics_all.csv` revealed two errors in the original text:
+  - Wrong value: gap when excluding Ljung-Box violations was stated as 0.47 pp → correct value is **0.51 pp**
+  - Wrong direction: gap *increases* (not narrows) when excluding violations, because CAN exports_commodities is a violation where ARIMA still won; removing it raises the ML advantage
+  - Protocol asymmetry paragraph compressed from ~150 words to 2 sentences with cross-reference to §7.3
+- **§7.3:** Para 1 compressed to 2 sentences; added practical sentence for policymakers (3–6 month horizons)
+- **§7.4:** (KIM; LE, 2024) removed — attached to empirical finding, not a conceptual claim; closing rewritten as assertive ("constitutes the primary empirical answer"); final generic literature sentence removed
+- **§7.5:** (GODA et al., 2024) removed — does not support Brazil claim; argument rewritten as structural reasoning (emerging market, no preferential agreement)
+- **§7.6:** Two "consistent with the literature" phrases without citations removed; (OLIVEIRA et al., 2023) removed; "appears to operate" → "operates"
+- **§7.7:** Explicit IS framing added to paragraphs 1, 2, and 3 — CRISP-DM novelty in IS, interpretability as IS design requirement, DM test with IS implications
+- **§7.8:** Para 2 (Friedman/n=24) removed — already handled in §6.4 Results; protocol paragraph compressed with justification added; final paragraph ("moderate predictor" as limitation) removed — RQ asked for measurable influence, not dominance
+- **§6 Conclusion:** "qualification" sentence removed (câmbio not dominant predictor); limitations aligned with §7.8: three limitations, Friedman/n=24 removed, 2022–2024 test window disturbances added; future work: removed "the current dataset can support" phrase (invites "why didn't you do it?")
+- **PDF comparison:** pdfplumber used to compare TCC II CURTO (55 pp, 15,606 words) vs TCC II FINAL (48 pp, 13,136 words) — only difference: author/advisor footnote bios; no section content lost
+
+**Citations removed or corrected:**
+- (KIM; LE, 2024) §7.4 — empirical result doesn't need citation
+- (GODA et al., 2024) §7.5 — misattributed claim
+- 2× "literature" refs §7.6 — no citation to back them up
+- (OLIVEIRA et al., 2023) §7.6 — unverified claim
+- Friedman/n=24 paragraph §7.8 — methodological, not a limitation
+
+**Decision made:**
+Style pass (natural-writing) explicitly deferred to after 30/05 delivery. Content integrity takes priority over phrasing.
+
+**Result:** §7 and §6 finalized. TCC ready for 30/05/2026 submission to Prof. Josiane.
+
+**Next step:** Deliver TCC to advisor on 30/05. Await corrections by 01/06. Ask about interview feasibility.
+
+---
+
 *End of log. New entries will appear above this line.*
