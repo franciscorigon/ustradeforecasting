@@ -8,7 +8,7 @@
 
         Crude oil prices (WTI) ranked as the most influential feature in Random Forest, alongside exchange rate and industrial production variables, pointing to an interaction that ARIMA's fixed-coefficient structure cannot capture. Energy prices and currency dynamics jointly affect commodity-intensive trade corridors through non-linear channels that ARIMA's additive structure cannot model. Tree splits capture these interactions implicitly, exploiting information that ARIMA cannot access by construction.
 
-        High-technology series showed the largest gap (0.91 pp for Random Forest), followed by manufactured goods (0.46 pp). These categories show heterogeneous demand, sensitivity to global value chains and exposure to multiple macroeconomic factors, conditions under which non-parametric models hold a comparative advantage (GOPINATH, M. et al., 2020). Commodities still favored ML but showed the smallest divergence, consistent with the linear pass-through of international prices into traded volumes.
+        High-technology series showed the largest gap (0.91 pp for Random Forest), followed by manufactured goods (0.46 pp). These categories show heterogeneous demand, sensitivity to global value chains and exposure to multiple macroeconomic factors, conditions under which non-parametric models hold a comparative advantage (GOPINATH, M. et al., 2021). Commodities still favored ML but showed the smallest divergence, consistent with the linear pass-through of international prices into traded volumes.
 
 ## 5.2 When ARIMA outperforms: eight series and the role of structure
 

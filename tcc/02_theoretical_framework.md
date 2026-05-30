@@ -78,7 +78,7 @@
 
         LightGBM is a gradient boosting framework with efficiency and accuracy on large data sets, optimized for training time and memory usage (CHATTERJEE et al., 2024). Its training acceleration techniques and reduced memory usage suit high-dimensional sparse scenarios, contributing significantly to model efficiency (GUO et al., 2024).
 
-        Despite its advantages, interpreting LightGBM is difficult due to the high complexity of tree boosting models. Although the model produces accurate predictions, it does so less transparently than simple models, which matters when explainability is vital (GOPINATH et al., 2021).
+        Despite its advantages, interpreting LightGBM is difficult due to the high complexity of tree boosting models. Although the model produces accurate predictions, it does so less transparently than simple models, which matters when explainability is vital (GOPINATH, M. et al., 2021).
 
 ### 2.6.3 Comparison between traditional approaches and ML
 
