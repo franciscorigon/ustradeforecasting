@@ -1,8 +1,8 @@
-# 7 DISCUSSION
+# 5 DISCUSSION
 
         This section interprets the results from two complementary perspectives: methodological, in the practice of Information Systems and applied machine learning, and economic, within the literature on exchange rate transmission and bilateral trade flows. The primary research question — what is the impact of exchange rate fluctuations on export and import flows between the United States and Canada, Mexico, and Brazil, and which forecasting models are best for making these forecasts — receives an affirmative empirical answer, contextualized here within the theoretical predictions of the exchange rate transmission literature and the comparative forecasting evidence accumulated in the field. The discussion proceeds from model comparison toward feature-level interpretability, heterogeneity, methodological contributions and limitations.
 
-## 7.1 Machine learning gains over ARIMA
+## 5.1 Machine learning gains over ARIMA
 
         The predictive advantage of Random Forest and LightGBM over ARIMA, evidenced by the Diebold-Mariano test in 75% and 83% of series, is consistent with the structural advantage of non-parametric models where trade dynamics are non-linear. ARIMA restricts the relationship between past and future values to a fixed-coefficient combination of lagged terms and disturbances. Tree-based ensembles, by contrast, approximate non-linear interactions among the 73 features without explicit parametric assumptions, capturing joint effects of exchange rates, energy prices and macroeconomic variables.
 
@@ -10,7 +10,7 @@
 
         The gap was largest in high-technology series (0.91 pp for Random Forest) and manufactured goods (0.46 pp), consistent with the argument that non-parametric models gain most where dynamics are heterogeneous. These categories show heterogeneous demand, sensitivity to global value chains and exposure to multiple macroeconomic factors, characteristics for which non-parametric models hold a comparative advantage (GOPINATH, M. et al., 2020). Commodities, although still favoring ML, had the smallest divergence between models, consistent with the linear pass-through of international prices into traded volumes.
 
-## 7.2 When ARIMA outperforms: eight series and the role of structure
+## 5.2 When ARIMA outperforms: eight series and the role of structure
 
         The result that ARIMA outperformed both ML models in 8 of 24 series tempers any sweeping claim of methodological superiority. The series in which ARIMA prevailed show a consistent pattern: lower volatility, near-stationary behavior after differencing and no structural breaks within the test window. Mexican total exports (MAPE 0.40% under ARIMA) exemplify this profile, a series whose dynamics are well captured by a parsimonious linear specification.
 
@@ -18,7 +18,7 @@
 
         The two series flagged by the Ljung-Box test (Canadian exports of commodities and Canadian total imports) merit separate consideration. Canadian total imports showed ARIMA errors substantially above the model's average; Canadian exports of commodities, by contrast, is a case where ARIMA outperformed RF despite the Ljung-Box flag, illustrating that misspecification and performance degradation are not mechanically linked. Excluding both series, the average gap between ARIMA and Random Forest is 0.51 percentage points — consistent with the estimate in Section 4 — confirming that the ML advantage is not an artifact of ARIMA misspecification. A properly specified linear model therefore remains a competitive baseline for well-behaved series, and the question is not whether ML is universally superior but under which structural conditions each approach offers meaningful gains.
 
-## 7.3 The Naïve baseline and information asymmetry
+## 5.3 The Naïve baseline and information asymmetry
 
         The Naïve baseline's lower MAPE (0.32%) reflects the informational asymmetry described in Section 4.2: the Naïve predictor accesses the realized value of the previous month at each step, while RF and LightGBM operated as direct 36-step predictors without intermediate feedback. This protocol asymmetry, not a methodological flaw, accounts for the apparent baseline advantage.
 
@@ -26,7 +26,7 @@
 
         This result reinforces the importance of paired statistical tests, such as the Diebold-Mariano employed here, when comparing models with structurally different prediction protocols.
 
-## 7.4 Exchange rate as a relevant predictor
+## 5.4 Exchange rate as a relevant predictor
 
         The central research question concerned whether exchange rate fluctuations exert a measurable influence on bilateral trade flows. The SHAP analysis offers strong empirical support for an affirmative answer. In both Random Forest and LightGBM, exchange rate variables, particularly the USD/CAD percentage change, appeared consistently among the top-ranked predictors, alongside the WTI crude oil price and country-specific industrial production indices.
 
@@ -34,7 +34,7 @@
 
         This dual confirmation constitutes the primary empirical answer to the research question framed in Section 1: bilateral exchange rate movements are not a peripheral input but a structurally relevant determinant of monthly trade flow dynamics, confirmed across two independent models through complementary interpretability tools.
 
-## 7.5 Country-level heterogeneity in exchange rate sensitivity
+## 5.5 Country-level heterogeneity in exchange rate sensitivity
 
         The pronounced heterogeneity in FX sensitivity across the three trading partners (Brazil at the higher end, Canada at the lower, Mexico intermediate) can be interpreted in light of the structural and institutional features of each bilateral relationship. Brazil's elevated sensitivity is consistent with its structural profile as an emerging economy: less diversified export structures, higher commodity dependence and the absence of a preferential trade agreement with the United States produce greater exposure to bilateral currency fluctuations.
 
@@ -42,7 +42,7 @@
 
         Mexico's intermediate position is consistent with its hybrid integration profile: USMCA provides partial insulation analogous to Canada's, while the maquiladora-driven manufacturing structure and the commodity component retain residual sensitivity to exchange rate movements.
 
-## 7.6 Sectoral patterns in exchange rate transmission
+## 5.6 Sectoral patterns in exchange rate transmission
 
         The sectoral disaggregation revealed a consistent ordering of FX sensitivity: commodities at the higher end, manufactured goods intermediate and high-technology at the lower end. The pattern was stable across the three country pairs.
 
@@ -50,7 +50,7 @@
 
         The lower sensitivity of high-technology products reflects the differentiated nature of these goods, the prevalence of long-term contracts and integration within global value chains. Bergin and Corsetti (2020) document that relationship-specific investments and bilateral pricing arrangements partially insulate differentiated goods from short-run currency fluctuations, and the same mechanism operates in U.S. trade with Canada, Mexico and Brazil. Manufactured goods occupied an intermediate position, combining standardized inputs (more exposed to exchange rate arbitrage) and differentiated components within integrated supply chains.
 
-## 7.7 Methodological contributions
+## 5.7 Methodological contributions
 
         Beyond the findings on exchange rate sensitivity, this study offers methodological contributions for Information Systems research applied to economic forecasting. The first is the implementation of a complete CRISP-DM pipeline across all six phases, applied to monthly macroeconomic forecasting with multiple country pairs and sectoral granularity (SHIMAOKA et al., 2024; MARTÍNEZ‐PLUMED et al., 2019). The framework integrated heterogeneous data sources, reproducible feature engineering and systematic model evaluation. The novelty lies not in the methodology itself but in its application to bilateral macroeconomic trade forecasting, a domain where structured ML pipelines remain underrepresented in the SI literature.
 
@@ -60,7 +60,7 @@
 
         The fourth contribution is reproducibility. The entire pipeline (source code, datasets, trained models and evaluation outputs) is in a public repository with versioned notebooks. Reproducibility, often neglected in applied economic research, is a central methodological requirement in Information Systems and was treated here as a first-class deliverable.
 
-## 7.8 Limitations
+## 5.8 Limitations
 
         Three methodological limitations merit attention. The sectoral target series were estimated by combining annual HS2 sectoral proportions with monthly aggregate flows, an approximation that introduces systematic distortion in periods of structural change within a given year. The effect is most pronounced for commodities, where intra-annual price volatility and shipment lumpiness deviate from the annual proportional structure. Future work could replace this approximation with monthly HS2 disaggregated series once available with sufficient coverage.
 

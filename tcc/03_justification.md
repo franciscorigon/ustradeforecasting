@@ -1,5 +1,0 @@
-# 3 JUSTIFICATION
-
-        Exchange rate volatility affects international competitiveness, investment decisions, and resource allocation in the world market (RAHMAN et al., 2025). Accurate predictions from modern machine learning algorithms, compared with traditional econometric methods, are highly relevant for cost minimization and profit maximization, helping nations and companies adapt faster to global changes (ABIR et al., 2024). The choice of Canada, Mexico and Brazil as trading partners is deliberate: the contrast between USMCA-integrated economies and a large emerging market without a preferential trade agreement with the United States makes the three-country design particularly suited to detecting heterogeneous patterns of exchange rate sensitivity.
-
-        The empirical results in Section 4 confirm this relevance: ML models outperformed the linear baseline in most of the 24 series, and SHAP analysis exposed heterogeneous transmission of exchange rate shocks across countries and sectors, demonstrating that the four specific objectives were achieved.
