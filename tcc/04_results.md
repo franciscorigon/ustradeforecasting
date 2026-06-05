@@ -58,7 +58,7 @@ Source: the author (2026).
 
 Source: the author (2026).
 
-        Figure 1 shows the mean MAPE per algorithm by country.
+        Figure 1 visualizes the country-level MAPE breakdown, making the heterogeneous ML advantage visible across the three trading partners. Canada shows the widest gap between ARIMA and the ML models, while Mexico stands out for LightGBM's weaker relative performance. Brazil shows the most symmetric ML advantage, with RF and LightGBM nearly indistinguishable.
 
 ![MAPE comparison across models and countries](../results/figures/mape_comparison.png)
 
@@ -140,4 +140,4 @@ Source: the author (2026).
 
 ## 4.8 Synthesis of findings
 
-        Exchange rate variables appeared among the most relevant predictors in both machine learning models (Figures 3 and 4), confirming that exchange rate fluctuations had measurable predictive content for bilateral trade flows. Random Forest was the most accurate model (mean MAPE 0.94%), and the Diebold-Mariano test confirmed its superiority over ARIMA in 75% of the series and over LightGBM in 83% (Table 4), establishing the hierarchy RF > LightGBM > ARIMA. Sensitivity varied systematically across countries and sectors (Figure 5): Brazil was the most sensitive partner and Canada the least, and the sectoral pattern differed by trade direction. Exports of commodities and imports of manufactured goods showed the highest sensitivity, while exports of manufactured goods and high-technology products showed the lowest.
+        Exchange rate variables appeared among the most relevant predictors in both machine learning models (Figures 3 and 4), confirming that exchange rate fluctuations had measurable predictive content for bilateral trade flows. Random Forest was the most accurate model (mean MAPE 0.94%), and the Diebold-Mariano test confirmed its superiority over ARIMA in 75% of the series and over LightGBM in 83% (Table 4), establishing the hierarchy RF > LightGBM > ARIMA. Sensitivity varied systematically across countries and sectors (Figure 5): Brazil was the most sensitive partner and Canada the least, and the sectoral pattern differed by trade direction. Exports of commodities and imports of manufactured goods showed the highest sensitivity, while exports of manufactured goods and high-technology products showed the lowest. The temporal analysis (objective d) showed that RF weighted six-month moving averages to capture medium-term currency trends, while LightGBM relied on monthly percentage-change features for short-term shifts.

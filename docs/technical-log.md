@@ -10,6 +10,28 @@
 
 ---
 
+### 2026-06-04 — Theoretical Framework — Added gravity model positioning sentence to §2.3
+
+**What was done:**
+Added one sentence to §2.3 (Trade flows and sectoral sensitivity) acknowledging the gravity model and positioning this study's predictive approach as distinct from structural gravity estimation.
+
+**Technical details:**
+- Location: end of §2.3 first paragraph, after GOPINATH, G. et al. (2020) citation
+- New reference added: HEAD; MAYER (2014), "Gravity Equations: Workhorse, Toolkit, and Cookbook", Handbook of International Economics, vol. 4, p. 131–195, DOI: 10.1016/B978-0-444-54314-1.00003-3
+- Reference chosen for: canonical authority on the gravity model (widely cited in trade literature), comprehensive review scope ("Workhorse, Toolkit, and Cookbook"), recognized by any banca with economics background
+
+**Decision made:**
+The gravity model (canonical framework for bilateral trade flows) was absent from the theoretical framework. Banca members with international trade background would likely question its absence. A single sentence acknowledges the framework and positions this study as complementary (predictive vs. structural estimation), without requiring a full subsection.
+
+**Result:**
+- `tcc/02_theoretical_framework.md` — sentence added to §2.3
+- `tcc/references.md` — BORCHERT et al. (2022) added in alphabetical order
+
+**Next step:**
+Continue with advisor-mentor checklist points (1-c onwards).
+
+---
+
 ### 2026-03-26 — Setup — Project repository initialized
 
 **What was done:**

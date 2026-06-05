@@ -24,7 +24,6 @@ BAYOUMI, T.; JAYANTHI, S.; LEE, J. W. New Rates from New Weights. IMF Staff Pape
 
 BERGIN, P. R.; CORSETTI, G. Beyond Competitive Devaluations: The Monetary Dimensions of Comparative Advantage. American Economic Journal Macroeconomics, [s. l.], vol. 12, no. 4, p. 246, 2020. Available at: https://doi.org/10.1257/mac.20160094. Accessed at: Aug. 2025.
 
-BOTZ, J.; THIEL, S.; KANNT, A.; FRÖHLICH, H. Wastewater as an Early Indicator for Short-Term Forecasting COVID-19 Hospitalization in Germany. BMC Public Health, [s. l.], vol. 25, no. 1, 2025. Available at: https://doi.org/10.1186/s12889-025-24149-2. Accessed at: Oct. 2025.
 
 BRYAN, A.-P. Yhack; DENNIS, V.-M. Lindell; FRED, T.-C. Peru Mining: Analysis and Forecast of Mining Production in Peru Using Time Series and Data Science Techniques. arXiv (Cornell University), [s. l.], 2023. Available at: http://arxiv.org/abs/2307.06293. Accessed at: Oct. 2025.
 
@@ -45,7 +44,13 @@ COSTA, M. G.; NISHIJIMA, M.; SCHOR, A.; PERLOTTI, E. A. Bilateral Trade of Films
 
 DIAS, T.; OLIVEIRA, R.; SARAIVA, P.; REIS, M. S. Predictive Analytics in the Petrochemical Industry: Research Octane Number (RON) Forecasting and Analysis in an Industrial Catalytic Reforming Unit. Computers & Chemical Engineering, [s. l.], vol. 139, p. 106912, 2020. Available at: https://doi.org/10.1016/j.compchemeng.2020.106912. Accessed at: Jul. 2025.
 
+DICKEY, D. A.; FULLER, W. A. Distribution of the Estimators for Autoregressive Time Series with a Unit Root. Journal of the American Statistical Association, [s. l.], vol. 74, no. 366, p. 427–431, 1979. Available at: https://doi.org/10.1080/01621459.1979.10482531. Accessed at: May. 2026.
+
+DIEBOLD, F. X.; MARIANO, R. S. Comparing Predictive Accuracy. Journal of Business & Economic Statistics, [s. l.], vol. 13, no. 3, p. 253–263, 1995. Available at: https://doi.org/10.1080/07350015.1995.10524599. Accessed at: May. 2026.
+
 ENKHBAYAR, S.; ŚLEPACZUK, R. Predictive Modeling of Foreign Exchange Trading Signals Using Machine Learning Techniques. Expert Systems with Applications, [s. l.], vol. 285, p. 127729, 2025. Available at: https://doi.org/10.1016/j.eswa.2025.127729. Accessed at: Nov. 2025.
+
+FRIEDMAN, M. The Use of Ranks to Avoid the Assumption of Normality Implicit in the Analysis of Variance. Journal of the American Statistical Association, [s. l.], vol. 32, no. 200, p. 675–701, 1937. Available at: https://doi.org/10.1080/01621459.1937.10503522. Accessed at: May. 2026.
 
 GAULIER, G.; SZTULMAN, A.; ÜNAL, D. Are Global Value Chains Receding? The Jury Is Still Out. Key Findings from the Analysis of Deflated World Trade in Parts and Components. HAL (Le Centre pour la Communication Scientifique Directe), [s. l.], 2020. Available at: https://hal.archivesouvertes.fr/hal-02895279. Accessed at: Aug. 2025.
 
@@ -53,9 +58,9 @@ GODA, T.; GARCÍA, A. T.; LARRAHONDO, C. Real Exchange Rates and Manufacturing E
 
 GONZÁLEZ, V. M. M.; ARAGÓN, G. D.; ARANGO, F. O. La Popularidad de las Marcas y Su Valor Económico en el Marco de Las Finanzas Corporativas: Un Análisis de Aprendizaje Máquina. Contaduría y Administración, [s. l.], vol. 68, no. 1, p. 379, 2022. Available at: https://doi.org/10.22201/fca.24488410e.2023.4665. Accessed at: Aug. 2025.
 
-GOPINATH, M.; BATARSEH, F. A.; BECKMAN, J.; KULKARNI, A.; JEONG, S. International Agricultural Trade Forecasting Using Machine Learning. Data & Policy, [s. l.], vol. 3, 2021. Available at: https://doi.org/10.1017/dap.2020.22. Accessed at: Nov. 2025.
-
 GOPINATH, G.; BOZ, E.; CASAS, C.; DÍEZ, F. J.; GOURINCHAS, P.-O.; PLAGBORG‐MØLLER, M. Dominant Currency Paradigm. American Economic Review, [s. l.], vol. 110, no. 3, p. 677, 2020. Available at: https://doi.org/10.1257/aer.20171201. Accessed at: Nov. 2025.
+
+GOPINATH, M.; BATARSEH, F. A.; BECKMAN, J.; KULKARNI, A.; JEONG, S. International Agricultural Trade Forecasting Using Machine Learning. Data & Policy, [s. l.], vol. 3, 2021. Available at: https://doi.org/10.1017/dap.2020.22. Accessed at: Nov. 2025.
 
 GUO, H.; DONG, Y.; BASTIDAS‐ARTEAGA, E.; LEI, X. Life-Cycle Performance Prediction and Interpretation for Coastal and Marine RC Structures: An Ensemble Learning Framework. Structural Safety, [s. l.], vol. 110, p. 102496, 2024. Available at: https://doi.org/10.1016/j.strusafe.2024.102496. Accessed at: Aug. 2025.
 
@@ -63,7 +68,11 @@ HARVEY, D. I.; LEYBOURNE, S. J.; NEWBOLD, P. Testing the Equality of Prediction 
 
 HE, Y.; MING, L. J.; RUAN, S.; SHUPING, Z. A Hybrid Model for Financial Time Series Forecasting—Integration of EWT, ARIMA With The Improved ABC Optimized ELM. IEEE Access, [s. l.], vol. 8, p. 84501, 2020. Available at: https://doi.org/10.1109/access.2020.2987547. Accessed at: Nov. 2025.
 
+HEAD, K.; MAYER, T. Gravity Equations: Workhorse, Toolkit, and Cookbook. In: GOPINATH, G.; HELPMAN, E.; ROGOFF, K. (ed.). Handbook of International Economics. Amsterdam: Elsevier, [s. l.], vol. 4, p. 131–195, 2014. Available at: https://doi.org/10.1016/B978-0-444-54314-1.00003-3. Accessed at: Jun. 2026.
+
 HEDAYATI, M.; ASL, I. M. Forecasting the health expenditures in Iran by Using Time Series Analysis as Machine Learning Model in Python. Research Square (Research Square), [s. l.], 2023. Available at: https://doi.org/10.21203/rs.3.rs-2979860/v1. Accessed at: Aug. 2025.
+
+HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design Science in Information Systems Research. MIS Quarterly, [s. l.], vol. 28, no. 1, p. 75–105, 2004. Available at: https://www.researchgate.net/publication/201168946. Accessed at: Jun. 2026.
 
 HIGUERA-COTA, M. F.; GUERRA, R. E. M.; BARCELÓ, J. G. A. Efecto de los Tratados Comerciales de América del Norte Sobre las Exportaciones Agrícolas de México a Estados Unidos. Investigación Económica, [s. l.], vol. 82, no. 324, p. 126, 2023. Available at: https://doi.org/10.22201/fe.01851667p.2023.324.83363. Accessed at: Oct. 2025.
 
@@ -83,6 +92,8 @@ KAT, Q. B. Competitive Liberalization, Postneoliberalism, and Hegemony: The Case
 
 KAYIT, A. D.; ISMAIL, M. T. Advancing Stock Price Prediction Through the Development of Hybrid Ensembles: A Comprehensive Comparative Analysis of Machine Learning Approaches. Journal Of Big Data, [s. l.], vol. 12, no. 1, 2025. Available at: https://doi.org/10.1186/s40537-025-01185-8. Accessed at: Oct. 2025.
 
+KE, G.; MENG, Q.; FINLEY, T.; WANG, T.; CHEN, W.; MA, W.; YE, Q.; LIU, T.-Y. LightGBM: A Highly Efficient Gradient Boosting Decision Tree. In: INTERNATIONAL CONFERENCE ON NEURAL INFORMATION PROCESSING SYSTEMS, 31., 2017, Long Beach. Proceedings [...]. Red Hook: Curran Associates, 2017. p. 3149–3157. Available at: https://dl.acm.org/doi/10.5555/3294996.3295074. Accessed at: May. 2026.
+
 KHAN, M. T.; AKTER, R.; DALIM, H. M.; SAYEED, A. A.; ANONNA, F. R.; MOHAIMIN, M. R.; KARMAKAR, M. Predictive Modeling of US Stock Market and Commodities: Impact of Economic Indicators and Geopolitical Events Using Machine. Journal of Economics Finance and Accounting Studies, [s. l.], vol. 6, no. 6, p. 17, 2024. Available at: https://doi.org/10.32996/jefas.2024.6.6.3. Accessed at: Nov. 2025.
 
 KIM, M.-J.; LE, T.-T.-H. Influence Analysis of Real Exchange Rate Fluctuations on Trade Balance Data Using Feature Important Evaluation Methods. Information, [s. l.], vol. 15, no. 3, p. 156, 2024. Available at: https://doi.org/10.3390/info15030156. Accessed at: Nov. 2025.
@@ -94,6 +105,8 @@ LI, L.; WANG, J.; WANG, X.; PENG, P.; SHEN, J.; ZHU, H.; ZHANG, Z. Big Data and 
 LIN, H.; SUN, Q.; CHEN, S.-Q. Reducing Exchange Rate Risks in International Trade: A Hybrid Forecasting Approach of CEEMDAN and Multilayer LSTM. Sustainability, [s. l.], vol. 12, no. 6, p. 2451, 2020. Available at: https://doi.org/10.3390/su12062451. Accessed at: Nov. 2025.
 
 LING, Y.; WANG, P. P. Ensemble Machine Learning Models in Financial Distress Prediction: Evidence from China. Journal of Mathematical Finance, [s. l.], vol. 14, no. 2, p. 226, 2024. Available at: https://doi.org/10.4236/jmf.2024.142013. Accessed at: Oct. 2025.
+
+LJUNG, G. M.; BOX, G. E. P. On a Measure of Lack of Fit in Time Series Models. Biometrika, [s. l.], vol. 65, no. 2, p. 297–303, 1978. Available at: https://doi.org/10.1093/biomet/65.2.297. Accessed at: May. 2026.
 
 LUNDBERG, S. M.; LEE, S. I. A Unified Approach to Interpreting Model Predictions. Advances in Neural Information Processing Systems, [s. l.], vol. 30, 2017. Available at: https://proceedings.neurips.cc/paper_files/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html. Accessed at: Oct. 2025.
 
@@ -155,7 +168,6 @@ SALVADOR, E. L. Use of Boosting Algorithms in Household-Level Poverty Measuremen
 
 SANTORO, J. P. C.; ROLIM, L. N. The Brazilian Distributive Conflict in the Early 21st Century and the Role of the Foreign Sector. Investigación Económica, [s. l.], vol. 82, no. 325, p. 125, 2023. Available at: https://doi.org/10.22201/fe.01851667p.2023.325.83831. Accessed at: Oct. 2025.
 
-SATRI, J.; MOKHI, C. E.; HACHIMI, H. Predicting the Outcome of Regional Development Projects Using Machine Learning. IAES International Journal of Artificial Intelligence, [s. l.], vol. 13, no. 1, p. 863, 2023. Available at: https://doi.org/10.11591/ijai.v13.i1.pp863-875. Accessed at: Oct. 2025.
 
 SCHMIDT, J.; STEINGRESS, W. No Double Standards: Quantifying The Impact of Standard Harmonization on Trade. Journal of International Economics, [s. l.], vol. 137, p. 103619, 2019. Available at: https://doi.org/10.1016/j.jinteco.2022.103619. Accessed at: Aug. 2025.
 
@@ -204,6 +216,8 @@ VRANJEŠ, D.; NIGGEMANN, O. Design Principles for Falsifiable, Replicable and Re
 WAHAB, B. A. Environmental Regulations and BRICS Export Flows: An Empirical Test of the Porter Hypothesis. Research Square (Research Square), [s. l.], 2024. Available at: https://doi.org/10.21203/rs.3.rs-5304339/v1. Accessed at: Aug. 2025.
 
 WANG, L.; XIE, M. Analysis of the Financial Market via an Optimized Machine Learning Algorithm: A Case Study of the Nasdaq Index. International Journal of Advanced Computer Science and Applications, [s. l.], vol. 15, no. 1, 2024. Available at: https://doi.org/10.14569/ijacsa.2024.0150120. Accessed at: Oct. 2025.
+
+WILCOXON, F. Individual Comparisons by Ranking Methods. Biometrics Bulletin, [s. l.], vol. 1, no. 6, p. 80–83, 1945. Available at: https://doi.org/10.2307/3001968. Accessed at: May. 2026.
 
 WIRTH, R.; HIPP, J. CRISP-DM: Towards a Standard Process Model for Data Mining. International Conference on the Practical Applications of Knowledge Discovery and Data Mining, [S. l.: s. n.], v. 1, p. 29–39, 2000. Accessed at: Sep. 2025.
 

@@ -20,7 +20,7 @@
 
 ## 5.3 The Naïve baseline and information asymmetry
 
-        A lower MAPE of 0.32% does not indicate that the Naïve model forecasts better. It reflects the informational asymmetry described in Section 4.2: the Naïve predictor accesses the realized value of the previous month at each step, while RF and LightGBM operated as direct 36-step predictors without intermediate feedback. This protocol asymmetry, not a methodological flaw, accounts for the apparent baseline advantage.
+        A lower MAPE of 0.32% does not indicate that the Naïve model forecasts better. The protocol asymmetry described in Section 4.2, not a methodological flaw, accounts for the apparent baseline advantage.
 
         As an upper-bound informational reference rather than a competing forecasting strategy, the Naïve baseline cannot substitute for multi-step tools. Trade strategy and macroeconomic planning typically require multi-month lead times incompatible with a Naïve approach that demands the previous observation. Random Forest and LightGBM, though penalized in this benchmark, generate forecasts directly applicable to such planning horizons.
 
@@ -32,7 +32,7 @@
 
         Random Forest gave greater weight to moving-average representations of exchange rates, with six-month windows prominent, capturing medium-term trend persistence; LightGBM placed higher weight on percentage-change features, responding more sensitively to short-term directional shifts. Both models converged on exchange rate variables as top predictors, through different representations of the same signal.
 
-        Bilateral exchange rate movements are not a peripheral input but a structurally relevant determinant of monthly trade flow dynamics, a result confirmed across two independent models through complementary interpretability tools.
+        Bilateral exchange rate movements are not a peripheral input but a structurally relevant determinant of monthly trade flow dynamics, a result confirmed across two independent models through complementary interpretability tools. The finding confirms the variable selection rationale in Section 2.2: USD/XXX and REER as the primary FX signals of bilateral price competitiveness.
 
 ## 5.5 Country-level heterogeneity in exchange rate sensitivity
 
@@ -58,7 +58,11 @@
 
         Statistical comparisons relied on the Diebold-Mariano test with the Harvey et al. (1997) small-sample correction, providing rigorous pairwise results that do not depend on aggregate metric averages. It exposed the predictive hierarchy that the non-significant Friedman result alone would have obscured, a distinction with direct IS implications: deployment decisions must rest on statistically validated performance differences, not on aggregate metric rankings.
 
-        Source code, datasets, trained models and evaluation outputs are publicly available in a versioned repository (https://github.com/franciscorigon/us-trade-forecasting, accessed May 2026). Reproducibility, often neglected in applied economic research, is a central methodological requirement in Information Systems and was treated here as a first-class deliverable.
+        Source code, datasets, trained models and evaluation outputs are publicly available in a versioned repository (https://github.com/franciscorigon/us-trade-forecasting, accessed June 2026). Reproducibility, often neglected in applied economic research, is a central methodological requirement in Information Systems and was treated here as a first-class deliverable.
+
+        The pipeline directly serves exporting firms seeking to anticipate how currency movements affect trade volumes, financial institutions supporting hedging decisions, and government agencies grounding trade policy analysis in reproducible, sector-level evidence.
+
+        Beyond its technical contributions, the work carries a social dimension that extends well beyond policy and corporate audiences. Exchange rate dynamics and trade flow data are typically confined to specialized reports, inaccessible to anyone without econometric training. The SHAP-based visualizations and structured CRISP-DM outputs change that. Academic communities, educators and public audiences can engage with the outputs directly, tracing how machine learning captures the economic signal of currency movements across sectors and partner countries, without requiring either econometric or computational expertise. Making complex economic and technological reasoning legible to non-specialist audiences is a contribution with educational reach that neither economics nor information systems alone could achieve.
 
 ## 5.8 Limitations
 
